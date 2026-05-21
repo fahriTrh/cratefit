@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('langganan', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('paket_id')->constrained('paket_subscription');
+            $table->foreignId('alamat_id')->constrained('alamat_pengiriman');
+ 
+            $table->enum('periode', ['bulanan', '2bulan', '3bulan'])->default('bulanan');
+            $table->enum('metode_bayar', ['transfer_bank', 'ewallet', 'qris', 'cod']);
+            $table->enum('status', ['aktif', 'dijeda', 'dibatalkan'])->default('aktif');
+ 
+            $table->date('tanggal_mulai');
+            $table->date('tanggal_pengiriman_berikutnya')->nullable();
+            $table->timestamp('tanggal_batal')->nullable();
+
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('langganan');
+    }
+};
