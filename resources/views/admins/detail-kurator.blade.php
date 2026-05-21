@@ -4,39 +4,7 @@
 @section('content')
 
 @php
-    $kurator = $kurator ?? [
-        'id'           => 1,
-        'nama'         => 'Sari Indah Lestari',
-        'email'        => 'sari@cratefit.id',
-        'no_hp'        => '081234567890',
-        'avatar'       => 'S',
-        'status'       => 'aktif',
-        'bergabung'    => 'Januari 2025',
-        'total_kurasi' => 48,
-        'bulan_ini'    => 8,
-        'rating'       => 4.9,
-        'spesialisasi' => ['Casual', 'Minimalis', 'Vintage'],
-        'catatan'      => 'Kurator senior, hasil kurasi konsisten. Fokus pada gaya minimalis dan earth tone.',
-
-        // Riwayat kurasi terbaru
-        'riwayat' => [
-            ['pelanggan' => 'Aulia Ramadhani', 'paket' => 'Starter Box', 'periode' => 'Juni 2025',  'status' => 'selesai',  'label' => 'Box Selesai',   'item' => 3, 'rating' => 5],
-            ['pelanggan' => 'Elisa Nuraini',   'paket' => 'Style Box',   'periode' => 'Juni 2025',  'status' => 'dikirim',  'label' => 'Sudah Dikirim', 'item' => 5, 'rating' => null],
-            ['pelanggan' => 'Citra Dewi',      'paket' => 'Premium Box', 'periode' => 'Mei 2025',   'status' => 'dikirim',  'label' => 'Sudah Dikirim', 'item' => 7, 'rating' => 5],
-            ['pelanggan' => 'Bintang Pratama', 'paket' => 'Starter Box', 'periode' => 'Mei 2025',   'status' => 'dikirim',  'label' => 'Sudah Dikirim', 'item' => 3, 'rating' => 4],
-            ['pelanggan' => 'Dafi Maulana',    'paket' => 'Style Box',   'periode' => 'April 2025', 'status' => 'dikirim',  'label' => 'Sudah Dikirim', 'item' => 5, 'rating' => 5],
-        ],
-
-        // Performa per bulan (6 bulan terakhir, dummy)
-        'performa' => [
-            ['bulan' => 'Jan', 'kurasi' => 6,  'rating' => 4.8],
-            ['bulan' => 'Feb', 'kurasi' => 9,  'rating' => 4.9],
-            ['bulan' => 'Mar', 'kurasi' => 7,  'rating' => 4.7],
-            ['bulan' => 'Apr', 'kurasi' => 10, 'rating' => 5.0],
-            ['bulan' => 'Mei', 'kurasi' => 8,  'rating' => 4.9],
-            ['bulan' => 'Jun', 'kurasi' => 8,  'rating' => null],
-        ],
-    ];
+    $kurator = $kurator ?? [];
 
     $badgeStatus = [
         'selesai' => 'bg-emerald-50 text-emerald-700 border-emerald-200',
@@ -45,7 +13,7 @@
         'menunggu'=> 'bg-crate-sand text-crate-stone border-crate-stone/20',
     ];
 
-    $maxKurasi = collect($kurator['performa'])->max('kurasi') ?: 1;
+    $maxKurasi = collect($kurator['performa'] ?? [])->max('kurasi') ?: 1;
 @endphp
 
 <div class="fade-in space-y-6">

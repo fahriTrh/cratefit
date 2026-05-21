@@ -394,8 +394,8 @@
                 @csrf
                 @method('DELETE')
                 <button type="submit"
-                        class="border border-red-200 text-red-500 hover:bg-red-50
-                               font-body font-semibold px-5 py-2.5 rounded-xl text-sm transition-colors">
+                        class="w-8 h-8 rounded-lg border border-crate-sand flex items-center justify-center
+                              text-crate-stone hover:text-crate-brown hover:bg-crate-sand transition-colors text-sm">
                     🗑 Hapus Kurir
                 </button>
             </form>

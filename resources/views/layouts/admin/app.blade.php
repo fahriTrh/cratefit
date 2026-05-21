@@ -309,7 +309,7 @@
                     [
                         'label' => 'Produk & Layanan',
                         'items' => [
-                            ['icon' => '📦', 'label' => 'Paket Subscription','route' => '/admin/paket'],
+                            ['icon' => '📦', 'label' => 'Paket Subscription','route' => '/admin/kelola-paket'],
                             ['icon' => '👕', 'label' => 'Inventory Thrift',  'route' => '/admin/inventory'],
                         ],
                     ],
@@ -439,7 +439,7 @@
                 ['icon'=>'🏠',  'label'=>'Dashboard', 'route'=>'/admin/dashboard'],
                 ['icon'=>'👥',  'label'=>'Pelanggan', 'route'=>'/admin/pelanggan'],
                 ['icon'=>'✂️',  'label'=>'Kurator',   'route'=>'/admin/kurator'],
-                ['icon'=>'📦',  'label'=>'Paket',     'route'=>'/admin/paket'],
+                ['icon'=>'📦',  'label'=>'Paket',     'route'=>'/admin/kelola-paket'],
                 ['icon'=>'☰',   'label'=>'Lainnya',   'route'=>'#', 'toggle'=>true],
             ];
             @endphp

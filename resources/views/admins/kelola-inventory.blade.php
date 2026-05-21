@@ -4,134 +4,31 @@
 @section('content')
 
 @php
-    $items = $items ?? [
-        [
-            'id'        => 1,
-            'kode'      => 'CF-001',
-            'nama'      => 'Kemeja Flannel Kotak-kotak',
-            'kategori'  => 'Atasan',
-            'jenis'     => 'Kemeja',
-            'ukuran'    => 'M',
-            'warna'     => 'Merah & Hitam',
-            'kondisi'   => 'Bagus',
-            'harga'     => 45000,
-            'stok'      => 3,
-            'status'    => 'tersedia',
-            'brand'     => 'Unbranded',
-            'masuk'     => '10 Mei 2025',
-            'foto'      => null,
-            'tags'      => ['casual', 'vintage'],
-        ],
-        [
-            'id'        => 2,
-            'kode'      => 'CF-002',
-            'nama'      => 'Jaket Denim Oversized',
-            'kategori'  => 'Outerwear',
-            'jenis'     => 'Jaket',
-            'ukuran'    => 'L',
-            'warna'     => 'Biru Tua',
-            'kondisi'   => 'Sangat Bagus',
-            'harga'     => 85000,
-            'stok'      => 1,
-            'status'    => 'tersedia',
-            'brand'     => 'Levi\'s',
-            'masuk'     => '12 Mei 2025',
-            'foto'      => null,
-            'tags'      => ['vintage', 'streetwear'],
-        ],
-        [
-            'id'        => 3,
-            'kode'      => 'CF-003',
-            'nama'      => 'Celana Cargo Army',
-            'kategori'  => 'Bawahan',
-            'jenis'     => 'Celana',
-            'ukuran'    => 'L',
-            'warna'     => 'Hijau Army',
-            'kondisi'   => 'Bagus',
-            'harga'     => 55000,
-            'stok'      => 2,
-            'status'    => 'tersedia',
-            'brand'     => 'Unbranded',
-            'masuk'     => '14 Mei 2025',
-            'foto'      => null,
-            'tags'      => ['streetwear', 'outdoor'],
-        ],
-        [
-            'id'        => 4,
-            'kode'      => 'CF-004',
-            'nama'      => 'Blouse Vintage Floral',
-            'kategori'  => 'Atasan',
-            'jenis'     => 'Blouse',
-            'ukuran'    => 'S',
-            'warna'     => 'Krem & Bunga',
-            'kondisi'   => 'Sangat Bagus',
-            'harga'     => 60000,
-            'stok'      => 0,
-            'status'    => 'habis',
-            'brand'     => 'Unbranded',
-            'masuk'     => '15 Mei 2025',
-            'foto'      => null,
-            'tags'      => ['vintage', 'feminine'],
-        ],
-        [
-            'id'        => 5,
-            'kode'      => 'CF-005',
-            'nama'      => 'Sweater Rajut Krem',
-            'kategori'  => 'Atasan',
-            'jenis'     => 'Sweater',
-            'ukuran'    => 'M',
-            'warna'     => 'Krem',
-            'kondisi'   => 'Bagus',
-            'harga'     => 70000,
-            'stok'      => 2,
-            'status'    => 'dikurasi',
-            'brand'     => 'Unbranded',
-            'masuk'     => '16 Mei 2025',
-            'foto'      => null,
-            'tags'      => ['casual', 'cozy'],
-        ],
-        [
-            'id'        => 6,
-            'kode'      => 'CF-006',
-            'nama'      => 'Rok Mini Plaid',
-            'kategori'  => 'Bawahan',
-            'jenis'     => 'Rok',
-            'ukuran'    => 'S',
-            'warna'     => 'Hitam & Putih',
-            'kondisi'   => 'Cukup Bagus',
-            'harga'     => 40000,
-            'stok'      => 4,
-            'status'    => 'tersedia',
-            'brand'     => 'Unbranded',
-            'masuk'     => '17 Mei 2025',
-            'foto'      => null,
-            'tags'      => ['feminine', 'vintage'],
-        ],
-    ];
+$items = $items ?? [];
 
-    $totalItem      = collect($items)->sum('stok');
-    $totalTersedia  = collect($items)->where('status', 'tersedia')->count();
-    $totalHabis     = collect($items)->where('status', 'habis')->count();
-    $totalDikurasi  = collect($items)->where('status', 'dikurasi')->count();
-    $nilaiInventory = collect($items)->sum(fn($i) => $i['harga'] * $i['stok']);
+$totalItem = collect($items)->sum('stok');
+$totalTersedia = collect($items)->where('status', 'tersedia')->count();
+$totalHabis = collect($items)->where('status', 'habis')->count();
+$totalDikurasi = collect($items)->where('status', 'dikurasi')->count();
+$nilaiInventory = collect($items)->sum(fn($i) => $i['harga'] * $i['stok']);
 
-    $kondisiColor = [
-        'Sangat Bagus' => 'bg-emerald-50 text-emerald-700 border-emerald-200',
-        'Bagus'        => 'bg-blue-50 text-blue-700 border-blue-200',
-        'Cukup Bagus'  => 'bg-amber-50 text-amber-700 border-amber-200',
-    ];
+$kondisiColor = [
+'Sangat Bagus' => 'bg-emerald-50 text-emerald-700 border-emerald-200',
+'Bagus' => 'bg-blue-50 text-blue-700 border-blue-200',
+'Cukup Bagus' => 'bg-amber-50 text-amber-700 border-amber-200',
+];
 
-    $statusColor = [
-        'tersedia' => 'bg-emerald-50 text-emerald-700 border-emerald-200',
-        'dikurasi' => 'bg-violet-50 text-violet-700 border-violet-200',
-        'habis'    => 'bg-red-50 text-red-600 border-red-200',
-    ];
+$statusColor = [
+'tersedia' => 'bg-emerald-50 text-emerald-700 border-emerald-200',
+'dikurasi' => 'bg-violet-50 text-violet-700 border-violet-200',
+'habis' => 'bg-red-50 text-red-600 border-red-200',
+];
 
-    $statusLabel = [
-        'tersedia' => '● Tersedia',
-        'dikurasi' => '◆ Dikurasi',
-        'habis'    => '○ Habis',
-    ];
+$statusLabel = [
+'tersedia' => '● Tersedia',
+'dikurasi' => '◆ Dikurasi',
+'habis' => '○ Habis',
+];
 @endphp
 
 <div class="fade-in">
@@ -146,7 +43,7 @@
             </p>
         </div>
         <button onclick="openModal('modal-tambah')"
-                class="btn-primary text-white font-body font-semibold px-6 py-3 rounded-2xl text-sm
+            class="btn-primary text-white font-body font-semibold px-6 py-3 rounded-2xl text-sm
                        shadow-lg shrink-0 flex items-center gap-2">
             <span>+</span> Tambah Item
         </button>
@@ -156,11 +53,11 @@
     <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-6">
         @php
         $stats = [
-            ['label' => 'Total Unit Stok',    'value' => $totalItem,                                          'icon' => '👕', 'color' => 'text-crate-brown'],
-            ['label' => 'Item Tersedia',       'value' => $totalTersedia,                                     'icon' => '✅', 'color' => 'text-emerald-600'],
-            ['label' => 'Sedang Dikurasi',    'value' => $totalDikurasi,                                      'icon' => '✂️', 'color' => 'text-violet-600'],
-            ['label' => 'Stok Habis',          'value' => $totalHabis,                                        'icon' => '⚠️', 'color' => 'text-red-500'],
-            ['label' => 'Nilai Inventory',     'value' => 'Rp ' . number_format($nilaiInventory, 0, ',', '.'), 'icon' => '💰', 'color' => 'text-amber-600'],
+        ['label' => 'Total Unit Stok', 'value' => $totalItem, 'icon' => '👕', 'color' => 'text-crate-brown'],
+        ['label' => 'Item Tersedia', 'value' => $totalTersedia, 'icon' => '✅', 'color' => 'text-emerald-600'],
+        ['label' => 'Sedang Dikurasi', 'value' => $totalDikurasi, 'icon' => '✂️', 'color' => 'text-violet-600'],
+        ['label' => 'Stok Habis', 'value' => $totalHabis, 'icon' => '⚠️', 'color' => 'text-red-500'],
+        ['label' => 'Nilai Inventory', 'value' => 'Rp ' . number_format($nilaiInventory, 0, ',', '.'), 'icon' => '💰', 'color' => 'text-amber-600'],
         ];
         @endphp
         @foreach($stats as $stat)
@@ -180,15 +77,15 @@
             <div class="relative flex-1">
                 <span class="absolute left-3 top-1/2 -translate-y-1/2 text-crate-stone text-sm">🔍</span>
                 <input type="text"
-                       id="search-input"
-                       placeholder="Cari nama item, kode, brand..."
-                       class="pl-9 pr-4 py-2.5 rounded-xl border border-crate-sand bg-white
+                    id="search-input"
+                    placeholder="Cari nama item, kode, brand..."
+                    class="pl-9 pr-4 py-2.5 rounded-xl border border-crate-sand bg-white
                               text-sm font-body text-crate-brown placeholder-crate-stone w-full transition-all">
             </div>
 
             {{-- Filter Kategori --}}
             <select id="filter-kategori"
-                    class="border border-crate-sand bg-white rounded-xl px-3 py-2.5
+                class="border border-crate-sand bg-white rounded-xl px-3 py-2.5
                            text-sm font-body text-crate-brown transition-all">
                 <option value="">Semua Kategori</option>
                 <option value="Atasan">Atasan</option>
@@ -199,7 +96,7 @@
 
             {{-- Filter Ukuran --}}
             <select id="filter-ukuran"
-                    class="border border-crate-sand bg-white rounded-xl px-3 py-2.5
+                class="border border-crate-sand bg-white rounded-xl px-3 py-2.5
                            text-sm font-body text-crate-brown transition-all">
                 <option value="">Semua Ukuran</option>
                 <option value="XS">XS</option>
@@ -212,7 +109,7 @@
 
             {{-- Filter Status --}}
             <select id="filter-status"
-                    class="border border-crate-sand bg-white rounded-xl px-3 py-2.5
+                class="border border-crate-sand bg-white rounded-xl px-3 py-2.5
                            text-sm font-body text-crate-brown transition-all">
                 <option value="">Semua Status</option>
                 <option value="tersedia">Tersedia</option>
@@ -222,7 +119,7 @@
 
             {{-- Urutkan --}}
             <select id="filter-urut"
-                    class="border border-crate-sand bg-white rounded-xl px-3 py-2.5
+                class="border border-crate-sand bg-white rounded-xl px-3 py-2.5
                            text-sm font-body text-crate-brown transition-all">
                 <option value="terbaru">Terbaru Masuk</option>
                 <option value="harga-naik">Harga ↑</option>
@@ -239,14 +136,14 @@
             $allTags = collect($items)->pluck('tags')->flatten()->unique()->values();
             @endphp
             <button onclick="filterTag('')"
-                    class="tag-quick px-3 py-1 rounded-full border border-crate-sand text-xs font-body
+                class="tag-quick px-3 py-1 rounded-full border border-crate-sand text-xs font-body
                            text-crate-stone hover:border-crate-orange hover:text-crate-orange transition-colors
                            bg-white selected" data-tag="">
                 Semua
             </button>
             @foreach($allTags as $tag)
             <button onclick="filterTag('{{ $tag }}')"
-                    class="tag-quick px-3 py-1 rounded-full border border-crate-sand text-xs font-body
+                class="tag-quick px-3 py-1 rounded-full border border-crate-sand text-xs font-body
                            text-crate-stone hover:border-crate-orange hover:text-crate-orange transition-colors
                            bg-white" data-tag="{{ $tag }}">
                 #{{ $tag }}
@@ -267,15 +164,15 @@
                 {{-- Toggle view --}}
                 <div class="flex border border-crate-sand rounded-lg overflow-hidden">
                     <button id="btn-view-table"
-                            onclick="setView('table')"
-                            class="px-3 py-1.5 text-xs font-body bg-crate-orange text-white transition-colors"
-                            title="Tampilan tabel">
+                        onclick="setView('table')"
+                        class="px-3 py-1.5 text-xs font-body bg-crate-orange text-white transition-colors"
+                        title="Tampilan tabel">
                         ☰
                     </button>
                     <button id="btn-view-grid"
-                            onclick="setView('grid')"
-                            class="px-3 py-1.5 text-xs font-body text-crate-stone hover:bg-crate-sand transition-colors"
-                            title="Tampilan grid">
+                        onclick="setView('grid')"
+                        class="px-3 py-1.5 text-xs font-body text-crate-stone hover:bg-crate-sand transition-colors"
+                        title="Tampilan grid">
                         ⊞
                     </button>
                 </div>
@@ -319,10 +216,9 @@
                                     <div class="w-10 h-10 rounded-xl bg-crate-sand/70 border border-crate-sand
                                                 flex items-center justify-center text-base shrink-0 overflow-hidden">
                                         @if($item['foto'])
-                                            <img src="{{ $item['foto'] }}" alt="{{ $item['nama'] }}"
-                                                 class="w-full h-full object-cover">
+                                        <img src="{{ asset($item['foto']) }}" alt="{{ $item['nama'] }}" class="w-full h-full object-cover">
                                         @else
-                                            👕
+                                        👕
                                         @endif
                                     </div>
                                     <div class="min-w-0">
@@ -388,43 +284,40 @@
 
                             {{-- Aksi --}}
                             <td class="px-4 py-4">
-                                <div class="flex items-center justify-center gap-1.5
-                                            opacity-0 group-hover:opacity-100 transition-all">
+                                <div class="flex items-center justify-center gap-1.5">
 
                                     {{-- Edit --}}
                                     <button onclick="openModalEdit({{ json_encode($item) }})"
-                                            title="Edit"
-                                            class="w-8 h-8 rounded-lg border border-crate-sand flex items-center justify-center
+                                        title="Edit"
+                                        class="w-8 h-8 rounded-lg border border-crate-sand flex items-center justify-center
                                                    text-crate-stone hover:text-crate-brown hover:bg-crate-sand transition-colors text-sm">
                                         ✏️
                                     </button>
 
                                     {{-- Tambah Stok --}}
                                     <form action="{{ url('/admin/inventory/' . $item['id'] . '/stok') }}"
-                                          method="POST">
+                                        method="POST">
                                         @csrf
                                         @method('PATCH')
                                         <input type="hidden" name="aksi" value="tambah">
                                         <button type="submit"
-                                                title="Tambah stok (+1)"
-                                                class="w-8 h-8 rounded-lg border border-crate-sand flex items-center justify-center
-                                                       text-crate-stone hover:text-emerald-600 hover:bg-emerald-50
-                                                       hover:border-emerald-200 transition-colors text-sm font-bold">
+                                            title="Tambah stok (+1)"
+                                            class="w-8 h-8 rounded-lg border border-crate-sand flex items-center justify-center
+                                                   text-crate-stone hover:text-crate-brown hover:bg-crate-sand transition-colors text-sm">
                                             +
                                         </button>
                                     </form>
 
                                     {{-- Hapus --}}
                                     <form action="{{ url('/admin/inventory/' . $item['id']) }}"
-                                          method="POST"
-                                          onsubmit="return confirm('Hapus item {{ $item['nama'] }}?')">
+                                        method="POST"
+                                        onsubmit="return confirm('Hapus item {{ $item['nama'] }}?')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                                title="Hapus"
-                                                class="w-8 h-8 rounded-lg border border-crate-sand flex items-center justify-center
-                                                       text-crate-stone hover:text-red-600 hover:bg-red-50
-                                                       hover:border-red-200 transition-colors text-sm">
+                                            title="Hapus"
+                                            class="w-8 h-8 rounded-lg border border-crate-sand flex items-center justify-center
+                                                   text-crate-stone hover:text-crate-brown hover:bg-crate-sand transition-colors text-sm">
                                             🗑
                                         </button>
                                     </form>
@@ -441,7 +334,7 @@
                                     Tambahkan item thrift untuk mulai mengkurasi box.
                                 </p>
                                 <button onclick="openModal('modal-tambah')"
-                                        class="inline-block mt-4 btn-primary text-white font-body font-semibold
+                                    class="inline-block mt-4 btn-primary text-white font-body font-semibold
                                                px-6 py-2.5 rounded-xl text-sm">
                                     + Tambah Item
                                 </button>
@@ -460,25 +353,25 @@
                 <div class="grid-item-card border border-crate-sand rounded-2xl overflow-hidden bg-white
                             hover:shadow-md hover:border-crate-stone/40 transition-all group
                             flex flex-col"
-                     data-nama="{{ strtolower($item['nama']) }}"
-                     data-kode="{{ strtolower($item['kode']) }}"
-                     data-brand="{{ strtolower($item['brand']) }}"
-                     data-kategori="{{ $item['kategori'] }}"
-                     data-ukuran="{{ $item['ukuran'] }}"
-                     data-status="{{ $item['status'] }}"
-                     data-tags="{{ implode(',', $item['tags']) }}"
-                     data-harga="{{ $item['harga'] }}"
-                     data-stok="{{ $item['stok'] }}"
-                     data-masuk="{{ $item['masuk'] }}">
+                    data-nama="{{ strtolower($item['nama']) }}"
+                    data-kode="{{ strtolower($item['kode']) }}"
+                    data-brand="{{ strtolower($item['brand']) }}"
+                    data-kategori="{{ $item['kategori'] }}"
+                    data-ukuran="{{ $item['ukuran'] }}"
+                    data-status="{{ $item['status'] }}"
+                    data-tags="{{ implode(',', $item['tags']) }}"
+                    data-harga="{{ $item['harga'] }}"
+                    data-stok="{{ $item['stok'] }}"
+                    data-masuk="{{ $item['masuk'] }}">
 
                     {{-- Foto --}}
                     <div class="aspect-square bg-crate-cream/80 flex items-center justify-center
                                 text-5xl border-b border-crate-sand relative">
                         @if($item['foto'])
-                            <img src="{{ $item['foto'] }}" alt="{{ $item['nama'] }}"
-                                 class="w-full h-full object-cover">
+                        <img src="{{ asset($item['foto']) }}" alt="{{ $item['nama'] }}"
+                            class="w-full h-full object-cover">
                         @else
-                            👕
+                        👕
                         @endif
                         {{-- Status badge overlay --}}
                         <span class="absolute top-2 right-2 text-xs font-body font-semibold
@@ -511,20 +404,20 @@
                             </span>
                         </div>
                         {{-- Aksi grid --}}
-                        <div class="mt-2 flex gap-1.5 opacity-0 group-hover:opacity-100 transition-all">
+                        <div class="mt-2 flex gap-1.5">
                             <button onclick="openModalEdit({{ json_encode($item) }})"
-                                    class="flex-1 border border-crate-sand text-crate-stone hover:bg-crate-sand
+                                class="flex-1 border border-crate-sand text-crate-stone hover:bg-crate-sand
                                            rounded-lg py-1.5 text-xs font-body transition-colors">
                                 ✏️ Edit
                             </button>
                             <form action="{{ url('/admin/inventory/' . $item['id']) }}"
-                                  method="POST"
-                                  onsubmit="return confirm('Hapus {{ $item['nama'] }}?')">
+                                method="POST"
+                                onsubmit="return confirm('Hapus {{ $item['nama'] }}?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
-                                        class="w-7 h-7 border border-crate-sand rounded-lg flex items-center justify-center
-                                               text-crate-stone hover:text-red-600 hover:bg-red-50 transition-colors text-xs">
+                                    class="flex-1 border border-crate-sand text-crate-stone hover:bg-crate-sand
+                                           rounded-lg py-1.5 text-xs font-body transition-colors">
                                     🗑
                                 </button>
                             </form>
@@ -561,14 +454,14 @@
      MODAL: TAMBAH ITEM
 ================================================================ --}}
 <div id="modal-tambah"
-     class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden"
-     style="background:rgba(42,21,8,0.55);backdrop-filter:blur(4px)">
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden"
+    style="background:rgba(42,21,8,0.55);backdrop-filter:blur(4px)">
     <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-crate-sand">
 
         <div class="flex items-center justify-between px-6 py-4 border-b border-crate-sand sticky top-0 bg-white z-10">
             <h3 class="font-display font-bold text-crate-brown text-lg">+ Tambah Item Thrift</h3>
             <button onclick="closeModal('modal-tambah')"
-                    class="w-8 h-8 rounded-lg text-crate-stone hover:text-crate-brown hover:bg-crate-sand
+                class="w-8 h-8 rounded-lg text-crate-stone hover:text-crate-brown hover:bg-crate-sand
                            flex items-center justify-center transition-colors text-xl leading-none">×</button>
         </div>
 
@@ -581,7 +474,7 @@
                 <div class="sm:col-span-2">
                     <label class="field-label">Nama Item <span class="text-red-400">*</span></label>
                     <input type="text" name="nama" placeholder="Contoh: Kemeja Flannel Vintage" required
-                           class="field-input w-full">
+                        class="field-input w-full">
                 </div>
 
                 {{-- Kategori --}}
@@ -602,7 +495,7 @@
                 <div>
                     <label class="field-label">Jenis Item <span class="text-red-400">*</span></label>
                     <input type="text" name="jenis" placeholder="Contoh: Kemeja, Celana, Jaket" required
-                           class="field-input w-full">
+                        class="field-input w-full">
                 </div>
 
                 {{-- Ukuran --}}
@@ -625,14 +518,14 @@
                 <div>
                     <label class="field-label">Warna</label>
                     <input type="text" name="warna" placeholder="Contoh: Biru Tua, Hitam & Putih"
-                           class="field-input w-full">
+                        class="field-input w-full">
                 </div>
 
                 {{-- Brand --}}
                 <div>
                     <label class="field-label">Brand / Merek</label>
                     <input type="text" name="brand" placeholder="Contoh: Levi's, H&M, Unbranded"
-                           class="field-input w-full">
+                        class="field-input w-full">
                 </div>
 
                 {{-- Kondisi --}}
@@ -652,7 +545,7 @@
                     <div class="relative">
                         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-crate-stone text-xs font-body">Rp</span>
                         <input type="number" name="harga" min="0" step="500" placeholder="45000" required
-                               class="field-input w-full pl-9">
+                            class="field-input w-full pl-9">
                     </div>
                 </div>
 
@@ -660,7 +553,7 @@
                 <div>
                     <label class="field-label">Jumlah Stok <span class="text-red-400">*</span></label>
                     <input type="number" name="stok" min="0" placeholder="1" required
-                           class="field-input w-full">
+                        class="field-input w-full">
                 </div>
 
                 {{-- Status --}}
@@ -680,7 +573,7 @@
                         <span class="text-crate-stone font-normal normal-case tracking-normal">(pisahkan dengan koma)</span>
                     </label>
                     <input type="text" name="tags" placeholder="casual, vintage, streetwear, feminine"
-                           class="field-input w-full">
+                        class="field-input w-full">
                 </div>
 
                 {{-- Catatan --}}
@@ -690,8 +583,8 @@
                         <span class="text-crate-stone font-normal normal-case tracking-normal">(opsional)</span>
                     </label>
                     <textarea name="catatan" rows="2"
-                              placeholder="Catatan tambahan tentang kondisi, detail unik, dll..."
-                              class="field-input w-full resize-none"></textarea>
+                        placeholder="Catatan tambahan tentang kondisi, detail unik, dll..."
+                        class="field-input w-full resize-none"></textarea>
                 </div>
 
                 {{-- Foto --}}
@@ -701,7 +594,7 @@
                         <span class="text-crate-stone font-normal normal-case tracking-normal">(opsional, JPG/PNG maks. 2MB)</span>
                     </label>
                     <label for="foto-tambah"
-                           class="flex items-center gap-3 border-2 border-dashed border-crate-sand
+                        class="flex items-center gap-3 border-2 border-dashed border-crate-sand
                                   rounded-xl px-4 py-3 cursor-pointer hover:border-crate-orange/50
                                   hover:bg-crate-cream/40 transition-all">
                         <span class="text-2xl">📷</span>
@@ -710,8 +603,8 @@
                             <p class="text-crate-stone text-xs font-body" id="foto-tambah-name">Belum ada file dipilih</p>
                         </div>
                         <input type="file" name="foto" id="foto-tambah"
-                               accept="image/jpeg,image/png" class="sr-only"
-                               onchange="document.getElementById('foto-tambah-name').textContent = this.files[0]?.name || 'Belum ada file dipilih'">
+                            accept="image/jpeg,image/png" class="sr-only"
+                            onchange="document.getElementById('foto-tambah-name').textContent = this.files[0]?.name || 'Belum ada file dipilih'">
                     </label>
                 </div>
 
@@ -719,12 +612,12 @@
 
             <div class="flex items-center justify-end gap-3 pt-2 border-t border-crate-sand">
                 <button type="button" onclick="closeModal('modal-tambah')"
-                        class="px-5 py-2.5 border border-crate-sand text-crate-stone font-body font-semibold
+                    class="px-5 py-2.5 border border-crate-sand text-crate-stone font-body font-semibold
                                text-sm rounded-xl hover:bg-crate-sand hover:text-crate-brown transition-colors">
                     Batal
                 </button>
                 <button type="submit"
-                        class="btn-primary text-white font-body font-semibold px-6 py-2.5 rounded-xl text-sm shadow">
+                    class="btn-primary text-white font-body font-semibold px-6 py-2.5 rounded-xl text-sm shadow">
                     + Simpan Item
                 </button>
             </div>
@@ -736,14 +629,14 @@
      MODAL: EDIT ITEM
 ================================================================ --}}
 <div id="modal-edit"
-     class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden"
-     style="background:rgba(42,21,8,0.55);backdrop-filter:blur(4px)">
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden"
+    style="background:rgba(42,21,8,0.55);backdrop-filter:blur(4px)">
     <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-crate-sand">
 
         <div class="flex items-center justify-between px-6 py-4 border-b border-crate-sand sticky top-0 bg-white z-10">
             <h3 class="font-display font-bold text-crate-brown text-lg">✏️ Edit Item Thrift</h3>
             <button onclick="closeModal('modal-edit')"
-                    class="w-8 h-8 rounded-lg text-crate-stone hover:text-crate-brown hover:bg-crate-sand
+                class="w-8 h-8 rounded-lg text-crate-stone hover:text-crate-brown hover:bg-crate-sand
                            flex items-center justify-center transition-colors text-xl leading-none">×</button>
         </div>
 
@@ -813,7 +706,7 @@
                     <div class="relative">
                         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-crate-stone text-xs font-body">Rp</span>
                         <input type="number" name="harga" id="edit-harga" min="0" step="500" required
-                               class="field-input w-full pl-9">
+                            class="field-input w-full pl-9">
                     </div>
                 </div>
 
@@ -844,7 +737,7 @@
                         <span class="text-crate-stone font-normal normal-case tracking-normal">(kosongkan jika tidak ingin mengubah)</span>
                     </label>
                     <label for="foto-edit"
-                           class="flex items-center gap-3 border-2 border-dashed border-crate-sand
+                        class="flex items-center gap-3 border-2 border-dashed border-crate-sand
                                   rounded-xl px-4 py-3 cursor-pointer hover:border-crate-orange/50
                                   hover:bg-crate-cream/40 transition-all">
                         <span class="text-2xl">📷</span>
@@ -853,8 +746,8 @@
                             <p class="text-crate-stone text-xs font-body" id="foto-edit-name">Belum ada file dipilih</p>
                         </div>
                         <input type="file" name="foto" id="foto-edit"
-                               accept="image/jpeg,image/png" class="sr-only"
-                               onchange="document.getElementById('foto-edit-name').textContent = this.files[0]?.name || 'Belum ada file dipilih'">
+                            accept="image/jpeg,image/png" class="sr-only"
+                            onchange="document.getElementById('foto-edit-name').textContent = this.files[0]?.name || 'Belum ada file dipilih'">
                     </label>
                 </div>
 
@@ -862,12 +755,12 @@
 
             <div class="flex items-center justify-end gap-3 pt-2 border-t border-crate-sand">
                 <button type="button" onclick="closeModal('modal-edit')"
-                        class="px-5 py-2.5 border border-crate-sand text-crate-stone font-body font-semibold
+                    class="px-5 py-2.5 border border-crate-sand text-crate-stone font-body font-semibold
                                text-sm rounded-xl hover:bg-crate-sand hover:text-crate-brown transition-colors">
                     Batal
                 </button>
                 <button type="submit"
-                        class="btn-primary text-white font-body font-semibold px-6 py-2.5 rounded-xl text-sm shadow">
+                    class="btn-primary text-white font-body font-semibold px-6 py-2.5 rounded-xl text-sm shadow">
                     💾 Simpan Perubahan
                 </button>
             </div>
@@ -886,6 +779,7 @@
         letter-spacing: 0.05em;
         margin-bottom: 0.375rem;
     }
+
     .field-input {
         border: 1px solid #EDE0CC;
         background: white;
@@ -896,11 +790,13 @@
         color: #3B1F0E;
         transition: all 0.15s;
     }
+
     .field-input:focus {
         outline: none;
         border-color: #C85A1A;
         box-shadow: 0 0 0 3px rgba(200, 90, 26, 0.12);
     }
+
     .tag-quick.selected {
         background: #C85A1A;
         color: white;
@@ -915,6 +811,7 @@
         document.getElementById(id).classList.remove('hidden');
         document.body.style.overflow = 'hidden';
     }
+
     function closeModal(id) {
         document.getElementById(id).classList.add('hidden');
         document.body.style.overflow = '';
@@ -925,23 +822,26 @@
         });
     });
     document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') { closeModal('modal-tambah'); closeModal('modal-edit'); }
+        if (e.key === 'Escape') {
+            closeModal('modal-tambah');
+            closeModal('modal-edit');
+        }
     });
 
     // ===== Isi modal edit =====
     function openModalEdit(item) {
-        document.getElementById('edit-nama').value     = item.nama     ?? '';
-        document.getElementById('edit-jenis').value    = item.jenis    ?? '';
-        document.getElementById('edit-warna').value    = item.warna    ?? '';
-        document.getElementById('edit-brand').value    = item.brand    ?? '';
-        document.getElementById('edit-harga').value    = item.harga    ?? '';
-        document.getElementById('edit-stok').value     = item.stok     ?? '';
-        document.getElementById('edit-tags').value     = Array.isArray(item.tags) ? item.tags.join(', ') : '';
+        document.getElementById('edit-nama').value = item.nama ?? '';
+        document.getElementById('edit-jenis').value = item.jenis ?? '';
+        document.getElementById('edit-warna').value = item.warna ?? '';
+        document.getElementById('edit-brand').value = item.brand ?? '';
+        document.getElementById('edit-harga').value = item.harga ?? '';
+        document.getElementById('edit-stok').value = item.stok ?? '';
+        document.getElementById('edit-tags').value = Array.isArray(item.tags) ? item.tags.join(', ') : '';
 
         setSelectValue('edit-kategori', item.kategori);
-        setSelectValue('edit-ukuran',   item.ukuran);
-        setSelectValue('edit-kondisi',  item.kondisi);
-        setSelectValue('edit-status',   item.status);
+        setSelectValue('edit-ukuran', item.ukuran);
+        setSelectValue('edit-kondisi', item.kondisi);
+        setSelectValue('edit-status', item.status);
 
         document.getElementById('form-edit').action = '/admin/inventory/' + item.id;
         document.getElementById('foto-edit-name').textContent = 'Belum ada file dipilih';
@@ -960,9 +860,9 @@
     // ===== Toggle view tabel / grid =====
     function setView(mode) {
         const tableEl = document.getElementById('view-table');
-        const gridEl  = document.getElementById('view-grid');
-        const btnT    = document.getElementById('btn-view-table');
-        const btnG    = document.getElementById('btn-view-grid');
+        const gridEl = document.getElementById('view-grid');
+        const btnT = document.getElementById('btn-view-table');
+        const btnG = document.getElementById('btn-view-grid');
 
         if (mode === 'table') {
             tableEl.classList.remove('hidden');
@@ -994,32 +894,34 @@
     }
 
     function applyFilters() {
-        const q         = document.getElementById('search-input').value.toLowerCase();
-        const kategori  = document.getElementById('filter-kategori').value;
-        const ukuran    = document.getElementById('filter-ukuran').value;
-        const status    = document.getElementById('filter-status').value;
-        const urut      = document.getElementById('filter-urut').value;
+        console.log('applyFilters dipanggil dari:', new Error().stack);
 
-        const isGrid    = !document.getElementById('view-grid').classList.contains('hidden');
-        const rows      = isGrid
-            ? Array.from(document.querySelectorAll('.grid-item-card'))
-            : Array.from(document.querySelectorAll('.item-row'));
+        const q = document.getElementById('search-input').value.toLowerCase();
+        const kategori = document.getElementById('filter-kategori').value;
+        const ukuran = document.getElementById('filter-ukuran').value;
+        const status = document.getElementById('filter-status').value;
+        const urut = document.getElementById('filter-urut').value;
+
+        const isGrid = !document.getElementById('view-grid').classList.contains('hidden');
+        const rows = isGrid ?
+            Array.from(document.querySelectorAll('.grid-item-card')) :
+            Array.from(document.querySelectorAll('.item-row'));
 
         let visible = rows.filter(row => {
-            const matchQ        = !q       || row.dataset.nama.includes(q) || row.dataset.kode.includes(q) || row.dataset.brand.includes(q);
-            const matchKategori = !kategori|| row.dataset.kategori === kategori;
-            const matchUkuran   = !ukuran  || row.dataset.ukuran   === ukuran;
-            const matchStatus   = !status  || row.dataset.status   === status;
-            const matchTag      = !activeTag|| row.dataset.tags.split(',').includes(activeTag);
+            const matchQ = !q || row.dataset.nama.includes(q) || row.dataset.kode.includes(q) || row.dataset.brand.includes(q);
+            const matchKategori = !kategori || row.dataset.kategori === kategori;
+            const matchUkuran = !ukuran || row.dataset.ukuran === ukuran;
+            const matchStatus = !status || row.dataset.status === status;
+            const matchTag = !activeTag || row.dataset.tags.split(',').includes(activeTag);
             return matchQ && matchKategori && matchUkuran && matchStatus && matchTag;
         });
 
         // Urutkan
         visible.sort((a, b) => {
-            if (urut === 'harga-naik')  return +a.dataset.harga  - +b.dataset.harga;
-            if (urut === 'harga-turun') return +b.dataset.harga  - +a.dataset.harga;
-            if (urut === 'stok-naik')   return +a.dataset.stok   - +b.dataset.stok;
-            if (urut === 'nama')        return a.dataset.nama.localeCompare(b.dataset.nama);
+            if (urut === 'harga-naik') return +a.dataset.harga - +b.dataset.harga;
+            if (urut === 'harga-turun') return +b.dataset.harga - +a.dataset.harga;
+            if (urut === 'stok-naik') return +a.dataset.stok - +b.dataset.stok;
+            if (urut === 'nama') return a.dataset.nama.localeCompare(b.dataset.nama);
             return 0; // terbaru — pertahankan urutan DOM
         });
 
@@ -1027,14 +929,14 @@
         rows.forEach(r => r.style.display = 'none');
 
         // Tampilkan yang cocok sesuai urutan
-        const parent = isGrid
-            ? document.getElementById('grid-items')
-            : document.getElementById('tbody-items');
+        const parent = isGrid ?
+            document.getElementById('grid-items') :
+            document.getElementById('tbody-items');
 
-        visible.forEach(r => {
-            r.style.display = '';
-            parent.appendChild(r);
-        });
+            visible.forEach(r => {
+    r.style.display = '';   // reset ke default browser (table-row)
+    parent.appendChild(r);
+});
 
         // No-result
         document.getElementById('no-result').classList.toggle('hidden', visible.length > 0);
@@ -1045,7 +947,7 @@
 
     // Event listeners filter
     ['search-input', 'filter-kategori', 'filter-ukuran', 'filter-status', 'filter-urut'].forEach(id => {
-        document.getElementById(id).addEventListener('input',  applyFilters);
+        document.getElementById(id).addEventListener('input', applyFilters);
         document.getElementById(id).addEventListener('change', applyFilters);
     });
 </script>

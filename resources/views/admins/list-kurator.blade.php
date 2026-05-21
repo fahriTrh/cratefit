@@ -4,65 +4,12 @@
 @section('content')
 
 @php
-    $kurators = $kurators ?? [
-        [
-            'id'           => 1,
-            'nama'         => 'Sari Indah Lestari',
-            'email'        => 'sari@cratefit.id',
-            'no_hp'        => '081234567890',
-            'avatar'       => 'S',
-            'status'       => 'aktif',
-            'bergabung'    => 'Januari 2025',
-            'total_kurasi' => 48,
-            'bulan_ini'    => 8,
-            'rating'       => 4.9,
-            'spesialisasi' => ['Casual', 'Minimalis', 'Vintage'],
-        ],
-        [
-            'id'           => 2,
-            'nama'         => 'Rizky Fajar Nugroho',
-            'email'        => 'rizky@cratefit.id',
-            'no_hp'        => '082345678901',
-            'avatar'       => 'R',
-            'status'       => 'aktif',
-            'bergabung'    => 'Februari 2025',
-            'total_kurasi' => 31,
-            'bulan_ini'    => 5,
-            'rating'       => 4.7,
-            'spesialisasi' => ['Streetwear', 'Eclectic', 'Smart Casual'],
-        ],
-        [
-            'id'           => 3,
-            'nama'         => 'Dinda Permata Sari',
-            'email'        => 'dinda@cratefit.id',
-            'no_hp'        => '083456789012',
-            'avatar'       => 'D',
-            'status'       => 'nonaktif',
-            'bergabung'    => 'Maret 2025',
-            'total_kurasi' => 12,
-            'bulan_ini'    => 0,
-            'rating'       => 4.5,
-            'spesialisasi' => ['Feminine', 'Boho'],
-        ],
-        [
-            'id'           => 4,
-            'nama'         => 'Ahmad Fauzan',
-            'email'        => 'fauzan@cratefit.id',
-            'no_hp'        => '084567890123',
-            'avatar'       => 'A',
-            'status'       => 'aktif',
-            'bergabung'    => 'April 2025',
-            'total_kurasi' => 19,
-            'bulan_ini'    => 6,
-            'rating'       => 4.8,
-            'spesialisasi' => ['Casual', 'Boho', 'Smart Casual'],
-        ],
-    ];
+$kurators = $kurators ?? [];
 
-    $totalAktif    = collect($kurators)->where('status', 'aktif')->count();
-    $totalNonaktif = collect($kurators)->where('status', 'nonaktif')->count();
-    $totalKurasi   = collect($kurators)->sum('total_kurasi');
-    $rataRating    = collect($kurators)->avg('rating');
+$totalAktif = collect($kurators)->where('status', 'aktif')->count();
+$totalNonaktif = collect($kurators)->where('status', 'nonaktif')->count();
+$totalKurasi = collect($kurators)->sum('total_kurasi');
+$rataRating = collect($kurators)->avg('rating') ?? 0;
 @endphp
 
 <div class="fade-in">
@@ -75,7 +22,7 @@
             <p class="text-crate-stone font-body mt-1 text-sm">Manajemen akun dan performa tim kurator fashion Cratefit.</p>
         </div>
         <a href="{{ url('/admin/kurator/tambah') }}"
-           class="btn-primary text-white font-body font-semibold px-6 py-3 rounded-2xl text-sm
+            class="btn-primary text-white font-body font-semibold px-6 py-3 rounded-2xl text-sm
                   shadow-lg text-center shrink-0 flex items-center gap-2">
             <span>+</span> Tambah Kurator
         </a>
@@ -85,10 +32,10 @@
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
         @php
         $stats = [
-            ['label' => 'Total Kurator',    'value' => count($kurators),            'icon' => '✂️',  'color' => 'text-crate-brown'],
-            ['label' => 'Kurator Aktif',    'value' => $totalAktif,                 'icon' => '✅',  'color' => 'text-emerald-600'],
-            ['label' => 'Total Kurasi',     'value' => $totalKurasi,                'icon' => '📦', 'color' => 'text-crate-orange'],
-            ['label' => 'Rata-rata Rating', 'value' => number_format($rataRating, 1), 'icon' => '⭐', 'color' => 'text-amber-500'],
+        ['label' => 'Total Kurator', 'value' => count($kurators), 'icon' => '✂️', 'color' => 'text-crate-brown'],
+        ['label' => 'Kurator Aktif', 'value' => $totalAktif, 'icon' => '✅', 'color' => 'text-emerald-600'],
+        ['label' => 'Total Kurasi', 'value' => $totalKurasi, 'icon' => '📦', 'color' => 'text-crate-orange'],
+        ['label' => 'Rata-rata Rating', 'value' => number_format($rataRating, 1), 'icon' => '⭐', 'color' => 'text-amber-500'],
         ];
         @endphp
         @foreach($stats as $stat)
@@ -108,7 +55,7 @@
             <div class="relative flex-1">
                 <span class="absolute left-3 top-1/2 -translate-y-1/2 text-crate-stone text-sm">🔍</span>
                 <input type="text" placeholder="Cari nama / email kurator..."
-                       class="pl-9 pr-4 py-2.5 rounded-xl border border-crate-sand bg-white text-sm font-body
+                    class="pl-9 pr-4 py-2.5 rounded-xl border border-crate-sand bg-white text-sm font-body
                               text-crate-brown placeholder-crate-stone w-full transition-all">
             </div>
             <select class="border border-crate-sand bg-white rounded-xl px-3 py-2.5 text-sm font-body text-crate-brown transition-all">
@@ -188,37 +135,27 @@
                 </div>
 
                 {{-- Aksi --}}
-                <div class="flex items-center gap-2 shrink-0 opacity-0 group-hover:opacity-100 transition-all">
+                <div class="flex items-center gap-2 shrink-0">
                     <a href="{{ url('/admin/kurator/' . $k['id']) }}"
-                       title="Detail"
-                       class="w-8 h-8 rounded-lg border border-crate-sand flex items-center justify-center
+                        title="Detail"
+                        class="w-8 h-8 rounded-lg border border-crate-sand flex items-center justify-center
                               text-crate-stone hover:text-crate-brown hover:bg-crate-sand transition-colors text-sm">
                         👁
                     </a>
                     <a href="{{ url('/admin/kurator/' . $k['id'] . '/edit') }}"
-                       title="Edit"
-                       class="w-8 h-8 rounded-lg border border-crate-sand flex items-center justify-center
+                        title="Edit"
+                        class="w-8 h-8 rounded-lg border border-crate-sand flex items-center justify-center
                               text-crate-stone hover:text-crate-brown hover:bg-crate-sand transition-colors text-sm">
                         ✏️
                     </a>
-                    <form action="{{ url('/admin/kurator/' . $k['id'] . '/toggle-status') }}" method="POST"
-                          onsubmit="return confirm('Ubah status kurator ini?')">
-                        @csrf @method('PATCH')
-                        <button type="submit"
-                                title="{{ $k['status'] === 'aktif' ? 'Nonaktifkan' : 'Aktifkan' }}"
-                                class="w-8 h-8 rounded-lg border border-crate-sand flex items-center justify-center
-                                       text-crate-stone hover:bg-crate-sand transition-colors text-sm
-                                       {{ $k['status'] === 'aktif' ? 'hover:text-red-500' : 'hover:text-emerald-600' }}">
-                            {{ $k['status'] === 'aktif' ? '🔴' : '🟢' }}
-                        </button>
-                    </form>
                     <form action="{{ url('/admin/kurator/' . $k['id']) }}" method="POST"
-                          onsubmit="return confirm('Hapus kurator ini? Tindakan tidak bisa dibatalkan.')">
+                        class="flex"
+                        onsubmit="return confirm('Hapus kurator ini? Tindakan tidak bisa dibatalkan.')">
                         @csrf @method('DELETE')
                         <button type="submit"
-                                title="Hapus"
-                                class="w-8 h-8 rounded-lg border border-crate-sand flex items-center justify-center
-                                       text-crate-stone hover:text-red-600 hover:bg-red-50 hover:border-red-200 transition-colors text-sm">
+                            title="Hapus"
+                            class="w-8 h-8 rounded-lg border border-crate-sand flex items-center justify-center
+                              text-crate-stone hover:text-crate-brown hover:bg-crate-sand transition-colors text-sm">
                             🗑
                         </button>
                     </form>
@@ -231,7 +168,7 @@
                 <p class="text-crate-brown font-display text-lg font-bold">Belum ada kurator</p>
                 <p class="text-crate-stone text-sm font-body mt-1">Tambahkan kurator baru untuk memulai kurasi box.</p>
                 <a href="{{ url('/admin/kurator/tambah') }}"
-                   class="inline-block mt-4 btn-primary text-white font-body font-semibold px-6 py-2.5 rounded-xl text-sm">
+                    class="inline-block mt-4 btn-primary text-white font-body font-semibold px-6 py-2.5 rounded-xl text-sm">
                     + Tambah Kurator
                 </a>
             </div>
@@ -243,10 +180,10 @@
             <p class="text-crate-stone text-xs font-body">Halaman 1 dari 1</p>
             <div class="flex gap-2">
                 <button disabled
-                        class="px-3 py-1.5 rounded-lg border border-crate-sand text-xs font-body
+                    class="px-3 py-1.5 rounded-lg border border-crate-sand text-xs font-body
                                text-crate-stone disabled:opacity-40">← Sebelumnya</button>
                 <button disabled
-                        class="px-3 py-1.5 rounded-lg border border-crate-sand text-xs font-body
+                    class="px-3 py-1.5 rounded-lg border border-crate-sand text-xs font-body
                                text-crate-stone disabled:opacity-40">Berikutnya →</button>
             </div>
         </div>
