@@ -51,4 +51,19 @@ class User extends Authenticatable
     {
         return $this->hasOne(Langganan::class)->where('status', 'aktif')->latest();
     }
+
+    public function alamatPengiriman()
+    {
+        return $this->hasMany(AlamatPengiriman::class);
+    }
+
+    public function alamatUtama()
+    {
+        return $this->hasOne(AlamatPengiriman::class)->where('is_primary', true);
+    }
+
+    public function preferensi()
+    {
+        return $this->hasOne(Preferensi::class);
+    }
 }

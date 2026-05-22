@@ -132,7 +132,7 @@
             // Ganti $dummyList dengan $pelangganList dari controller
             @endphp
 
-            @forelse($dummyList as $p)
+            @forelse($pelangganList as $p)
             <div class="flex items-center gap-4 px-6 py-4 hover:bg-crate-cream/50 transition-colors group">
 
                 {{-- Avatar --}}

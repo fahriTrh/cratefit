@@ -90,111 +90,51 @@
             <h2 class="font-display text-lg text-crate-brown font-bold mb-1">📋 Pilih Paket</h2>
             <p class="text-crate-stone text-xs font-body mb-5">Sesuaikan paket dengan kebutuhan dan budget kamu</p>
 
-            @php
-            $pakets = [
-            [
-            'value' => 'starter',
-            'nama' => 'Starter Box',
-            'icon' => '🌱',
-            'harga' => 79000,
-            'items' => 3,
-            'highlight'=> false,
-            'fitur' => [
-            '2 item pilihan kurator',
-            'Gratis ongkir (min. order)',
-            '1x retur per periode',
-            'Akses basic preferensi',
-            ],
-            'tidak' => [
-            'Priority curation',
-            'Bonus item surprise',
-            ],
-            ],
-            [
-            'value' => 'style',
-            'nama' => 'Style Box',
-            'icon' => '✨',
-            'harga' => 129000,
-            'items' => 5,
-            'highlight'=> true,
-            'fitur' => [
-            '3 item pilihan kurator',
-            'Gratis ongkir ke seluruh Indonesia',
-            '2x retur per periode',
-            'Priority curation',
-            'Akses penuh preferensi fashion',
-            ],
-            'tidak' => [
-            'Bonus item surprise',
-            ],
-            ],
-            [
-            'value' => 'premium',
-            'nama' => 'Premium Box',
-            'icon' => '👑',
-            'harga' => 199000,
-            'items' => 8,
-            'highlight'=> false,
-            'fitur' => [
-            '4 item pilihan kurator',
-            'Gratis ongkir ke seluruh Indonesia',
-            'Retur tanpa batas',
-            'Priority curation',
-            'Akses penuh preferensi fashion',
-            '1 bonus item surprise per box',
-            ],
-            'tidak' => [],
-            ],
-            ];
-            @endphp
-
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
                 @foreach($pakets as $paket)
                 <label class="cursor-pointer relative flex">
-                    <input type="radio" name="paket" value="{{ $paket['value'] }}" class="sr-only peer"
-                        {{ old('paket', 'style') === $paket['value'] ? 'checked' : '' }}>
+                    <input type="radio" name="paket" value="{{ $paket->id }}" class="sr-only peer"
+                        {{ old('paket', optional($pakets->firstWhere('highlight', true))->slug ?? $pakets->first()?->slug) === $paket->slug ? 'checked' : '' }}>
 
-                    @if($paket['highlight'])
+                    @if($paket->highlight)
                     <span class="absolute -top-3 left-1/2 -translate-x-1/2 z-10 bg-crate-brown text-crate-cream text-xs font-body font-semibold px-3 py-0.5 rounded-full whitespace-nowrap">
                         ⭐ Rekomendasi
                     </span>
                     @endif
 
-                    <div class="tag-btn w-full border-2 rounded-2xl p-5 transition-all flex flex-col
-                                    {{ $paket['highlight']
-                                        ? 'border-crate-brown bg-crate-brown/5'
-                                        : 'border-crate-sand bg-crate-cream' }}
-                                    peer-checked:border-crate-orange peer-checked:bg-crate-orange/5
-                                    hover:border-crate-amber">
+                    @if($paket->badge)
+                    <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 z-10 bg-crate-orange text-white text-xs font-body font-semibold px-3 py-0.5 rounded-full whitespace-nowrap">
+                        {{ $paket->badge }}
+                    </span>
+                    @endif
 
-                        {{-- Header Paket --}}
+                    <div class="tag-btn w-full border-2 rounded-2xl p-5 transition-all flex flex-col
+                            {{ $paket->highlight ? 'border-crate-brown bg-crate-brown/5' : 'border-crate-sand bg-crate-cream' }}
+                            peer-checked:border-crate-orange peer-checked:bg-crate-orange/5
+                            hover:border-crate-amber">
                         <div class="text-center mb-4">
-                            <div class="text-3xl mb-2">{{ $paket['icon'] }}</div>
-                            <p class="font-display font-bold text-crate-brown text-lg">{{ $paket['nama'] }}</p>
+                            <div class="text-3xl mb-2">{{ $paket->icon }}</div>
+                            <p class="font-display font-bold text-crate-brown text-lg">{{ $paket->nama }}</p>
                             <div class="mt-2">
                                 <span class="font-display font-bold text-crate-orange text-2xl">
-                                    Rp {{ number_format($paket['harga'], 0, ',', '.') }}
+                                    Rp {{ number_format($paket->harga, 0, ',', '.') }}
                                 </span>
                                 <span class="text-crate-stone text-xs font-body">/periode</span>
                             </div>
-                            <p class="text-crate-stone text-xs font-body mt-1">{{ $paket['items'] }} item per box</p>
+                            <p class="text-crate-stone text-xs font-body mt-1">{{ $paket->jumlah_item }} item per box</p>
                         </div>
 
-                        {{-- Divider --}}
                         <div class="border-t border-crate-sand my-3"></div>
 
-                        {{-- Fitur --}}
                         <ul class="space-y-2 flex-1">
-                            @foreach($paket['fitur'] as $f)
+                            @foreach($paket->fitur ?? [] as $f)
                             <li class="flex items-start gap-2 text-xs font-body text-crate-brown/80">
-                                <span class="text-crate-orange mt-0.5 shrink-0">✓</span>
-                                {{ $f }}
+                                <span class="text-crate-orange mt-0.5 shrink-0">✓</span>{{ $f }}
                             </li>
                             @endforeach
-                            @foreach($paket['tidak'] as $t)
+                            @foreach($paket->tidak ?? [] as $t)
                             <li class="flex items-start gap-2 text-xs font-body text-crate-stone/60 line-through">
-                                <span class="mt-0.5 shrink-0">✗</span>
-                                {{ $t }}
+                                <span class="mt-0.5 shrink-0">✗</span>{{ $t }}
                             </li>
                             @endforeach
                         </ul>
@@ -311,18 +251,16 @@
 {{-- ===== JAVASCRIPT RINGKASAN DINAMIS ===== --}}
 <script>
     const paketData = {
-        starter: {
-            nama: 'Starter Box',
-            harga: 79000
+        @foreach($pakets as $paket)
+        "{{ $paket->slug }}": {
+            nama: "{{ $paket->nama }}",
+            harga: {
+                {
+                    $paket - > harga
+                }
+            }
         },
-        style: {
-            nama: 'Style Box',
-            harga: 129000
-        },
-        premium: {
-            nama: 'Premium Box',
-            harga: 199000
-        },
+        @endforeach
     };
 
     const periodeData = {

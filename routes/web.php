@@ -4,6 +4,7 @@ use App\Http\Controllers\AlamatController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\KuratorController;
+use App\Http\Controllers\KuratorPelangganController;
 use App\Http\Controllers\KurirController;
 use App\Http\Controllers\LanggananController;
 use App\Http\Controllers\PaketController;
@@ -26,11 +27,16 @@ Route::middleware(['guest'])->group(function () {
 
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
     Route::post('/register', [AuthController::class, 'register'])->name('register.post');
+
+    // curator auth
+    Route::get('/kurator/login',  [AuthController::class, 'showLoginKurator'])->name('kurator.login');
+    Route::post('/kurator/login', [AuthController::class, 'loginKurator'])->name('kurator.login.post');
 });
 
 
 
 Route::middleware(['auth'])->group(function () {
+
     // customers
     Route::get('/preferensi',  [PreferensiController::class, 'index']);
     Route::post('/preferensi', [PreferensiController::class, 'store']);
@@ -42,17 +48,11 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/alamat/{id}', [AlamatController::class, 'destroy'])->name('pelanggan.alamat.destroy');
 
 
-    Route::get('/langganan', function () {
-        $currentStep = 4;
-        return view('customers.langganan', compact('currentStep'));
-    });
+    Route::get('/langganan', [LanggananController::class, 'create'])->name('langganan.create');
     Route::post('/langganan', [LanggananController::class, 'store'])->name('langganan.store');
     Route::get('/langganan/sukses', [LanggananController::class, 'sukses'])->name('langganan.sukses');
-
-
-    Route::get('/status-box', function () {
-        return view('customers.status-box');
-    });
+    Route::post('/langganan/batalkan', [LanggananController::class, 'batalkan']);
+    Route::get('/status-box', [LanggananController::class, 'statusBox'])->name('status-box');
 
     Route::get('/retur', function () {
         return view('customers.retur');
@@ -64,23 +64,21 @@ Route::middleware(['auth'])->group(function () {
 
 
     // kurator
+    Route::middleware(['kurator'])->group(function () {
 
-    Route::get('/kurator/pelanggan', function () {
-        return view('kurators.list-pelanggan');
+        Route::get('/kurator/pelanggan',      [KuratorPelangganController::class, 'index']);
+        Route::get('/kurator/pelanggan/{id}', [KuratorPelangganController::class, 'show']);
+
+        Route::get('/kurator/pilih-item/{id}', function () {
+            return view('kurators.pilih-item');
+        });
+
+        Route::get('/kurator/susun-box/{id}', function () {
+            return view('kurators.susun-box');
+        });
+
+        Route::post('/kurator/logout', [AuthController::class, 'logoutKurator'])->name('kurator.logout');
     });
-
-    Route::get('/kurator/pelanggan/{id}', function () {
-        return view('kurators.detail-pelanggan');
-    });
-
-    Route::get('/kurator/pilih-item/{id}', function () {
-        return view('kurators.pilih-item');
-    });
-
-    Route::get('/kurator/susun-box/{id}', function () {
-        return view('kurators.susun-box');
-    });
-
     // end kurator
 
 

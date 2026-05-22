@@ -9,9 +9,17 @@ class PaketSubscription extends Model
     protected $table = 'paket_subscription';
 
     protected $fillable = [
-        'nama', 'slug', 'icon', 'harga', 'jumlah_item',
-        'badge', 'deskripsi', 'fitur', 'tidak',
-        'highlight', 'aktif',
+        'nama',
+        'slug',
+        'icon',
+        'harga',
+        'jumlah_item',
+        'badge',
+        'deskripsi',
+        'fitur',
+        'tidak',
+        'highlight',
+        'aktif',
     ];
 
     protected $casts = [
@@ -21,4 +29,8 @@ class PaketSubscription extends Model
         'aktif'     => 'boolean',
     ];
 
+    public function langganan()
+    {
+        return $this->hasMany(Langganan::class, 'paket_id');
+    }
 }

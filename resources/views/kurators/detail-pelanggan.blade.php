@@ -5,57 +5,57 @@
 
 {{-- Data dummy — ganti dengan $pelanggan dari controller --}}
 @php
-    $pelanggan = $pelanggan ?? [
-        'id'              => 1,
-        'nama'            => 'Aulia Ramadhani',
-        'email'           => 'aulia@email.com',
-        'no_hp'           => '081234567890',
-        'bergabung'       => 'Maret 2025',
-        'paket'           => 'Starter Box',
-        'periode'         => 'Juni 2025',
-        'status'          => 'menunggu',
-        'label_status'    => 'Menunggu Kurasi',
-        'avatar'          => 'A',
+$pelanggan = $pelanggan ?? [
+'id' => 1,
+'nama' => 'Aulia Ramadhani',
+'email' => 'aulia@email.com',
+'no_hp' => '081234567890',
+'bergabung' => 'Maret 2025',
+'paket' => 'Starter Box',
+'periode' => 'Juni 2025',
+'status' => 'menunggu',
+'label_status' => 'Menunggu Kurasi',
+'avatar' => 'A',
 
-        // Preferensi fashion
-        'ukuran_atasan'   => 'M',
-        'ukuran_bawahan'  => 'M',
-        'tinggi'          => '162',
-        'berat'           => '52',
-        'gaya'            => ['Casual', 'Minimalis'],
-        'warna'           => ['Hitam', 'Putih', 'Abu-abu', 'Navy', 'Krem'],
-        'jenis_pakaian'   => ['Kaos', 'Kemeja', 'Jaket', 'Celana Jeans', 'Cardigan'],
-        'pantangan'       => ['Dress', 'Rok'],
-        'catatan'         => 'Saya lebih suka warna earth tone dan netral. Hindari motif ramai. Prefer pakaian yang bisa dipakai ke kampus sekaligus jalan-jalan.',
+// Preferensi fashion
+'ukuran_atasan' => 'M',
+'ukuran_bawahan' => 'M',
+'tinggi' => '162',
+'berat' => '52',
+'gaya' => ['Casual', 'Minimalis'],
+'warna' => ['Hitam', 'Putih', 'Abu-abu', 'Navy', 'Krem'],
+'jenis_pakaian' => ['Kaos', 'Kemeja', 'Jaket', 'Celana Jeans', 'Cardigan'],
+'pantangan' => ['Dress', 'Rok'],
+'catatan' => 'Saya lebih suka warna earth tone dan netral. Hindari motif ramai. Prefer pakaian yang bisa dipakai ke kampus sekaligus jalan-jalan.',
 
-        // Alamat
-        'alamat'          => 'Jl. Pahlawan No. 12, Kel. Sudirman, Kec. Medan Baru, Kota Medan, Sumatera Utara 20152',
+// Alamat
+'alamat' => 'Jl. Pahlawan No. 12, Kel. Sudirman, Kec. Medan Baru, Kota Medan, Sumatera Utara 20152',
 
-        // Riwayat box
-        'riwayat'         => [
-            ['periode' => 'Mei 2025',   'status' => 'dikirim', 'label' => 'Sudah Dikirim', 'item' => 3],
-            ['periode' => 'April 2025', 'status' => 'selesai', 'label' => 'Box Selesai',   'item' => 3],
-        ],
-    ];
+// Riwayat box
+'riwayat' => [
+['periode' => 'Mei 2025', 'status' => 'dikirim', 'label' => 'Sudah Dikirim', 'item' => 3],
+['periode' => 'April 2025', 'status' => 'selesai', 'label' => 'Box Selesai', 'item' => 3],
+],
+];
 
-    $warnaMeta = [
-        'Hitam'      => '#1A1A1A',
-        'Putih'      => '#F5F5F0',
-        'Abu-abu'    => '#9E9E9E',
-        'Navy'       => '#1B2A4A',
-        'Biru'       => '#3B82F6',
-        'Hijau'      => '#22C55E',
-        'Sage'       => '#87A878',
-        'Merah'      => '#EF4444',
-        'Oranye'     => '#F97316',
-        'Kuning'     => '#EAB308',
-        'Krem'       => '#F5F0E0',
-        'Coklat'     => '#7C3F1E',
-        'Ungu'       => '#A855F7',
-        'Pink'       => '#EC4899',
-        'Dusty Rose' => '#D4929A',
-        'Terracota'  => '#C2694F',
-    ];
+$warnaMeta = [
+'Hitam' => '#1A1A1A',
+'Putih' => '#F5F5F0',
+'Abu-abu' => '#9E9E9E',
+'Navy' => '#1B2A4A',
+'Biru' => '#3B82F6',
+'Hijau' => '#22C55E',
+'Sage' => '#87A878',
+'Merah' => '#EF4444',
+'Oranye' => '#F97316',
+'Kuning' => '#EAB308',
+'Krem' => '#F5F0E0',
+'Coklat' => '#7C3F1E',
+'Ungu' => '#A855F7',
+'Pink' => '#EC4899',
+'Dusty Rose' => '#D4929A',
+'Terracota' => '#C2694F',
+];
 @endphp
 
 <div class="fade-in space-y-6">
@@ -87,7 +87,7 @@
                         {{ $pelanggan['label_status'] }}
                     </span>
                 </div>
-                <p class="text-crate-stone text-sm font-body">{{ $pelanggan['email'] }}  ·  {{ $pelanggan['no_hp'] }}</p>
+                <p class="text-crate-stone text-sm font-body">{{ $pelanggan['email'] }} · {{ $pelanggan['no_hp'] }}</p>
                 <p class="text-crate-stone text-xs font-body mt-1">
                     Bergabung: <span class="text-crate-brown font-medium">{{ $pelanggan['bergabung'] }}</span>
                     &nbsp;·&nbsp;
@@ -100,11 +100,11 @@
             {{-- CTA kurator --}}
             <div class="flex flex-col sm:items-end gap-2 shrink-0">
                 <a href="{{ url('/kurator/pilih-item?pelanggan=' . $pelanggan['id']) }}"
-                   class="btn-curator text-white font-body font-semibold px-5 py-2.5 rounded-xl text-sm text-center">
+                    class="btn-curator text-white font-body font-semibold px-5 py-2.5 rounded-xl text-sm text-center">
                     👕 Mulai Kurasi Box
                 </a>
                 <a href="{{ url('/kurator/susun-box?pelanggan=' . $pelanggan['id']) }}"
-                   class="border border-cur-teal text-cur-teal font-body font-semibold px-5 py-2.5 rounded-xl text-sm
+                    class="border border-cur-teal text-cur-teal font-body font-semibold px-5 py-2.5 rounded-xl text-sm
                           hover:bg-cur-teal-bg transition-colors text-center">
                     📦 Susun Isi Box
                 </a>
@@ -152,7 +152,7 @@
         <div class="card-wood rounded-2xl p-6">
             <h2 class="font-display text-base text-crate-brown font-bold mb-4">🎨 Gaya Berpakaian</h2>
             <div class="flex flex-wrap gap-2 mb-4">
-                @foreach($pelanggan['gaya'] as $g)
+                @foreach($pelanggan['gaya'] ?? [] as $g)
                 <span class="bg-cur-teal-bg border border-cur-teal/25 text-cur-teal
                              text-sm font-body font-semibold px-3 py-1.5 rounded-full">
                     {{ $g }}
@@ -167,7 +167,7 @@
                 @foreach($pelanggan['warna'] as $w)
                 <div class="flex flex-col items-center gap-1">
                     <div class="w-8 h-8 rounded-full ring-2 ring-white shadow-sm border border-black/10"
-                         style="background:{{ $warnaMeta[$w] ?? '#ccc' }}"></div>
+                        style="background:{{ $warnaMeta[$w] ?? '#ccc' }}"></div>
                     <span class="text-crate-stone text-xs font-body text-center" style="max-width:44px;line-height:1.2">{{ $w }}</span>
                 </div>
                 @endforeach
@@ -218,7 +218,7 @@
                     Catatan Internal Kurator
                 </label>
                 <textarea rows="3" placeholder="Tambahkan catatan internal di sini (hanya terlihat oleh tim kurator)..."
-                          class="w-full border border-crate-sand rounded-xl px-4 py-3 text-sm font-body text-crate-brown
+                    class="w-full border border-crate-sand rounded-xl px-4 py-3 text-sm font-body text-crate-brown
                                  bg-crate-cream placeholder-crate-stone resize-none transition-all">{{ $catatanKurator ?? '' }}</textarea>
                 <button class="mt-2 btn-curator text-white text-xs font-body font-semibold px-4 py-2 rounded-lg">
                     Simpan Catatan
@@ -262,11 +262,11 @@
     {{-- ACTION FOOTER --}}
     <div class="flex items-center justify-between pt-2 pb-6">
         <a href="{{ url('/kurator/pelanggan') }}"
-           class="flex items-center gap-2 text-crate-stone font-body text-sm hover:text-crate-brown transition-colors">
+            class="flex items-center gap-2 text-crate-stone font-body text-sm hover:text-crate-brown transition-colors">
             ← Kembali ke Daftar
         </a>
         <a href="{{ url('/kurator/pilih-item?pelanggan=' . $pelanggan['id']) }}"
-           class="btn-curator text-white font-body font-semibold px-7 py-3 rounded-2xl text-sm shadow-lg">
+            class="btn-curator text-white font-body font-semibold px-7 py-3 rounded-2xl text-sm shadow-lg">
             👕 Mulai Kurasi Box →
         </a>
     </div>

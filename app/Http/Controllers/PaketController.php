@@ -10,7 +10,10 @@ class PaketController extends Controller
 {
     public function index()
     {
-        $pakets = PaketSubscription::all()->map(function ($p) {
+        $pakets = PaketSubscription::withCount([
+            'langganan as langganan_aktif' => fn($q) => $q->where('status', 'aktif'),
+            'langganan as total_langganan',
+        ])->get()->map(function ($p) {
             return [
                 'id'               => $p->id,
                 'slug'             => $p->slug,
@@ -24,9 +27,9 @@ class PaketController extends Controller
                 'tidak'            => $p->tidak ?? [],
                 'highlight'        => $p->highlight,
                 'aktif'            => $p->aktif,
-                'langganan_aktif'  => 0,
-                'total_langganan'  => 0,
-                'pendapatan_bulan' => 0,
+                'langganan_aktif'  => $p->langganan_aktif,
+                'total_langganan'  => $p->total_langganan,
+                'pendapatan_bulan' => $p->langganan_aktif * $p->harga,
             ];
         })->toArray();
 
