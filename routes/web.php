@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\AlamatController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\KuratorController;
 use App\Http\Controllers\KurirController;
+use App\Http\Controllers\LanggananController;
 use App\Http\Controllers\PaketController;
+use App\Http\Controllers\PreferensiController;
 use App\Http\Controllers\StatusBoxController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,27 +19,36 @@ Route::middleware(['guest'])->group(function () {
     // admin auth
     Route::get('/admin/login',  [AuthController::class, 'showLogin'])->name('admin.login');
     Route::post('/admin/login', [AuthController::class, 'login'])->name('admin.login.post');
-    Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
+
+    // customer auth
+    Route::get('/login',  [AuthController::class, 'showLoginPelanggan'])->name('login');
+    Route::post('/login', [AuthController::class, 'loginPelanggan'])->name('pelanggan.login.post');
+
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+    Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 });
 
 
 
 Route::middleware(['auth'])->group(function () {
     // customers
-    Route::get('/preferensi', function () {
-        $currentStep = 2;
-        return view('customers.preferensi', compact('currentStep'));
-    });
+    Route::get('/preferensi',  [PreferensiController::class, 'index']);
+    Route::post('/preferensi', [PreferensiController::class, 'store']);
 
-    Route::get('/alamat', function () {
-        $currentStep = 3;
-        return view('customers.alamat', compact('currentStep'));
-    });
+    Route::get('/alamat',        [AlamatController::class, 'index']);
+    Route::post('/alamat',       [AlamatController::class, 'store']);
+    Route::get('/alamat/{id}/edit', [AlamatController::class, 'edit'])->name('pelanggan.alamat.edit');
+    Route::put('/alamat/{id}',      [AlamatController::class, 'update']);
+    Route::delete('/alamat/{id}', [AlamatController::class, 'destroy'])->name('pelanggan.alamat.destroy');
+
 
     Route::get('/langganan', function () {
         $currentStep = 4;
         return view('customers.langganan', compact('currentStep'));
     });
+    Route::post('/langganan', [LanggananController::class, 'store'])->name('langganan.store');
+    Route::get('/langganan/sukses', [LanggananController::class, 'sukses'])->name('langganan.sukses');
+
 
     Route::get('/status-box', function () {
         return view('customers.status-box');
@@ -45,6 +57,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/retur', function () {
         return view('customers.retur');
     });
+
+    Route::post('/logout', [AuthController::class, 'logoutPelanggan'])->name('logout');
 
     // end customers
 
@@ -72,6 +86,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['admin'])->group(function () {
         // admin
+
+        Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
 
         Route::get('/admin/dashboard', function () {
             return 'Hello';

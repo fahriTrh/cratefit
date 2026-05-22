@@ -26,7 +26,7 @@
     </div>
     @endif
 
-    <form action="" method="POST">
+    <form action="{{ route('langganan.store') }}" method="POST">
         @csrf
 
         {{-- ===== PERIODE LANGGANAN ===== --}}

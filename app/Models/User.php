@@ -41,4 +41,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function langganan()
+    {
+        return $this->hasMany(Langganan::class);
+    }
+
+    public function langgananAktif()
+    {
+        return $this->hasOne(Langganan::class)->where('status', 'aktif')->latest();
+    }
 }

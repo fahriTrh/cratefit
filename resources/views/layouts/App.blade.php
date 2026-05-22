@@ -184,7 +184,7 @@
                 <nav class="sidebar-nav space-y-1">
                     @php
                     $menu = [
-                    ['icon'=>'👤','label'=>'Profil Saya', 'route'=>'/profil'],
+                    // ['icon'=>'👤','label'=>'Profil Saya', 'route'=>'/profil'],
                     ['icon'=>'✨','label'=>'Preferensi Fashion', 'route'=>'/preferensi'],
                     ['icon'=>'📍','label'=>'Alamat Pengiriman', 'route'=>'/alamat'],
                     ['icon'=>'📦','label'=>'Langganan Paket', 'route'=>'/langganan'],
