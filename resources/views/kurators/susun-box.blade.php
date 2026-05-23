@@ -4,79 +4,79 @@
 @section('content')
 
 @php
-    $pelanggan = $pelanggan ?? [
-        'id'             => 1,
-        'nama'           => 'Aulia Ramadhani',
-        'email'          => 'aulia@email.com',
-        'paket'          => 'Starter Box',
-        'periode'        => 'Juni 2025',
-        'ukuran_atasan'  => 'M',
-        'ukuran_bawahan' => 'M',
-        'gaya'           => ['Casual', 'Minimalis'],
-        'warna'          => ['Hitam', 'Putih', 'Krem'],
-        'pantangan'      => ['Dress', 'Rok'],
-        'catatan'        => 'Saya lebih suka warna earth tone dan netral. Hindari motif ramai.',
-        'alamat'         => 'Jl. Pahlawan No. 12, Kel. Sudirman, Kec. Medan Baru, Kota Medan, Sumatera Utara 20152',
-        'avatar'         => 'A',
-        'status'         => 'menunggu',
-        'label_status'   => 'Menunggu Kurasi',
-    ];
+$pelanggan = $pelanggan ?? [
+'id' => 1,
+'nama' => 'Aulia Ramadhani',
+'email' => 'aulia@email.com',
+'paket' => 'Starter Box',
+'periode' => 'Juni 2025',
+'ukuran_atasan' => 'M',
+'ukuran_bawahan' => 'M',
+'gaya' => ['Casual', 'Minimalis'],
+'warna' => ['Hitam', 'Putih', 'Krem'],
+'pantangan' => ['Dress', 'Rok'],
+'catatan' => 'Saya lebih suka warna earth tone dan netral. Hindari motif ramai.',
+'alamat' => 'Jl. Pahlawan No. 12, Kel. Sudirman, Kec. Medan Baru, Kota Medan, Sumatera Utara 20152',
+'avatar' => 'A',
+'status' => 'menunggu',
+'label_status' => 'Menunggu Kurasi',
+];
 
-    // Item-item yang sudah dipilih dari halaman sebelumnya
-    // Di controller nyata, ambil dari session atau relasi DB
-    $itemDipilih = $itemDipilih ?? [
-        [
-            'id'       => 1,
-            'nama'     => 'Kemeja Flanel Kotak Vintage',
-            'kategori' => 'Kemeja',
-            'ukuran'   => 'M',
-            'warna'    => 'Hitam/Merah',
-            'kondisi'  => 'Sangat Baik',
-            'harga'    => 45000,
-            'foto'     => null,
-            'tag'      => ['Casual', 'Vintage'],
-            'cocok'    => true,
-        ],
-        [
-            'id'       => 2,
-            'nama'     => 'Kaos Oversize Polos Putih',
-            'kategori' => 'Kaos',
-            'ukuran'   => 'M',
-            'warna'    => 'Putih',
-            'kondisi'  => 'Baik',
-            'harga'    => 30000,
-            'foto'     => null,
-            'tag'      => ['Casual', 'Minimalis'],
-            'cocok'    => true,
-        ],
-        [
-            'id'       => 3,
-            'nama'     => 'Cardigan Rajut Krem',
-            'kategori' => 'Cardigan',
-            'ukuran'   => 'M',
-            'warna'    => 'Krem',
-            'kondisi'  => 'Sangat Baik',
-            'harga'    => 60000,
-            'foto'     => null,
-            'tag'      => ['Minimalis', 'Casual'],
-            'cocok'    => true,
-        ],
-    ];
+// Item-item yang sudah dipilih dari halaman sebelumnya
+// Di controller nyata, ambil dari session atau relasi DB
+$itemDipilih = $itemDipilih ?? [
+[
+'id' => 1,
+'nama' => 'Kemeja Flanel Kotak Vintage',
+'kategori' => 'Kemeja',
+'ukuran' => 'M',
+'warna' => 'Hitam/Merah',
+'kondisi' => 'Sangat Baik',
+'harga' => 45000,
+'foto' => null,
+'tag' => ['Casual', 'Vintage'],
+'cocok' => true,
+],
+[
+'id' => 2,
+'nama' => 'Kaos Oversize Polos Putih',
+'kategori' => 'Kaos',
+'ukuran' => 'M',
+'warna' => 'Putih',
+'kondisi' => 'Baik',
+'harga' => 30000,
+'foto' => null,
+'tag' => ['Casual', 'Minimalis'],
+'cocok' => true,
+],
+[
+'id' => 3,
+'nama' => 'Cardigan Rajut Krem',
+'kategori' => 'Cardigan',
+'ukuran' => 'M',
+'warna' => 'Krem',
+'kondisi' => 'Sangat Baik',
+'harga' => 60000,
+'foto' => null,
+'tag' => ['Minimalis', 'Casual'],
+'cocok' => true,
+],
+];
 
-    $totalHarga = array_sum(array_column($itemDipilih, 'harga'));
+$totalHarga = array_sum(array_column($itemDipilih, 'harga'));
 
-    $kondisiBadge = [
-        'Sangat Baik' => 'bg-emerald-50 text-emerald-700 border-emerald-200',
-        'Baik'        => 'bg-blue-50 text-blue-700 border-blue-200',
-        'Cukup'       => 'bg-amber-50 text-amber-700 border-amber-200',
-    ];
+$kondisiBadge = [
+'Sangat Baik' => 'bg-emerald-50 text-emerald-700 border-emerald-200',
+'Baik' => 'bg-blue-50 text-blue-700 border-blue-200',
+'Cukup' => 'bg-amber-50 text-amber-700 border-amber-200',
+];
 
-    $maxItem = match($pelanggan['paket'] ?? '') {
-        'Starter Box'  => 3,
-        'Style Box'    => 5,
-        'Premium Box'  => 7,
-        default        => 3,
-    };
+$maxItem = match($pelanggan['paket'] ?? '') {
+'Starter Box' => 3,
+'Style Box' => 5,
+'Premium Box' => 7,
+default => 3,
+};
 @endphp
 
 <div class="fade-in space-y-6">
@@ -104,7 +104,7 @@
             </p>
         </div>
         <a href="{{ url('/kurator/pilih-item?pelanggan=' . $pelanggan['id']) }}"
-           class="border border-crate-sand bg-white text-crate-brown font-body font-semibold
+            class="border border-crate-sand bg-white text-crate-brown font-body font-semibold
                   px-5 py-2.5 rounded-xl text-sm hover:bg-crate-sand transition-colors text-center shrink-0">
             ← Ubah Pilihan Item
         </a>
@@ -154,9 +154,12 @@
                         <div class="drag-handle cursor-grab active:cursor-grabbing shrink-0 text-crate-stone/40
                                     hover:text-crate-stone transition-colors select-none px-1">
                             <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor">
-                                <circle cx="5" cy="4"  r="2"/><circle cx="11" cy="4"  r="2"/>
-                                <circle cx="5" cy="10" r="2"/><circle cx="11" cy="10" r="2"/>
-                                <circle cx="5" cy="16" r="2"/><circle cx="11" cy="16" r="2"/>
+                                <circle cx="5" cy="4" r="2" />
+                                <circle cx="11" cy="4" r="2" />
+                                <circle cx="5" cy="10" r="2" />
+                                <circle cx="11" cy="10" r="2" />
+                                <circle cx="5" cy="16" r="2" />
+                                <circle cx="11" cy="16" r="2" />
                             </svg>
                         </div>
 
@@ -169,11 +172,11 @@
                         {{-- Foto / placeholder --}}
                         <div class="w-14 h-14 rounded-xl bg-crate-sand flex items-center justify-center shrink-0 overflow-hidden border border-crate-sand">
                             @if($item['foto'])
-                                <img src="{{ asset('storage/' . $item['foto']) }}"
-                                     alt="{{ $item['nama'] }}"
-                                     class="w-full h-full object-cover">
+                            <img src="{{ asset($item['foto']) }}"
+                                alt="{{ $item['nama'] }}"
+                                class="w-full h-full object-cover">
                             @else
-                                <span class="text-2xl opacity-30">👕</span>
+                            <span class="text-2xl opacity-30">👕</span>
                             @endif
                         </div>
 
@@ -212,12 +215,13 @@
 
                         {{-- Hapus dari box --}}
                         <button type="button"
-                                onclick="hapusItem(this, {{ $item['id'] }})"
-                                title="Hapus dari box"
-                                class="shrink-0 w-8 h-8 rounded-full flex items-center justify-center
+                            onclick="hapusItem(this, {{ $item['id'] }})"
+                            title="Hapus dari box"
+                            class="shrink-0 w-8 h-8 rounded-full flex items-center justify-center
                                        text-red-400 hover:bg-red-50 hover:text-red-600 transition-colors">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
                             </svg>
                         </button>
 
@@ -228,7 +232,7 @@
                 {{-- Tambah item lagi --}}
                 <div class="px-5 py-4 border-t border-crate-sand">
                     <a href="{{ url('/kurator/pilih-item?pelanggan=' . $pelanggan['id']) }}"
-                       class="flex items-center gap-2 text-sm font-body text-crate-stone hover:text-crate-brown transition-colors">
+                        class="flex items-center gap-2 text-sm font-body text-crate-stone hover:text-crate-brown transition-colors">
                         <span class="w-7 h-7 rounded-full border-2 border-dashed border-crate-stone/40
                                      flex items-center justify-center text-base leading-none">+</span>
                         Tambah / ubah item
@@ -245,8 +249,8 @@
                 </p>
 
                 <textarea id="catatan-kurasi" name="catatan_kurasi" rows="4"
-                          placeholder="Contoh: Hai Aulia! Kami pilihkan outfit casual-minimalis yang bisa kamu mix & match. Cardigan krem cocok dipadukan dengan kaos putih dan celana jeans biru. Semoga suka! 🎁"
-                          class="w-full border border-crate-sand rounded-xl px-4 py-3 text-sm font-body
+                    placeholder="Contoh: Hai Aulia! Kami pilihkan outfit casual-minimalis yang bisa kamu mix & match. Cardigan krem cocok dipadukan dengan kaos putih dan celana jeans biru. Semoga suka! 🎁"
+                    class="w-full border border-crate-sand rounded-xl px-4 py-3 text-sm font-body
                                  text-crate-brown bg-crate-cream placeholder-crate-stone resize-none
                                  transition-all leading-relaxed">{{ $catatanKurasi ?? '' }}</textarea>
 
@@ -342,9 +346,9 @@
 
             {{-- FORM KONFIRMASI --}}
             <form id="form-konfirmasi"
-                  action="{{ url('/kurator/susun-box/' . $pelanggan['id'] . '/konfirmasi') }}"
-                  method="POST"
-                  class="card-wood rounded-2xl p-5">
+                action="{{ url('/kurator/susun-box/' . $pelanggan['id'] . '/konfirmasi') }}"
+                method="POST"
+                class="card-wood rounded-2xl p-5">
                 @csrf
 
                 {{-- Hidden: urutan item (diisi JS) --}}
@@ -359,17 +363,11 @@
                         Ubah Status Box
                     </label>
                     <select name="status_box"
-                            class="w-full border border-crate-sand bg-white rounded-xl px-3 py-2.5
+                        class="w-full border border-crate-sand bg-white rounded-xl px-3 py-2.5
                                    text-sm font-body text-crate-brown transition-all">
-                        <option value="selesai" {{ ($statusBox ?? '') === 'selesai' ? 'selected' : '' }}>
-                            ✅ Box Selesai Dikurasi
-                        </option>
-                        <option value="menunggu_pengiriman" {{ ($statusBox ?? '') === 'menunggu_pengiriman' ? 'selected' : '' }}>
-                            📦 Menunggu Pengiriman
-                        </option>
-                        <option value="dikirim" {{ ($statusBox ?? '') === 'dikirim' ? 'selected' : '' }}>
-                            🚚 Sudah Dikirim
-                        </option>
+                        <option value="sedang_dikurasi">🔄 Sedang Dikurasi</option>
+                        <option value="siap_dikirim">📦 Siap Dikirim</option>
+                        <option value="dalam_pengiriman">🚚 Dalam Pengiriman</option>
                     </select>
                 </div>
 
@@ -379,15 +377,15 @@
                         Nomor Resi <span class="normal-case font-normal text-crate-stone">(opsional)</span>
                     </label>
                     <input type="text" name="nomor_resi"
-                           placeholder="Misal: JNE123456789"
-                           value="{{ $nomorResi ?? '' }}"
-                           class="w-full border border-crate-sand bg-white rounded-xl px-3 py-2.5
+                        placeholder="Misal: JNE123456789"
+                        value="{{ $nomorResi ?? '' }}"
+                        class="w-full border border-crate-sand bg-white rounded-xl px-3 py-2.5
                                   text-sm font-body text-crate-brown placeholder-crate-stone transition-all">
                 </div>
 
                 {{-- Tombol simpan --}}
                 <button type="submit" id="btn-konfirmasi"
-                        class="btn-curator w-full text-white font-body font-semibold
+                    class="btn-curator w-full text-white font-body font-semibold
                                px-5 py-3 rounded-xl text-sm shadow-md transition-all">
                     📦 Konfirmasi &amp; Simpan Box
                 </button>
@@ -410,11 +408,11 @@
                     Status Box
                 </label>
                 <select name="status_box_mobile"
-                        class="w-full border border-crate-sand bg-white rounded-xl px-3 py-2.5
+                    class="w-full border border-crate-sand bg-white rounded-xl px-3 py-2.5
                                text-sm font-body text-crate-brown transition-all">
-                    <option value="selesai">✅ Box Selesai</option>
-                    <option value="menunggu_pengiriman">📦 Menunggu Kirim</option>
-                    <option value="dikirim">🚚 Sudah Dikirim</option>
+                    <option value="sedang_dikurasi">🔄 Sedang Dikurasi</option>
+                    <option value="siap_dikirim">📦 Siap Dikirim</option>
+                    <option value="dalam_pengiriman">🚚 Dalam Pengiriman</option>
                 </select>
             </div>
             <div>
@@ -422,19 +420,19 @@
                     Nomor Resi
                 </label>
                 <input type="text" name="nomor_resi_mobile"
-                       placeholder="JNE123456789"
-                       class="w-full border border-crate-sand bg-white rounded-xl px-3 py-2.5
+                    placeholder="JNE123456789"
+                    class="w-full border border-crate-sand bg-white rounded-xl px-3 py-2.5
                               text-sm font-body text-crate-brown placeholder-crate-stone transition-all">
             </div>
         </div>
         <button type="button"
-                onclick="document.getElementById('form-konfirmasi').submit()"
-                class="btn-curator w-full text-white font-body font-semibold px-5 py-3 rounded-xl text-sm shadow-md">
+            onclick="document.getElementById('form-konfirmasi').submit()"
+            class="btn-curator w-full text-white font-body font-semibold px-5 py-3 rounded-xl text-sm shadow-md">
             📦 Konfirmasi &amp; Simpan Box
         </button>
     </div>
 
-    
+
 
 </div>
 
@@ -464,20 +462,20 @@
     let dragSrc = null;
 
     list.querySelectorAll('.sortable-item').forEach(item => {
-        item.addEventListener('dragstart', function (e) {
+        item.addEventListener('dragstart', function(e) {
             dragSrc = this;
             this.classList.add('dragging');
             e.dataTransfer.effectAllowed = 'move';
         });
 
-        item.addEventListener('dragend', function () {
+        item.addEventListener('dragend', function() {
             this.classList.remove('dragging');
             list.querySelectorAll('.sortable-item').forEach(i => i.classList.remove('drag-over'));
             updateNomor();
             updateHiddenUrutan();
         });
 
-        item.addEventListener('dragover', function (e) {
+        item.addEventListener('dragover', function(e) {
             e.preventDefault();
             if (this !== dragSrc) {
                 list.querySelectorAll('.sortable-item').forEach(i => i.classList.remove('drag-over'));
@@ -485,11 +483,11 @@
             }
         });
 
-        item.addEventListener('drop', function (e) {
+        item.addEventListener('drop', function(e) {
             e.preventDefault();
             if (this !== dragSrc) {
                 const items = [...list.querySelectorAll('.sortable-item')];
-                const srcIdx  = items.indexOf(dragSrc);
+                const srcIdx = items.indexOf(dragSrc);
                 const destIdx = items.indexOf(this);
                 if (srcIdx < destIdx) {
                     list.insertBefore(dragSrc, this.nextSibling);
@@ -521,8 +519,8 @@
 
         const li = btn.closest('.sortable-item');
         li.style.transition = 'opacity 0.25s, transform 0.25s';
-        li.style.opacity    = '0';
-        li.style.transform  = 'translateX(-16px)';
+        li.style.opacity = '0';
+        li.style.transform = 'translateX(-16px)';
         setTimeout(() => {
             li.remove();
             updateNomor();
@@ -541,10 +539,10 @@
 
     // ===== CHAR COUNTER CATATAN =====
     const catatanEl = document.getElementById('catatan-kurasi');
-    const charEl    = document.getElementById('char-count');
-    const MAX_CHAR  = 500;
+    const charEl = document.getElementById('char-count');
+    const MAX_CHAR = 500;
 
-    catatanEl.addEventListener('input', function () {
+    catatanEl.addEventListener('input', function() {
         const len = this.value.length;
         charEl.textContent = `${len} / ${MAX_CHAR}`;
         if (len > MAX_CHAR) {
@@ -554,10 +552,10 @@
     });
 
     // ===== SUBMIT: sinkron catatan ke form utama =====
-    document.getElementById('form-konfirmasi').addEventListener('submit', function (e) {
+    document.getElementById('form-konfirmasi').addEventListener('submit', function(e) {
         // Sinkron catatan ke hidden input agar ikut terkirim
         const catatan = document.getElementById('catatan-kurasi').value;
-        const internal = document.getElementById('catatan-internal').value;
+        // const internal = document.getElementById('catatan-internal').value;
 
         let inputCatatan = this.querySelector('[name="catatan_kurasi"]');
         if (!inputCatatan) {
@@ -568,14 +566,14 @@
         }
         inputCatatan.value = catatan;
 
-        let inputInternal = this.querySelector('[name="catatan_internal"]');
-        if (!inputInternal) {
-            inputInternal = document.createElement('input');
-            inputInternal.type = 'hidden';
-            inputInternal.name = 'catatan_internal';
-            this.appendChild(inputInternal);
-        }
-        inputInternal.value = internal;
+        // let inputInternal = this.querySelector('[name="catatan_internal"]');
+        // if (!inputInternal) {
+        //     inputInternal = document.createElement('input');
+        //     inputInternal.type = 'hidden';
+        //     inputInternal.name = 'catatan_internal';
+        //     this.appendChild(inputInternal);
+        // }
+        // inputInternal.value = internal;
     });
 </script>
 

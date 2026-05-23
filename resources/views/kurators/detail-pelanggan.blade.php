@@ -99,7 +99,7 @@ $warnaMeta = [
 
             {{-- CTA kurator --}}
             <div class="flex flex-col sm:items-end gap-2 shrink-0">
-                <a href="{{ url('/kurator/pilih-item?pelanggan=' . $pelanggan['id']) }}"
+                <a href="{{ url('/kurator/pilih-item/' . $pelanggan['id']) }}"
                     class="btn-curator text-white font-body font-semibold px-5 py-2.5 rounded-xl text-sm text-center">
                     👕 Mulai Kurasi Box
                 </a>
@@ -232,7 +232,18 @@ $warnaMeta = [
         <h2 class="font-display text-base text-crate-brown font-bold mb-3">📍 Alamat Pengiriman</h2>
         <div class="flex items-start gap-3 bg-crate-cream rounded-xl p-4 border border-crate-sand">
             <span class="text-xl mt-0.5">🏠</span>
-            <p class="text-crate-brown text-sm font-body leading-relaxed">{{ $pelanggan['alamat'] }}</p>
+            @if($pelanggan['alamat'])
+            <p class="...">
+                {{ $pelanggan['alamat']['nama_penerima'] }} · {{ $pelanggan['alamat']['no_telepon'] }}<br>
+                {{ $pelanggan['alamat']['alamat_lengkap'] }},
+                {{ $pelanggan['alamat']['kecamatan'] }},
+                {{ $pelanggan['alamat']['kota'] }},
+                {{ $pelanggan['alamat']['provinsi'] }}
+                {{ $pelanggan['alamat']['kode_pos'] }}
+            </p>
+            @else
+            <p class="...">Belum ada alamat tersimpan.</p>
+            @endif
         </div>
     </div>
 
@@ -265,7 +276,7 @@ $warnaMeta = [
             class="flex items-center gap-2 text-crate-stone font-body text-sm hover:text-crate-brown transition-colors">
             ← Kembali ke Daftar
         </a>
-        <a href="{{ url('/kurator/pilih-item?pelanggan=' . $pelanggan['id']) }}"
+        <a href="{{ url('/kurator/pilih-item/' . $pelanggan['id']) }}"
             class="btn-curator text-white font-body font-semibold px-7 py-3 rounded-2xl text-sm shadow-lg">
             👕 Mulai Kurasi Box →
         </a>

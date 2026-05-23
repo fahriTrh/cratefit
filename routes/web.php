@@ -68,14 +68,11 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/kurator/pelanggan',      [KuratorPelangganController::class, 'index']);
         Route::get('/kurator/pelanggan/{id}', [KuratorPelangganController::class, 'show']);
+        Route::get('/kurator/pilih-item/{id}', [KuratorPelangganController::class, 'pilihItem']);
+        Route::post('/kurator/pilih-item/{id}', [KuratorPelangganController::class, 'simpanPilihan']);
 
-        Route::get('/kurator/pilih-item/{id}', function () {
-            return view('kurators.pilih-item');
-        });
-
-        Route::get('/kurator/susun-box/{id}', function () {
-            return view('kurators.susun-box');
-        });
+        Route::get('/kurator/susun-box/{id}',               [KuratorPelangganController::class, 'susunBox']);
+        Route::post('/kurator/susun-box/{id}/konfirmasi',   [KuratorPelangganController::class, 'konfirmasiBox']);
 
         Route::post('/kurator/logout', [AuthController::class, 'logoutKurator'])->name('kurator.logout');
     });
