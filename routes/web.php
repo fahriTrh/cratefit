@@ -12,6 +12,8 @@ use App\Http\Controllers\PaketController;
 use App\Http\Controllers\PreferensiController;
 use App\Http\Controllers\StatusBoxController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReturController;
+use App\Http\Controllers\AdminReturController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -60,9 +62,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/status-box', [LanggananController::class, 'statusBox'])->name('status-box');
     Route::post('/status-box/konfirmasi-diterima', [LanggananController::class, 'konfirmasiDiterima'])->name('status-box.konfirmasi');
 
-    Route::get('/retur', function () {
-        return view('customers.retur');
-    });
+    Route::get('/retur',  [ReturController::class, 'index'])->name('retur.index');
+    Route::post('/retur', [ReturController::class, 'store'])->name('retur.store');
+
 
     Route::post('/logout', [AuthController::class, 'logoutPelanggan'])->name('logout');
 
@@ -136,9 +138,11 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/admin/inventory/{id}',             [InventoryController::class, 'destroy']);
         Route::patch('/admin/inventory/{id}/stok',         [InventoryController::class, 'updateStok']);
 
-        Route::get('/admin/kelola-retur', function () {
-            return view('admins.kelola-retur');
-        });
+        Route::get('/admin/kelola-retur',              [AdminReturController::class, 'index']);
+        Route::patch('/admin/retur/{id}/proses',       [AdminReturController::class, 'proses']);
+        Route::patch('/admin/retur/{id}/selesai',      [AdminReturController::class, 'selesai']);
+        Route::patch('/admin/retur/{id}/tolak',        [AdminReturController::class, 'tolak']);
+        Route::patch('/admin/retur/{id}/assign-kurir', [AdminReturController::class, 'assignKurir']);
 
         // end admin
     });
@@ -150,6 +154,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/kurir/dashboard',                          [KurirDashboardController::class, 'index']);
         Route::post('/kurir/box/{boxId}/ambil',                 [KurirDashboardController::class, 'ambilBox']);
         Route::post('/kurir/box/{boxId}/konfirmasi-tiba',       [KurirDashboardController::class, 'konfirmasiTiba']);
+        Route::post('/kurir/retur/{id}/konfirmasi-jemput', [KurirDashboardController::class, 'konfirmasiJemputRetur']);
         Route::post('/kurir/logout', [AuthController::class, 'logoutKurir'])->name('kurir.logout');
 
         // end courier

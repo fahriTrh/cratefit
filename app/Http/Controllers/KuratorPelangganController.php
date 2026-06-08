@@ -208,6 +208,7 @@ class KuratorPelangganController extends Controller
             'nama'           => $user->name,
             'avatar'         => strtoupper(substr($user->name, 0, 1)),
             'paket'          => $langganan?->paket->nama ?? 'Starter Box',
+            'jumlah_item'    => $langganan?->paket->jumlah_item ?? 3,
             'periode'        => $langganan?->tanggal_pengiriman_berikutnya?->translatedFormat('F Y') ?? '-',
             'ukuran_atasan'  => $preferensi?->ukuran_atasan ?? '-',
             'ukuran_bawahan' => $preferensi?->ukuran_bawahan ?? '-',

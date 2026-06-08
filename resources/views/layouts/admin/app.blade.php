@@ -318,7 +318,7 @@
                         'items' => [
                             // ['icon' => '🛒', 'label' => 'Langganan',         'route' => '/admin/langganan'],
                             // ['icon' => '📬', 'label' => 'Pengiriman',        'route' => '/admin/pengiriman'],
-                            ['icon' => '↩️', 'label' => 'Retur',             'route' => '/admin/retur'],
+                            ['icon' => '↩️', 'label' => 'Retur',             'route' => '/admin/kelola-retur'],
                         ],
                     ],
                     [

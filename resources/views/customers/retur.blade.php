@@ -102,6 +102,7 @@
 
     <form action="{{ url('/retur') }}" method="POST" id="form-retur">
         @csrf
+        <input type="hidden" name="box_id" value="{{ $box['id'] }}">
 
         {{-- INFO BOX --}}
         <div class="card-wood rounded-2xl p-6 mb-6">

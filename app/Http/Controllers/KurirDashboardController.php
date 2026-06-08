@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Box;
+use App\Models\Retur;
 
 class KurirDashboardController extends Controller
 {
@@ -11,20 +12,17 @@ class KurirDashboardController extends Controller
     {
         $kurir = auth()->user();
 
-        // Box siap dikirim (belum diambil kurir manapun atau milik kurir ini)
         $boxSiapDikirim = Box::with(['pelanggan', 'langganan.alamat'])
             ->where('status', 'siap_dikirim')
             ->latest()
             ->get();
 
-        // Box yang sedang dikirim oleh kurir ini
         $boxDalamPengiriman = Box::with(['pelanggan', 'langganan.alamat'])
             ->where('status', 'dalam_pengiriman')
             ->where('kurir_id', $kurir->id)
             ->latest()
             ->get();
 
-        // Riwayat box yang sudah tiba/selesai oleh kurir ini
         $riwayat = Box::with(['pelanggan'])
             ->where('kurir_id', $kurir->id)
             ->whereIn('status', ['tiba', 'selesai'])
@@ -32,11 +30,21 @@ class KurirDashboardController extends Controller
             ->limit(10)
             ->get();
 
+        // Retur pickup yang di-assign ke kurir ini
+        $returPickup = Retur::with('user', 'box')
+            ->where('kurir_id', $kurir->id)
+            ->where('metode_pengembalian', 'pickup')
+            ->where('status', 'diproses')
+            ->whereNull('tanggal_dijemput')
+            ->latest()
+            ->get();
+
         return view('kurirs.dashboard', compact(
             'kurir',
             'boxSiapDikirim',
             'boxDalamPengiriman',
-            'riwayat'
+            'riwayat',
+            'returPickup'
         ));
     }
 
@@ -52,14 +60,13 @@ class KurirDashboardController extends Controller
         $box->update([
             'status'          => 'dalam_pengiriman',
             'kurir_id'        => auth()->id(),
-            // Pakai resi dari kurator kalau sudah ada, kalau tidak pakai input kurir
             'nomor_resi'      => $box->nomor_resi ?? ($request->ekspedisi === 'Kurir Internal' ? null : $request->nomor_resi),
             'ekspedisi'       => $request->ekspedisi,
             'tanggal_dikirim' => now(),
         ]);
 
         return redirect('/kurir/dashboard')
-            ->with('success', 'Box ' . $box->kode_box . ' berhasil diambil dan status diperbarui.');
+            ->with('success', 'Box ' . $box->kode_box . ' berhasil diambil.');
     }
 
     public function konfirmasiTiba($boxId)
@@ -76,4 +83,21 @@ class KurirDashboardController extends Controller
         return redirect('/kurir/dashboard')
             ->with('success', 'Box ' . $box->kode_box . ' dikonfirmasi sudah tiba.');
     }
+
+    public function konfirmasiJemputRetur($id)
+    {
+        $retur = Retur::where('kurir_id', auth()->id())
+            ->where('status', 'diproses')
+            ->where('metode_pengembalian', 'pickup')
+            ->whereNull('tanggal_dijemput')
+            ->findOrFail($id);
+
+        $retur->update([
+            'tanggal_dijemput' => now(),
+        ]);
+
+        return redirect('/kurir/dashboard')
+            ->with('success', 'Item retur ' . $retur->kode_retur . ' berhasil dijemput.');
+    }
+
 }

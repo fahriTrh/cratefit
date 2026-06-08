@@ -268,6 +268,42 @@
             @endif
         </div>
 
+        {{-- ─── RETUR PICKUP ─────────────────────────────── --}}
+        @if($returPickup->count() > 0)
+        <div class="mb-8">
+            <h2 class="font-display text-xl text-crate-brown font-bold mb-4">↩️ Penjemputan Retur</h2>
+            <div class="space-y-4">
+                @foreach($returPickup as $retur)
+                <div class="card-wood relative rounded-2xl p-5">
+                    <div class="flex items-start justify-between gap-4 mb-3">
+                        <div>
+                            <p class="font-body font-semibold text-crate-brown">{{ $retur->kode_retur }}</p>
+                            <p class="text-crate-stone text-xs font-body mt-0.5">
+                                {{ $retur->user?->name }} · Box #{{ $retur->box?->kode_box }}
+                            </p>
+                        </div>
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs
+                             font-body font-semibold bg-blue-100 text-blue-700 border border-blue-200 shrink-0">
+                            🏍️ Perlu Dijemput
+                        </span>
+                    </div>
+                    <p class="text-crate-stone text-xs font-body mb-4">
+                        📍 Alamat: {{ $retur->box?->langganan?->alamat?->alamat_lengkap ?? 'Lihat detail pelanggan' }}
+                    </p>
+                    <form action="{{ url('/kurir/retur/' . $retur->id . '/konfirmasi-jemput') }}" method="POST">
+                        @csrf
+                        <button type="submit"
+                            class="btn-primary text-white font-body font-semibold px-5 py-2.5
+                               rounded-xl text-sm shadow flex items-center gap-2">
+                            ✅ Konfirmasi Sudah Dijemput
+                        </button>
+                    </form>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        @endif
+
         {{-- RIWAYAT --}}
         @if($riwayat->count() > 0)
         <div class="mb-8">

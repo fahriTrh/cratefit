@@ -252,13 +252,9 @@
 <script>
     const paketData = {
         @foreach($pakets as $paket)
-        "{{ $paket->slug }}": {
+        "{{ $paket->id }}": {
             nama: "{{ $paket->nama }}",
-            harga: {
-                {
-                    $paket - > harga
-                }
-            }
+            harga: {{ $paket->harga }},
         },
         @endforeach
     };

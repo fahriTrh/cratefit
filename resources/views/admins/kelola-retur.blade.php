@@ -4,82 +4,82 @@
 @section('content')
 
 @php
-    $returs = $returs ?? [
-        [
-            'id'      => 1,
-            'kode'    => 'RTR-20250115-001',
-            'pelanggan' => ['nama' => 'Aulia Ramadhani', 'email' => 'aulia@gmail.com', 'avatar' => 'A'],
-            'box'     => 'CF-20250101',
-            'items'   => ['Kemeja Flannel', 'Kaos Oversized'],
-            'alasan'  => 'Tidak Cocok Ukuran',
-            'catatan' => 'Ukuran M terlalu besar, biasanya pakai S.',
-            'metode'  => 'drop_off',
-            'status'  => 'diajukan',
-            'tanggal' => '15 Jan 2025',
-        ],
-        [
-            'id'      => 2,
-            'kode'    => 'RTR-20241205-001',
-            'pelanggan' => ['nama' => 'Bintang Pratama', 'email' => 'bintang@gmail.com', 'avatar' => 'B'],
-            'box'     => 'CF-20241201',
-            'items'   => ['Celana Jeans'],
-            'alasan'  => 'Kondisi Rusak/Cacat',
-            'catatan' => 'Ada sobekan kecil di bagian saku.',
-            'metode'  => 'pickup',
-            'status'  => 'diproses',
-            'tanggal' => '05 Des 2024',
-        ],
-        [
-            'id'      => 3,
-            'kode'    => 'RTR-20241105-001',
-            'pelanggan' => ['nama' => 'Citra Dewi', 'email' => 'citra@gmail.com', 'avatar' => 'C'],
-            'box'     => 'CF-20241101',
-            'items'   => ['Outer Corduroy', 'Hoodie Basic'],
-            'alasan'  => 'Tidak Suka Gaya',
-            'catatan' => null,
-            'metode'  => 'drop_off',
-            'status'  => 'selesai',
-            'tanggal' => '05 Nov 2024',
-        ],
-        [
-            'id'      => 4,
-            'kode'    => 'RTR-20241010-001',
-            'pelanggan' => ['nama' => 'Dafi Maulana', 'email' => 'dafi@gmail.com', 'avatar' => 'D'],
-            'box'     => 'CF-20241001',
-            'items'   => ['Kemeja Oxford'],
-            'alasan'  => 'Kualitas Kurang',
-            'catatan' => 'Jahitan di bagian kerah lepas.',
-            'metode'  => 'pickup',
-            'status'  => 'ditolak',
-            'tanggal' => '10 Okt 2024',
-        ],
-        [
-            'id'      => 5,
-            'kode'    => 'RTR-20250110-001',
-            'pelanggan' => ['nama' => 'Elisa Nuraini', 'email' => 'elisa@gmail.com', 'avatar' => 'E'],
-            'box'     => 'CF-20250105',
-            'items'   => ['Kaos Stripe'],
-            'alasan'  => 'Warna Tidak Sesuai',
-            'catatan' => null,
-            'metode'  => 'drop_off',
-            'status'  => 'diajukan',
-            'tanggal' => '10 Jan 2025',
-        ],
-    ];
+$returs = $returs ?? [
+[
+'id' => 1,
+'kode' => 'RTR-20250115-001',
+'pelanggan' => ['nama' => 'Aulia Ramadhani', 'email' => 'aulia@gmail.com', 'avatar' => 'A'],
+'box' => 'CF-20250101',
+'items' => ['Kemeja Flannel', 'Kaos Oversized'],
+'alasan' => 'Tidak Cocok Ukuran',
+'catatan' => 'Ukuran M terlalu besar, biasanya pakai S.',
+'metode' => 'drop_off',
+'status' => 'diajukan',
+'tanggal' => '15 Jan 2025',
+],
+[
+'id' => 2,
+'kode' => 'RTR-20241205-001',
+'pelanggan' => ['nama' => 'Bintang Pratama', 'email' => 'bintang@gmail.com', 'avatar' => 'B'],
+'box' => 'CF-20241201',
+'items' => ['Celana Jeans'],
+'alasan' => 'Kondisi Rusak/Cacat',
+'catatan' => 'Ada sobekan kecil di bagian saku.',
+'metode' => 'pickup',
+'status' => 'diproses',
+'tanggal' => '05 Des 2024',
+],
+[
+'id' => 3,
+'kode' => 'RTR-20241105-001',
+'pelanggan' => ['nama' => 'Citra Dewi', 'email' => 'citra@gmail.com', 'avatar' => 'C'],
+'box' => 'CF-20241101',
+'items' => ['Outer Corduroy', 'Hoodie Basic'],
+'alasan' => 'Tidak Suka Gaya',
+'catatan' => null,
+'metode' => 'drop_off',
+'status' => 'selesai',
+'tanggal' => '05 Nov 2024',
+],
+[
+'id' => 4,
+'kode' => 'RTR-20241010-001',
+'pelanggan' => ['nama' => 'Dafi Maulana', 'email' => 'dafi@gmail.com', 'avatar' => 'D'],
+'box' => 'CF-20241001',
+'items' => ['Kemeja Oxford'],
+'alasan' => 'Kualitas Kurang',
+'catatan' => 'Jahitan di bagian kerah lepas.',
+'metode' => 'pickup',
+'status' => 'ditolak',
+'tanggal' => '10 Okt 2024',
+],
+[
+'id' => 5,
+'kode' => 'RTR-20250110-001',
+'pelanggan' => ['nama' => 'Elisa Nuraini', 'email' => 'elisa@gmail.com', 'avatar' => 'E'],
+'box' => 'CF-20250105',
+'items' => ['Kaos Stripe'],
+'alasan' => 'Warna Tidak Sesuai',
+'catatan' => null,
+'metode' => 'drop_off',
+'status' => 'diajukan',
+'tanggal' => '10 Jan 2025',
+],
+];
 
-    $statusMap = [
-        'diajukan' => ['label'=>'Diajukan', 'class'=>'badge-menunggu',  'dot'=>'bg-yellow-400'],
-        'diproses' => ['label'=>'Diproses', 'class'=>'badge-diproses',  'dot'=>'bg-blue-400'],
-        'selesai'  => ['label'=>'Selesai',  'class'=>'badge-selesai',   'dot'=>'bg-green-400'],
-        'ditolak'  => ['label'=>'Ditolak',  'class'=>'bg-red-100 text-red-600 border border-red-200', 'dot'=>'bg-red-400'],
-    ];
+$statusMap = [
+'diajukan' => ['label'=>'Diajukan', 'class'=>'badge-menunggu', 'dot'=>'bg-yellow-400'],
+'diproses' => ['label'=>'Diproses', 'class'=>'badge-diproses', 'dot'=>'bg-blue-400'],
+'selesai' => ['label'=>'Selesai', 'class'=>'badge-selesai', 'dot'=>'bg-green-400'],
+'ditolak' => ['label'=>'Ditolak', 'class'=>'bg-red-100 text-red-600 border border-red-200', 'dot'=>'bg-red-400'],
+];
 
-    $metodeMap = ['drop_off' => '📦 Drop Off', 'pickup' => '🏍️ Pickup'];
+$metodeMap = ['drop_off' => '📦 Drop Off', 'pickup' => '🏍️ Pickup'];
 
-    $totalDiajukan = collect($returs)->where('status', 'diajukan')->count();
-    $totalDiproses = collect($returs)->where('status', 'diproses')->count();
-    $totalSelesai  = collect($returs)->where('status', 'selesai')->count();
-    $totalDitolak  = collect($returs)->where('status', 'ditolak')->count();
+$totalDiajukan = collect($returs)->where('status', 'diajukan')->count();
+$totalDiproses = collect($returs)->where('status', 'diproses')->count();
+$totalSelesai = collect($returs)->where('status', 'selesai')->count();
+$totalDitolak = collect($returs)->where('status', 'ditolak')->count();
 @endphp
 
 <div class="fade-in">
@@ -104,10 +104,10 @@
     {{-- STATS --}}
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
         @foreach([
-            ['label'=>'Diajukan',  'value'=>$totalDiajukan, 'icon'=>'📥', 'color'=>'text-yellow-700'],
-            ['label'=>'Diproses',  'value'=>$totalDiproses, 'icon'=>'🔄', 'color'=>'text-blue-700'],
-            ['label'=>'Selesai',   'value'=>$totalSelesai,  'icon'=>'✅', 'color'=>'text-green-700'],
-            ['label'=>'Ditolak',   'value'=>$totalDitolak,  'icon'=>'❌', 'color'=>'text-red-600'],
+        ['label'=>'Diajukan', 'value'=>$totalDiajukan, 'icon'=>'📥', 'color'=>'text-yellow-700'],
+        ['label'=>'Diproses', 'value'=>$totalDiproses, 'icon'=>'🔄', 'color'=>'text-blue-700'],
+        ['label'=>'Selesai', 'value'=>$totalSelesai, 'icon'=>'✅', 'color'=>'text-green-700'],
+        ['label'=>'Ditolak', 'value'=>$totalDitolak, 'icon'=>'❌', 'color'=>'text-red-600'],
         ] as $stat)
         <div class="card-wood rounded-2xl p-4">
             <span class="text-xl block mb-1">{{ $stat['icon'] }}</span>
@@ -123,14 +123,14 @@
             <div class="relative flex-1">
                 <span class="absolute left-3 top-1/2 -translate-y-1/2 text-crate-stone text-sm">🔍</span>
                 <input type="text"
-                       placeholder="Cari kode retur / nama pelanggan..."
-                       class="pl-9 pr-4 py-2.5 rounded-xl border border-crate-sand bg-white
+                    placeholder="Cari kode retur / nama pelanggan..."
+                    class="pl-9 pr-4 py-2.5 rounded-xl border border-crate-sand bg-white
                               text-sm font-body text-crate-brown placeholder-crate-stone w-full transition-all"
-                       oninput="filterRetur(this.value)">
+                    oninput="filterRetur(this.value)">
             </div>
             <select class="border border-crate-sand bg-white rounded-xl px-3 py-2.5
                            text-sm font-body text-crate-brown transition-all"
-                    onchange="filterStatus(this.value)">
+                onchange="filterStatus(this.value)">
                 <option value="">Semua Status</option>
                 <option value="diajukan">Diajukan</option>
                 <option value="diproses">Diproses</option>
@@ -159,9 +159,9 @@
             @php $rs = $statusMap[$r['status']] ?? $statusMap['diajukan']; @endphp
 
             <div class="retur-row px-6 py-5 hover:bg-crate-cream/40 transition-colors"
-                 data-status="{{ $r['status'] }}"
-                 data-nama="{{ strtolower($r['pelanggan']['nama']) }}"
-                 data-kode="{{ strtolower($r['kode']) }}">
+                data-status="{{ $r['status'] }}"
+                data-nama="{{ strtolower($r['pelanggan']['nama']) }}"
+                data-kode="{{ strtolower($r['kode']) }}">
 
                 <div class="flex items-start gap-4">
 
@@ -230,25 +230,52 @@
                                 @csrf
                                 @method('PATCH')
                                 <button type="submit"
-                                        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl
+                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl
                                                bg-blue-50 border border-blue-200 text-blue-700
                                                text-xs font-body font-semibold hover:bg-blue-100 transition-colors">
                                     🔄 Proses
                                 </button>
                             </form>
+                            {{-- Assign Kurir — hanya untuk metode pickup --}}
+                            @if($r['metode'] === 'pickup' && !$r['kurir'])
+                            <form action="{{ url('/admin/retur/' . $r['id'] . '/assign-kurir') }}" method="POST" class="flex items-center gap-2">
+                                @csrf
+                                @method('PATCH')
+                                <select name="kurir_id" required
+                                    class="border border-crate-sand rounded-xl px-2 py-1.5 text-xs font-body text-crate-brown bg-white">
+                                    <option value="">Pilih Kurir</option>
+                                    @foreach($kurirList as $kurir)
+                                    <option value="{{ $kurir->id }}">{{ $kurir->name }}</option>
+                                    @endforeach
+                                </select>
+                                <button type="submit"
+                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl
+                   bg-crate-amber/20 border border-crate-amber text-crate-brown
+                   text-xs font-body font-semibold hover:bg-crate-amber/30 transition-colors">
+                                    🏍️ Assign Kurir
+                                </button>
+                            </form>
+                            @elseif($r['kurir'])
+                            <span class="text-xs font-body text-crate-stone">
+                                🏍️ Kurir: <span class="text-crate-brown font-semibold">{{ $r['kurir'] }}</span>
+                                @if($r['tanggal_dijemput'])
+                                · <span class="text-green-600">Dijemput {{ $r['tanggal_dijemput'] }}</span>
+                                @endif
+                            </span>
+                            @endif
                             <form action="{{ url('/admin/retur/' . $r['id'] . '/selesai') }}" method="POST">
                                 @csrf
                                 @method('PATCH')
                                 <button type="submit"
-                                        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl
+                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl
                                                bg-green-50 border border-green-200 text-green-700
                                                text-xs font-body font-semibold hover:bg-green-100 transition-colors">
                                     ✅ Selesaikan
                                 </button>
                             </form>
                             <button type="button"
-                                    onclick="openTolakModal({{ $r['id'] }}, '{{ $r['kode'] }}')"
-                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl
+                                onclick="openTolakModal({{ $r['id'] }}, '{{ $r['kode'] }}')"
+                                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl
                                            bg-red-50 border border-red-200 text-red-600
                                            text-xs font-body font-semibold hover:bg-red-100 transition-colors">
                                 ❌ Tolak
@@ -261,12 +288,21 @@
                                 @csrf
                                 @method('PATCH')
                                 <button type="submit"
-                                        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl
+                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl
                                                bg-green-50 border border-green-200 text-green-700
                                                text-xs font-body font-semibold hover:bg-green-100 transition-colors">
                                     ✅ Tandai Selesai
                                 </button>
                             </form>
+                            @if($r['kurir'])
+                            <span class="text-xs font-body text-crate-stone">
+                                🏍️ {{ $r['kurir'] }}
+                                @if($r['tanggal_dijemput'])
+                                · <span class="text-green-600">Dijemput {{ $r['tanggal_dijemput'] }}</span>
+                                @endif
+                            </span>
+                            @endif
+
                         </div>
                         @endif
 
@@ -288,12 +324,12 @@
             <p class="text-crate-stone text-xs font-body">Halaman 1 dari 1</p>
             <div class="flex gap-2">
                 <button disabled
-                        class="px-3 py-1.5 rounded-lg border border-crate-sand text-xs font-body
+                    class="px-3 py-1.5 rounded-lg border border-crate-sand text-xs font-body
                                text-crate-stone disabled:opacity-40">
                     ← Sebelumnya
                 </button>
                 <button disabled
-                        class="px-3 py-1.5 rounded-lg border border-crate-sand text-xs font-body
+                    class="px-3 py-1.5 rounded-lg border border-crate-sand text-xs font-body
                                text-crate-stone disabled:opacity-40">
                     Berikutnya →
                 </button>
@@ -305,8 +341,8 @@
 
 {{-- MODAL TOLAK --}}
 <div id="modal-tolak"
-     class="hidden fixed inset-0 z-50 flex items-center justify-center p-4"
-     style="background:rgba(0,0,0,0.5);backdrop-filter:blur(4px)">
+    class="hidden fixed inset-0 z-50 flex items-center justify-center p-4"
+    style="background:rgba(0,0,0,0.5);backdrop-filter:blur(4px)">
     <div class="card-wood rounded-2xl p-6 w-full max-w-md">
         <h3 class="font-display text-xl text-crate-brown font-bold mb-1">Tolak Pengajuan Retur</h3>
         <p class="text-crate-stone text-xs font-body mb-5" id="modal-kode-label">—</p>
@@ -319,21 +355,21 @@
                 Alasan Penolakan <span class="text-red-500">*</span>
             </label>
             <textarea name="catatan_admin"
-                      rows="3"
-                      required
-                      placeholder="cth: Pakaian terlihat sudah dipakai, label sudah lepas..."
-                      class="w-full border border-crate-sand rounded-xl px-4 py-3 text-sm font-body
+                rows="3"
+                required
+                placeholder="cth: Pakaian terlihat sudah dipakai, label sudah lepas..."
+                class="w-full border border-crate-sand rounded-xl px-4 py-3 text-sm font-body
                              text-crate-brown bg-crate-cream placeholder-crate-stone resize-none mb-5"></textarea>
 
             <div class="flex gap-3">
                 <button type="button"
-                        onclick="closeModal()"
-                        class="flex-1 border border-crate-sand text-crate-brown font-body font-semibold
+                    onclick="closeModal()"
+                    class="flex-1 border border-crate-sand text-crate-brown font-body font-semibold
                                py-3 rounded-2xl text-sm hover:bg-crate-sand transition-colors">
                     Batal
                 </button>
                 <button type="submit"
-                        class="flex-1 bg-red-500 text-white font-body font-semibold
+                    class="flex-1 bg-red-500 text-white font-body font-semibold
                                py-3 rounded-2xl text-sm hover:bg-red-600 transition-colors">
                     ❌ Tolak Retur
                 </button>
