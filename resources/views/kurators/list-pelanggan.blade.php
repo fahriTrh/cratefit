@@ -169,11 +169,23 @@
                 </div>
 
                 {{-- CTA --}}
-                <a href="{{ url('/kurator/pelanggan/' . $p['id']) }}"
-                    class="shrink-0 btn-curator text-white text-xs font-body font-semibold
-                          px-4 py-2 rounded-xl opacity-0 group-hover:opacity-100 transition-all">
-                    Lihat Detail →
-                </a>
+                <div class="shrink-0 flex gap-2 opacity-0 group-hover:opacity-100 transition-all">
+
+                    @if(in_array($p['status'], ['diproses']) && $p['box_id'])
+                    {{-- Box sedang dikurasi/siap dikirim: tampilkan tombol Edit --}}
+                    <a href="{{ url('/kurator/edit-pilih-item/' . $p['box_id']) }}"
+                        class="btn-curator text-white text-xs font-body font-semibold px-4 py-2 rounded-xl">
+                        Edit Box →
+                    </a>
+                    @else
+                    {{-- Belum ada box atau sudah selesai: tombol kurasi biasa --}}
+                    <a href="{{ url('/kurator/pelanggan/' . $p['id']) }}"
+                        class="btn-curator text-white text-xs font-body font-semibold px-4 py-2 rounded-xl">
+                        Lihat Detail →
+                    </a>
+                    @endif
+
+                </div>
             </div>
             @empty
             <div class="px-6 py-16 text-center">

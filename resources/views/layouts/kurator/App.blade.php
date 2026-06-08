@@ -186,7 +186,7 @@
                     {{ strtoupper(substr($kuratorNama ?? 'K', 0, 1)) }}
                 </div>
                 {{-- Logout --}}
-                <form method="POST" action="">
+                <form method="POST" action="/kurator/logout">
                     @csrf
                     <button type="submit"
                         class="hidden sm:flex items-center gap-1.5 text-crate-stone hover:text-white text-xs font-body transition-colors ml-2">

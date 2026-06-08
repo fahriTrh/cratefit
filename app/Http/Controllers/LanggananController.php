@@ -102,7 +102,40 @@ class LanggananController extends Controller
             return redirect('/langganan')->with('info', 'Kamu belum memiliki langganan aktif.');
         }
 
-        return view('customers.status-box', compact('langganan'));
+        // Ambil box terbaru milik user
+        $box = \App\Models\Box::with('items.item')
+            ->where('user_id', auth()->id())
+            ->latest()
+            ->first();
+
+        return view('customers.status-box', compact('langganan', 'box'));
+    }
+
+    public function konfirmasiDiterima()
+    {
+        $box = \App\Models\Box::with('items')
+            ->where('user_id', auth()->id())
+            ->whereIn('status', ['dalam_pengiriman', 'tiba'])
+            ->latest()
+            ->firstOrFail();
+
+        // Kurangi stok item secara permanen
+        foreach ($box->items as $boxItem) {
+            $item = \App\Models\InventoryItem::find($boxItem->item_id);
+            if ($item) {
+                $item->decrement('stok');
+                if ($item->stok <= 0) {
+                    $item->update(['status' => 'tidak_tersedia']);
+                }
+            }
+        }
+
+        $box->update([
+            'status'        => 'selesai',
+            'tanggal_tiba'  => now(),
+        ]);
+
+        return redirect('/status-box')->with('success', 'Box berhasil dikonfirmasi diterima!');
     }
 
     // LanggananController

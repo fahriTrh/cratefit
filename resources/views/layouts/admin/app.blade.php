@@ -316,15 +316,15 @@
                     [
                         'label' => 'Operasional',
                         'items' => [
-                            ['icon' => '🛒', 'label' => 'Langganan',         'route' => '/admin/langganan'],
-                            ['icon' => '📬', 'label' => 'Pengiriman',        'route' => '/admin/pengiriman'],
+                            // ['icon' => '🛒', 'label' => 'Langganan',         'route' => '/admin/langganan'],
+                            // ['icon' => '📬', 'label' => 'Pengiriman',        'route' => '/admin/pengiriman'],
                             ['icon' => '↩️', 'label' => 'Retur',             'route' => '/admin/retur'],
                         ],
                     ],
                     [
                         'label' => 'Sistem',
                         'items' => [
-                            ['icon' => '⚙️', 'label' => 'Pengaturan',        'route' => '/admin/pengaturan'],
+                            // ['icon' => '⚙️', 'label' => 'Pengaturan',        'route' => '/admin/pengaturan'],
                         ],
                     ],
                 ];

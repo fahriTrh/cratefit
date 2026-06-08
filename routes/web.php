@@ -6,6 +6,7 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\KuratorController;
 use App\Http\Controllers\KuratorPelangganController;
 use App\Http\Controllers\KurirController;
+use App\Http\Controllers\KurirDashboardController;
 use App\Http\Controllers\LanggananController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\PreferensiController;
@@ -31,6 +32,10 @@ Route::middleware(['guest'])->group(function () {
     // curator auth
     Route::get('/kurator/login',  [AuthController::class, 'showLoginKurator'])->name('kurator.login');
     Route::post('/kurator/login', [AuthController::class, 'loginKurator'])->name('kurator.login.post');
+
+    // courier auth
+    Route::get('/kurir/login',  [AuthController::class, 'showLoginKurir'])->name('kurir.login');
+    Route::post('/kurir/login', [AuthController::class, 'loginKurir'])->name('kurir.login.post');
 });
 
 
@@ -53,6 +58,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/langganan/sukses', [LanggananController::class, 'sukses'])->name('langganan.sukses');
     Route::post('/langganan/batalkan', [LanggananController::class, 'batalkan']);
     Route::get('/status-box', [LanggananController::class, 'statusBox'])->name('status-box');
+    Route::post('/status-box/konfirmasi-diterima', [LanggananController::class, 'konfirmasiDiterima'])->name('status-box.konfirmasi');
 
     Route::get('/retur', function () {
         return view('customers.retur');
@@ -73,6 +79,11 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/kurator/susun-box/{id}',               [KuratorPelangganController::class, 'susunBox']);
         Route::post('/kurator/susun-box/{id}/konfirmasi',   [KuratorPelangganController::class, 'konfirmasiBox']);
+
+        Route::get('/kurator/edit-pilih-item/{boxId}',            [KuratorPelangganController::class, 'editPilihItem']);
+        Route::post('/kurator/edit-pilih-item/{boxId}',           [KuratorPelangganController::class, 'editSimpanPilihan']);
+        Route::get('/kurator/edit-susun-box/{boxId}',             [KuratorPelangganController::class, 'editSusunBox']);
+        Route::post('/kurator/edit-susun-box/{boxId}/konfirmasi', [KuratorPelangganController::class, 'updateBox']);
 
         Route::post('/kurator/logout', [AuthController::class, 'logoutKurator'])->name('kurator.logout');
     });
@@ -130,5 +141,17 @@ Route::middleware(['auth'])->group(function () {
         });
 
         // end admin
+    });
+
+
+    Route::middleware(['kurir'])->group(function () {
+        // courier
+
+        Route::get('/kurir/dashboard',                          [KurirDashboardController::class, 'index']);
+        Route::post('/kurir/box/{boxId}/ambil',                 [KurirDashboardController::class, 'ambilBox']);
+        Route::post('/kurir/box/{boxId}/konfirmasi-tiba',       [KurirDashboardController::class, 'konfirmasiTiba']);
+        Route::post('/kurir/logout', [AuthController::class, 'logoutKurir'])->name('kurir.logout');
+
+        // end courier
     });
 });

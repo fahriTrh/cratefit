@@ -183,6 +183,61 @@ class AuthController extends Controller
     }
 
 
+    public function showLoginKurir()
+    {
+        if (Auth::check() && Auth::user()->role === 'kurir') {
+            return redirect('/kurir/dashboard');
+        }
+
+        return view('auth.login-kurir');
+    }
+
+    public function loginKurir(Request $request)
+    {
+        $request->validate([
+            'email'    => ['required', 'email'],
+            'password' => ['required', 'string', 'min:6'],
+        ], [
+            'email.required'    => 'Email wajib diisi.',
+            'email.email'       => 'Format email tidak valid.',
+            'password.required' => 'Password wajib diisi.',
+            'password.min'      => 'Password minimal 6 karakter.',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+        $remember    = $request->boolean('remember');
+
+        if (Auth::attempt($credentials, $remember)) {
+            $user = Auth::user();
+
+            if ($user->role !== 'kurir') {
+                Auth::logout();
+                return back()->withErrors([
+                    'email' => 'Akun ini bukan akun kurir.',
+                ])->withInput($request->only('email'));
+            }
+
+            $request->session()->regenerate();
+
+            return redirect('/kurir/dashboard')
+                ->with('success', 'Selamat datang, ' . $user->name . '!');
+        }
+
+        return back()
+            ->withInput($request->only('email'))
+            ->withErrors(['email' => 'Email atau password salah.']);
+    }
+
+    public function logoutKurir(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/kurir/login')->with('success', 'Berhasil keluar.');
+    }
+
+
 
     /**
      * Tampilkan halaman login admin.
