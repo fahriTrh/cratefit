@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cratefit Kurator — @yield('title', 'Dashboard Kurator')</title>
+    <title>Cratefit Kurator — Profil Pelanggan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -158,14 +159,15 @@
 
 <body class="min-h-screen relative z-10">
 
-    {{-- ===== TOP NAV ===== --}}
+    
     <nav class="nav-curator text-crate-cream sticky top-0 z-50 shadow-lg py-2">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
 
-            {{-- Logo + role badge --}}
+            
             <div class="flex items-center gap-3">
                 <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-crate-cream flex items-center justify-center overflow-hidden border border-white/20">
-                    <img class="w-full h-full" src="{{ asset('assets/imgs/logo-circle.png') }}" alt="Cratefit">
+                    <!-- <img class="w-full h-full" src="http://127.0.0.1:8000/assets/imgs/logo-circle.png" alt="Cratefit"> -->
+                    <span class="text-crate-orange font-script text-lg leading-none">C</span>
                 </div>
                 <div>
                     <div class="flex items-center gap-2">
@@ -176,19 +178,18 @@
                 </div>
             </div>
 
-            {{-- Kurator info --}}
+            
             <div class="flex items-center gap-3">
                 <div class="hidden sm:flex flex-col items-end">
                     <span class="text-crate-stone text-xs font-body">Masuk sebagai</span>
-                    <span class="text-crate-warm font-semibold text-sm font-body">{{ $kuratorNama ?? 'Kurator' }}</span>
+                    <span class="text-crate-warm font-semibold text-sm font-body">Kurator Cratefit</span>
                 </div>
                 <div class="w-9 h-9 rounded-full bg-cur-teal flex items-center justify-center text-white font-display font-bold text-sm">
-                    {{ strtoupper(substr($kuratorNama ?? 'K', 0, 1)) }}
+                    K
                 </div>
-                {{-- Logout --}}
+                
                 <form method="POST" action="/kurator/logout">
-                    @csrf
-                    <button type="submit"
+                    <input type="hidden" name="_token" value="8LbAVuyKFEVVm230Azw7BCC972chGNsBRU632NOM" autocomplete="off">                    <button type="submit"
                         class="hidden sm:flex items-center gap-1.5 text-crate-stone hover:text-white text-xs font-body transition-colors ml-2">
                         <span>↗</span> Keluar
                     </button>
@@ -197,20 +198,20 @@
         </div>
     </nav>
 
-    {{-- ===== LAYOUT ===== --}}
+    
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex gap-8">
 
-        {{-- ===== SIDEBAR ===== --}}
+        
         <aside class="hidden lg:block w-64 shrink-0">
             <div class="card-wood rounded-2xl p-5 sticky top-24">
 
-                {{-- Kurator identity --}}
+                
                 <div class="flex items-center gap-3 mb-5 pb-4 border-b border-crate-sand">
                     <div class="w-10 h-10 rounded-full bg-cur-teal flex items-center justify-center text-white font-display font-bold">
-                        {{ strtoupper(substr($kuratorNama ?? 'K', 0, 1)) }}
+                        K
                     </div>
                     <div>
-                        <p class="text-crate-brown font-semibold text-sm font-body">{{ $kuratorNama ?? 'Kurator' }}</p>
+                        <p class="text-crate-brown font-semibold text-sm font-body">Kurator Cratefit</p>
                         <p class="text-cur-teal text-xs font-body">Kurator Fashion</p>
                     </div>
                 </div>
@@ -218,41 +219,176 @@
                 <p class="text-crate-stone text-xs font-body font-medium uppercase tracking-widest mb-3">Menu Kurator</p>
 
                 <nav class="sidebar-nav space-y-1">
-                    @php
-                    $menu = [
-                    ['icon' => '👥', 'label' => 'Profil Pelanggan', 'route' => '/kurator/pelanggan'],
-                    ['icon' => '👕', 'label' => 'Pilih Item', 'route' => '/kurator/pilih-item'],
-                    ['icon' => '📦', 'label' => 'Susun Isi Box', 'route' => '/kurator/susun-box'],
-                    ];
-                    @endphp
-
-                    @foreach($menu as $item)
-                    @php
-                    $isActive = request()->is(trim($item['route'], '/')) || request()->is(trim($item['route'], '/') . '/*');
-                    @endphp
-                    <a href="{{ url($item['route']) }}"
+                    
+                                                            <a href="http://127.0.0.1:8000/kurator/pelanggan"
                         class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-body
-                                  {{ $isActive
-                                      ? 'bg-cur-teal/10 text-cur-teal font-semibold border border-cur-teal/20'
-                                      : 'text-crate-brown/70 hover:bg-crate-sand hover:text-crate-brown' }}">
-                        <span class="text-base">{{ $item['icon'] }}</span>
-                        {{ $item['label'] }}
-                        @if($isActive)
-                        <span class="ml-auto w-1.5 h-1.5 rounded-full bg-cur-teal"></span>
-                        @endif
-                    </a>
-                    @endforeach
-                </nav>
+                                  bg-cur-teal/10 text-cur-teal font-semibold border border-cur-teal/20">
+                        <span class="text-base">👥</span>
+                        Profil Pelanggan
+                                                <span class="ml-auto w-1.5 h-1.5 rounded-full bg-cur-teal"></span>
+                                            </a>
+                                                            <a href="http://127.0.0.1:8000/kurator/pilih-item"
+                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-body
+                                  text-crate-brown/70 hover:bg-crate-sand hover:text-crate-brown">
+                        <span class="text-base">👕</span>
+                        Pilih Item
+                                            </a>
+                                                            <a href="http://127.0.0.1:8000/kurator/susun-box"
+                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-body
+                                  text-crate-brown/70 hover:bg-crate-sand hover:text-crate-brown">
+                        <span class="text-base">📦</span>
+                        Susun Isi Box
+                                            </a>
+                                    </nav>
             </div>
         </aside>
 
-        {{-- ===== MAIN CONTENT ===== --}}
+        
         <main class="flex-1 min-w-0 pb-24 lg:pb-0">
-            @yield('content')
+            <div class="fade-in">
+
+    
+    <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+            <p class="text-cur-teal font-script text-lg mb-0.5">Panel Kurator</p>
+            <h1 class="font-display text-3xl text-crate-brown font-bold">Profil Pelanggan</h1>
+            <p class="text-crate-stone font-body mt-1 text-sm">Lihat dan kelola data preferensi setiap pelanggan yang membutuhkan kurasi.</p>
+        </div>
+
+        
+        <div class="flex items-center gap-2 shrink-0">
+            <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-crate-stone text-sm">🔍</span>
+                <input type="text" placeholder="Cari nama / email..."
+                    class="pl-9 pr-4 py-2.5 rounded-xl border border-crate-sand bg-white text-sm font-body
+                              text-crate-brown placeholder-crate-stone w-52 transition-all">
+            </div>
+            <select class="border border-crate-sand bg-white rounded-xl px-3 py-2.5 text-sm font-body text-crate-brown transition-all">
+                <option value="">Semua Status</option>
+                <option value="menunggu">Menunggu Kurasi</option>
+                <option value="diproses">Sedang Diproses</option>
+                <option value="selesai">Box Selesai</option>
+                <option value="dikirim">Sudah Dikirim</option>
+            </select>
+        </div>
+    </div>
+
+    
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+                        <div class="card-wood rounded-2xl p-4">
+            <div class="flex items-center justify-between mb-1">
+                <span class="text-lg">👥</span>
+            </div>
+            <p class="font-display text-2xl font-bold text-crate-brown">1</p>
+            <p class="text-crate-stone text-xs font-body mt-0.5">Total Pelanggan</p>
+        </div>
+                <div class="card-wood rounded-2xl p-4">
+            <div class="flex items-center justify-between mb-1">
+                <span class="text-lg">⏳</span>
+            </div>
+            <p class="font-display text-2xl font-bold text-amber-600">0</p>
+            <p class="text-crate-stone text-xs font-body mt-0.5">Menunggu Kurasi</p>
+        </div>
+                <div class="card-wood rounded-2xl p-4">
+            <div class="flex items-center justify-between mb-1">
+                <span class="text-lg">🔄</span>
+            </div>
+            <p class="font-display text-2xl font-bold text-blue-600">0</p>
+            <p class="text-crate-stone text-xs font-body mt-0.5">Sedang Diproses</p>
+        </div>
+                <div class="card-wood rounded-2xl p-4">
+            <div class="flex items-center justify-between mb-1">
+                <span class="text-lg">✅</span>
+            </div>
+            <p class="font-display text-2xl font-bold text-cur-teal">1</p>
+            <p class="text-crate-stone text-xs font-body mt-0.5">Selesai Bulan Ini</p>
+        </div>
+            </div>
+
+    
+    <div class="card-wood rounded-2xl overflow-hidden">
+
+        
+        <div class="px-6 py-4 border-b border-crate-sand flex items-center justify-between">
+            <h2 class="font-display text-base font-bold text-crate-brown">Daftar Pelanggan</h2>
+            <span class="text-crate-stone text-xs font-body">
+                Menampilkan 1 pelanggan
+            </span>
+        </div>
+
+        
+        <div class="divide-y divide-crate-sand/60">
+
+            
+            
+                        <div class="flex items-center gap-4 px-6 py-4 hover:bg-crate-cream/50 transition-colors group">
+
+                
+                <div class="w-10 h-10 rounded-full bg-cur-teal flex items-center justify-center
+                            text-white font-display font-bold text-sm shrink-0">
+                    P
+                </div>
+
+                
+                <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <p class="font-body font-semibold text-crate-brown text-sm">Pelanggan Cratefit</p>
+                        
+                        <span class="badge-selesai text-xs font-body font-semibold px-2 py-0.5 rounded-full">
+                            Selesai
+                        </span>
+                    </div>
+                    <p class="text-crate-stone text-xs font-body mt-0.5">pelanggan@cratefit.id</p>
+                    
+                    <div class="flex items-center gap-1.5 mt-1.5 flex-wrap">
+                                                <span class="bg-crate-sand text-crate-brown text-xs font-body px-2 py-0.5 rounded-full">Casual</span>
+                                                <span class="bg-crate-sand text-crate-brown text-xs font-body px-2 py-0.5 rounded-full">Vintage</span>
+                                                <span class="bg-cur-teal-bg text-cur-teal text-xs font-body px-2 py-0.5 rounded-full">
+                            👔 M / M
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="hidden sm:block text-right shrink-0">
+                    <p class="text-crate-brown font-semibold text-xs font-body">Premium Box</p>
+                    <p class="text-crate-stone text-xs font-body">July 2026</p>
+                </div>
+
+                
+                <div class="shrink-0 flex gap-2 opacity-0 group-hover:opacity-100 transition-all">
+
+                                        
+                    <a href="http://127.0.0.1:8000/kurator/pelanggan/4"
+                        class="btn-curator text-white text-xs font-body font-semibold px-4 py-2 rounded-xl">
+                        Lihat Detail →
+                    </a>
+                    
+                </div>
+            </div>
+                    </div>
+
+        
+        <div class="px-6 py-4 border-t border-crate-sand flex items-center justify-between">
+            <p class="text-crate-stone text-xs font-body">Halaman 1 dari 1</p>
+            <div class="flex gap-2">
+                <button class="px-3 py-1.5 rounded-lg border border-crate-sand text-xs font-body text-crate-stone
+                               hover:bg-crate-sand transition-colors disabled:opacity-40" disabled>
+                    ← Sebelumnya
+                </button>
+                <button class="px-3 py-1.5 rounded-lg border border-crate-sand text-xs font-body text-crate-stone
+                               hover:bg-crate-sand transition-colors disabled:opacity-40" disabled>
+                    Berikutnya →
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
         </main>
     </div>
 
-    {{-- ===== FOOTER ===== --}}
+    
     <footer class="mt-16 bg-crate-brown text-crate-stone">
         <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-2">
             <span class="font-script text-crate-warm text-xl">Cratefit</span>
@@ -261,25 +397,25 @@
         </div>
     </footer>
 
-    {{-- ===== MOBILE BOTTOM NAV ===== --}}
+    
     <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50"
         style="background:#2A1508;border-top:1px solid rgba(255,255,255,0.08);padding-bottom:env(safe-area-inset-bottom)">
         <div style="display:flex;justify-content:space-around;align-items:center;height:60px">
-            <a href="{{ url('/kurator/pelanggan') }}"
+            <a href="http://127.0.0.1:8000/kurator/pelanggan"
                 style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;
-                      color:{{ request()->is('kurator/pelanggan*') ? '#6ECFBB' : '#C9B99A' }};
+                      color:#6ECFBB;
                       font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
                 <span style="font-size:1.25rem">👥</span>Pelanggan
             </a>
-            <a href="{{ url('/kurator/pilih-item') }}"
+            <a href="http://127.0.0.1:8000/kurator/pilih-item"
                 style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;
-                      color:{{ request()->is('kurator/pilih-item*') ? '#6ECFBB' : '#C9B99A' }};
+                      color:#C9B99A;
                       font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
                 <span style="font-size:1.25rem">👕</span>Pilih Item
             </a>
-            <a href="{{ url('/kurator/susun-box') }}"
+            <a href="http://127.0.0.1:8000/kurator/susun-box"
                 style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;
-                      color:{{ request()->is('kurator/susun-box*') ? '#6ECFBB' : '#C9B99A' }};
+                      color:#C9B99A;
                       font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
                 <span style="font-size:1.25rem">📦</span>Susun Box
             </a>
@@ -291,7 +427,7 @@
         </div>
     </div>
 
-    {{-- Mobile drawer --}}
+    
     <div id="mobile-drawer" onclick="toggleMobileMenu()"
         style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:60;backdrop-filter:blur(2px)">
         <div onclick="event.stopPropagation()"
@@ -301,25 +437,24 @@
             <div style="width:40px;height:4px;background:#EDE0CC;border-radius:9999px;margin:0 auto 1.25rem"></div>
             <p style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#C9B99A;margin-bottom:0.75rem">Menu Kurator</p>
             <nav style="display:flex;flex-direction:column;gap:0.25rem">
-                <a href="{{ url('/kurator/pelanggan') }}"
+                <a href="http://127.0.0.1:8000/kurator/pelanggan"
                     style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:0.75rem;
                           font-size:0.9rem;color:rgba(59,31,14,0.7);text-decoration:none;font-family:'DM Sans',sans-serif">
                     👥 &nbsp;Profil Pelanggan
                 </a>
-                <a href="{{ url('/kurator/pilih-item') }}"
+                <a href="http://127.0.0.1:8000/kurator/pilih-item"
                     style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:0.75rem;
                           font-size:0.9rem;color:rgba(59,31,14,0.7);text-decoration:none;font-family:'DM Sans',sans-serif">
                     👕 &nbsp;Pilih Item
                 </a>
-                <a href="{{ url('/kurator/susun-box') }}"
+                <a href="http://127.0.0.1:8000/kurator/susun-box"
                     style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:0.75rem;
                           font-size:0.9rem;color:rgba(59,31,14,0.7);text-decoration:none;font-family:'DM Sans',sans-serif">
                     📦 &nbsp;Susun Isi Box
                 </a>
             </nav>
             <form method="POST" action="/kurator/logout" class="mt-4">
-                @csrf
-                <button type="submit"
+                <input type="hidden" name="_token" value="8LbAVuyKFEVVm230Azw7BCC972chGNsBRU632NOM" autocomplete="off">                <button type="submit"
                     style="width:100%;padding:0.75rem;background:#EDE0CC;border-radius:0.75rem;
                                font-size:0.875rem;color:rgba(59,31,14,0.7);font-family:'DM Sans',sans-serif;
                                border:none;cursor:pointer;text-align:center">
@@ -345,7 +480,6 @@
         }
     </script>
 
-    @stack('scripts')
-</body>
+    </body>
 
 </html>

@@ -36,12 +36,7 @@
         'Cukup'       => 'bg-amber-50 text-amber-700 border-amber-200',
     ];
 
-    $maxItem = match($pelanggan['paket'] ?? '') {
-        'Starter Box'  => 3,
-        'Style Box'    => 5,
-        'Premium Box'  => 7,
-        default        => 3,
-    };
+    $maxItem = $pelanggan['jumlah_item'] ?? 3;
 @endphp
 
 {{-- Form POST — satu saja, di luar semua container --}}

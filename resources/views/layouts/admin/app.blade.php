@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cratefit Admin — @yield('title', 'Dashboard')</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
-    <script>
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
+   <script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -29,9 +31,14 @@
                         'admin-blue':   '#1E3A5F',
                         'admin-blue-bg':'#EAF0F8',
                     },
+                    // fontFamily: {
+                    //     'display': ['Playfair Display', 'serif'],
+                    //     'body':    ['DM Sans', 'sans-serif'],
+                    //     'script':  ['Caveat', 'cursive'],
+                    // },
                     fontFamily: {
-                        'display': ['Playfair Display', 'serif'],
-                        'body':    ['DM Sans', 'sans-serif'],
+                        'display': ['Plus Jakarta Sans', 'sans-serif'],
+                        'body':    ['Plus Jakarta Sans', 'sans-serif'],
                         'script':  ['Caveat', 'cursive'],
                     },
                 }
@@ -39,9 +46,16 @@
         }
     </script>
     <style>
-        body {
+        /* body {
             font-family: 'DM Sans', sans-serif;
             background-color: #F4EDE0;
+        } */
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F4EDE0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* Noise texture overlay */
@@ -155,9 +169,17 @@
         }
 
         /* Scrollbar sidebar */
-        #admin-sidebar::-webkit-scrollbar { width: 4px; }
+        /* #admin-sidebar::-webkit-scrollbar { width: 4px; }
         #admin-sidebar::-webkit-scrollbar-track { background: transparent; }
-        #admin-sidebar::-webkit-scrollbar-thumb { background: #EDE0CC; border-radius: 9999px; }
+        #admin-sidebar::-webkit-scrollbar-thumb { background: #EDE0CC; border-radius: 9999px; } */
+        
+        #admin-sidebar {
+            scrollbar-width: none;      /* Firefox */
+            -ms-overflow-style: none;   /* IE/Edge lama */
+        }
+        #admin-sidebar::-webkit-scrollbar {
+            display: none;              /* Chrome, Safari, Edge baru */
+        }
 
         /* Mobile overlay */
         #sidebar-overlay {
@@ -291,40 +313,36 @@
 
                 {{-- NAV GROUPS --}}
                 @php
+                
+
                 $navGroups = [
                     [
                         'label' => 'Utama',
                         'items' => [
-                            ['icon' => '🏠', 'label' => 'Dashboard',         'route' => '/admin/dashboard'],
+                            ['icon' => 'layout-dashboard', 'label' => 'Dashboard',          'route' => '/admin/dashboard'],
                         ],
                     ],
                     [
                         'label' => 'Manajemen Pengguna',
                         'items' => [
-                            ['icon' => '👥', 'label' => 'Pelanggan',         'route' => '/admin/pelanggan'],
-                            ['icon' => '✂️', 'label' => 'Kurator',           'route' => '/admin/kurator'],
-                            ['icon' => '🚚', 'label' => 'Kurir',             'route' => '/admin/kurir'],
+                            ['icon' => 'users',            'label' => 'Pelanggan',          'route' => '/admin/pelanggan'],
+                            ['icon' => 'scissors',         'label' => 'Kurator',            'route' => '/admin/kurator'],
+                            ['icon' => 'truck',            'label' => 'Kurir',              'route' => '/admin/kurir'],
                         ],
                     ],
                     [
                         'label' => 'Produk & Layanan',
                         'items' => [
-                            ['icon' => '📦', 'label' => 'Paket Subscription','route' => '/admin/kelola-paket'],
-                            ['icon' => '👕', 'label' => 'Inventory Thrift',  'route' => '/admin/inventory'],
+                            ['icon' => 'package',          'label' => 'Paket Subscription', 'route' => '/admin/kelola-paket'],
+                            ['icon' => 'shirt',            'label' => 'Inventory Thrift',   'route' => '/admin/inventory'],
                         ],
                     ],
                     [
                         'label' => 'Operasional',
                         'items' => [
-                            // ['icon' => '🛒', 'label' => 'Langganan',         'route' => '/admin/langganan'],
-                            // ['icon' => '📬', 'label' => 'Pengiriman',        'route' => '/admin/pengiriman'],
-                            ['icon' => '↩️', 'label' => 'Retur',             'route' => '/admin/kelola-retur'],
-                        ],
-                    ],
-                    [
-                        'label' => 'Sistem',
-                        'items' => [
-                            // ['icon' => '⚙️', 'label' => 'Pengaturan',        'route' => '/admin/pengaturan'],
+                            // ['icon' => 'shopping-cart',  'label' => 'Langganan',          'route' => '/admin/langganan'],
+                            // ['icon' => 'send',           'label' => 'Pengiriman',         'route' => '/admin/pengiriman'],
+                            ['icon' => 'undo-2',           'label' => 'Retur',              'route' => '/admin/kelola-retur'],
                         ],
                     ],
                 ];
@@ -346,7 +364,8 @@
                                   {{ $isActive
                                        ? 'bg-crate-orange/15 text-crate-warm font-medium border border-crate-orange/20'
                                        : 'text-crate-stone hover:bg-white/5 hover:text-crate-cream' }}">
-                            <span class="text-base w-5 text-center shrink-0">{{ $item['icon'] }}</span>
+                            <!-- <span class="text-base w-5 text-center shrink-0">{{ $item['icon'] }}</span> -->
+                            <i data-lucide="{{ $item['icon'] }}" class="w-4 h-4 shrink-0 {{ $isActive ? 'text-crate-warm' : 'text-crate-stone' }}"></i>
                             <span class="{{ $isActive ? 'active' : '' }}">{{ $item['label'] }}</span>
                         </a>
                         @endforeach
@@ -361,7 +380,7 @@
                         <button type="submit"
                                 class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-body
                                        text-red-400/80 hover:bg-red-500/10 hover:text-red-400 transition-colors">
-                            <span class="text-base w-5 text-center">🚪</span>
+                            <i data-lucide="log-out" class="w-4 h-4 shrink-0 text-red-400/80"></i>
                             Keluar
                         </button>
                     </form>
@@ -435,12 +454,14 @@
          style="border-top:1px solid rgba(255,255,255,0.08);padding-bottom:env(safe-area-inset-bottom)">
         <div class="flex justify-around items-center h-14">
             @php
+            
+
             $mobileNav = [
-                ['icon'=>'🏠',  'label'=>'Dashboard', 'route'=>'/admin/dashboard'],
-                ['icon'=>'👥',  'label'=>'Pelanggan', 'route'=>'/admin/pelanggan'],
-                ['icon'=>'✂️',  'label'=>'Kurator',   'route'=>'/admin/kurator'],
-                ['icon'=>'📦',  'label'=>'Paket',     'route'=>'/admin/kelola-paket'],
-                ['icon'=>'☰',   'label'=>'Lainnya',   'route'=>'#', 'toggle'=>true],
+                ['icon'=>'layout-dashboard', 'label'=>'Dashboard', 'route'=>'/admin/dashboard'],
+                ['icon'=>'users',            'label'=>'Pelanggan', 'route'=>'/admin/pelanggan'],
+                ['icon'=>'scissors',         'label'=>'Kurator',   'route'=>'/admin/kurator'],
+                ['icon'=>'package',          'label'=>'Paket',     'route'=>'/admin/kelola-paket'],
+                ['icon'=>'menu',             'label'=>'Lainnya',   'route'=>'#', 'toggle'=>true],
             ];
             @endphp
             @foreach($mobileNav as $nav)
@@ -451,15 +472,15 @@
             <button onclick="toggleSidebar()"
                     style="display:flex;flex-direction:column;align-items:center;gap:3px;
                            background:none;border:none;color:#C9B99A;font-size:0.6rem;
-                           font-family:'DM Sans',sans-serif;padding:0 0.5rem;cursor:pointer">
-                <span style="font-size:1.1rem">{{ $nav['icon'] }}</span>{{ $nav['label'] }}
+                           font-family:'Plus Jakarta Sans',sans-serif;padding:0 0.5rem;cursor:pointer">
+                <i data-lucide="{{ $nav['icon'] }}" style="width:18px;height:18px"></i>{{ $nav['label'] }}
             </button>
             @else
             <a href="{{ url($nav['route']) }}"
                style="display:flex;flex-direction:column;align-items:center;gap:3px;
-                      text-decoration:none;font-size:0.6rem;font-family:'DM Sans',sans-serif;
+                      text-decoration:none;font-size:0.6rem;font-family:'Plus Jakarta Sans',sans-serif;
                       padding:0 0.5rem;color:{{ $mbActive ? '#F5A05A' : '#C9B99A' }}">
-                <span style="font-size:1.1rem">{{ $nav['icon'] }}</span>
+                <i data-lucide="{{ $nav['icon'] }}" style="width:18px;height:18px"></i>
                 <span style="{{ $mbActive ? 'font-weight:600' : '' }}">{{ $nav['label'] }}</span>
             </a>
             @endif
@@ -502,6 +523,7 @@
             }, 5000);
         });
     </script>
+    <script>lucide.createIcons();</script>
 
     @stack('scripts')
 </body>

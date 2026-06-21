@@ -168,8 +168,16 @@
 
             {{-- User --}}
             <div class="flex items-center gap-3">
-                <span class="text-crate-stone text-sm hidden sm:block">Halo, <span class="text-crate-warm font-medium">Pelanggan</span></span>
-                <div class="w-9 h-9 rounded-full bg-crate-orange flex items-center justify-center text-white font-display font-bold text-sm">P</div>
+                <span class="text-crate-stone text-sm hidden sm:block">Halo, <span class="text-crate-warm font-medium">{{ auth()->user()->name }}</span></span>
+                <div class="w-9 h-9 rounded-full bg-crate-orange flex items-center justify-center text-white font-display font-bold text-sm">
+                    {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                </div>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="text-crate-stone hover:text-crate-warm text-sm font-body transition-colors">
+                        Keluar
+                    </button>
+                </form>
             </div>
         </div>
     </nav>
@@ -212,6 +220,14 @@
                     @endforeach
                 </nav>
 
+                <form method="POST" action="{{ route('logout') }}" class="mt-4">
+                    @csrf
+                    <button type="submit"
+                        class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-body
+                            text-red-500 hover:bg-red-50 hover:text-red-600 transition-colors">
+                        <span class="text-base">🚪</span> Keluar
+                    </button>
+                </form>
                 <div class="mt-6 p-3 bg-crate-cream rounded-xl border border-crate-sand text-center">
                     <p class="text-crate-stone text-xs font-body">Paket aktif</p>
                     <p class="text-crate-orange font-display font-bold text-sm mt-0.5">— Belum berlangganan —</p>
@@ -269,16 +285,16 @@
     <!-- MOBILE BOTTOM NAV -->
     <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50" style="background:#3B1F0E;border-top:1px solid rgba(255,255,255,0.08);padding-bottom:env(safe-area-inset-bottom)">
         <div style="display:flex;justify-content:space-around;align-items:center;height:60px">
-            <a href="#" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#C9B99A;font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
+            <!-- <a href="#" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#C9B99A;font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
                 <span style="font-size:1.25rem">👤</span>Profil
-            </a>
-            <a href="#" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#F5A05A;font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
+            </a> -->
+            <a href="/preferensi" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#F5A05A;font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
                 <span style="font-size:1.25rem">✨</span><span style="color:#F5A05A;font-weight:600">Preferensi</span>
             </a>
-            <a href="#" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#C9B99A;font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
+            <a href="/alamat" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#C9B99A;font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
                 <span style="font-size:1.25rem">📍</span>Alamat
             </a>
-            <a href="#" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#C9B99A;font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
+            <a href="/status-box" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#C9B99A;font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
                 <span style="font-size:1.25rem">📦</span>Paket
             </a>
             <a href="#" onclick="toggleMobileMenu()" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#C9B99A;font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
@@ -294,8 +310,14 @@
             <div style="width:40px;height:4px;background:#EDE0CC;border-radius:9999px;margin:0 auto 1.25rem"></div>
             <p style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#C9B99A;margin-bottom:0.75rem">Menu Pelanggan</p>
             <nav style="display:flex;flex-direction:column;gap:0.25rem">
-                <a href="#" style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:0.75rem;font-size:0.9rem;color:rgba(59,31,14,0.7);text-decoration:none;font-family:'DM Sans',sans-serif" onmouseover="this.style.background='#EDE0CC'" onmouseout="this.style.background='transparent'">🚚 &nbsp;Status Box</a>
-                <a href="#" style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:0.75rem;font-size:0.9rem;color:rgba(59,31,14,0.7);text-decoration:none;font-family:'DM Sans',sans-serif" onmouseover="this.style.background='#EDE0CC'" onmouseout="this.style.background='transparent'">↩️ &nbsp;Retur</a>
+                <a href="/status-box" style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:0.75rem;font-size:0.9rem;color:rgba(59,31,14,0.7);text-decoration:none;font-family:'DM Sans',sans-serif" onmouseover="this.style.background='#EDE0CC'" onmouseout="this.style.background='transparent'">🚚 &nbsp;Status Box</a>
+                <a href="/retur" style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:0.75rem;font-size:0.9rem;color:rgba(59,31,14,0.7);text-decoration:none;font-family:'DM Sans',sans-serif" onmouseover="this.style.background='#EDE0CC'" onmouseout="this.style.background='transparent'">↩️ &nbsp;Retur</a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:0.75rem;font-size:0.9rem;color:#ef4444;text-decoration:none;font-family:'DM Sans',sans-serif;width:100%;background:none;border:none;cursor:pointer;text-align:left">
+                        🚪 &nbsp;Keluar
+                    </button>
+                </form>
             </nav>
             <div style="margin-top:1rem;padding:0.75rem;background:white;border-radius:0.75rem;border:1px solid #EDE0CC;text-align:center">
                 <p style="color:#C9B99A;font-size:0.75rem;margin:0">Paket aktif</p>
