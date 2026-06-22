@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cratefit — @yield('title', 'Stylish tanpa ribet')</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Caveat:wght@600&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -23,9 +25,14 @@
                         'crate-sand': '#EDE0CC',
                         'crate-stone': '#C9B99A',
                     },
+                    // fontFamily: {
+                    //     'display': ['Playfair Display', 'serif'],
+                    //     'body': ['DM Sans', 'sans-serif'],
+                    //     'script': ['Caveat', 'cursive'],
+                    // },
                     fontFamily: {
-                        'display': ['Playfair Display', 'serif'],
-                        'body': ['DM Sans', 'sans-serif'],
+                        'display': ['Plus Jakarta Sans', 'sans-serif'],
+                        'body': ['Plus Jakarta Sans', 'sans-serif'],
                         'script': ['Caveat', 'cursive'],
                     },
                 }
@@ -33,8 +40,13 @@
         }
     </script>
     <style>
-        body {
+        /* body {
             font-family: 'DM Sans', sans-serif;
+            background-color: #FAF3E8;
+        } */
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #FAF3E8;
         }
 
@@ -192,12 +204,12 @@
                 <nav class="sidebar-nav space-y-1">
                     @php
                     $menu = [
-                    // ['icon'=>'👤','label'=>'Profil Saya', 'route'=>'/profil'],
-                    ['icon'=>'✨','label'=>'Preferensi Fashion', 'route'=>'/preferensi'],
-                    ['icon'=>'📍','label'=>'Alamat Pengiriman', 'route'=>'/alamat'],
-                    ['icon'=>'📦','label'=>'Langganan Paket', 'route'=>'/langganan'],
-                    ['icon'=>'🚚','label'=>'Status Box', 'route'=>'/status-box'],
-                    ['icon'=>'↩️','label'=>'Retur', 'route'=>'/retur'],
+                    // ['icon'=>'user','label'=>'Profil Saya', 'route'=>'/profil'],
+                    ['icon'=>'sparkles','label'=>'Preferensi Fashion', 'route'=>'/preferensi'],
+                    ['icon'=>'map-pin','label'=>'Alamat Pengiriman', 'route'=>'/alamat'],
+                    ['icon'=>'package','label'=>'Langganan Paket', 'route'=>'/langganan'],
+                    ['icon'=>'truck','label'=>'Status Box', 'route'=>'/status-box'],
+                    ['icon'=>'undo-2','label'=>'Retur', 'route'=>'/retur'],
                     ];
                     @endphp
 
@@ -213,7 +225,7 @@
             ? 'bg-crate-orange/10 text-crate-orange font-medium border border-crate-orange/20'
             : 'text-crate-brown/70 hover:bg-crate-sand hover:text-crate-brown' }}">
 
-                        <span class="text-base">{{ $item['icon'] }}</span>
+                        <i data-lucide="{{ $item['icon'] }}" class="w-4 h-4 shrink-0 {{ $isActive ? 'text-crate-orange' : 'text-crate-brown/60' }}"></i>
                         {{ $item['label'] }}
                     </a>
 
@@ -225,7 +237,7 @@
                     <button type="submit"
                         class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-body
                             text-red-500 hover:bg-red-50 hover:text-red-600 transition-colors">
-                        <span class="text-base">🚪</span> Keluar
+                            <i data-lucide="log-out" class="w-4 h-4 shrink-0"></i> Keluar
                     </button>
                 </form>
                 <div class="mt-6 p-3 bg-crate-cream rounded-xl border border-crate-sand text-center">
@@ -289,16 +301,16 @@
                 <span style="font-size:1.25rem">👤</span>Profil
             </a> -->
             <a href="/preferensi" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#F5A05A;font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
-                <span style="font-size:1.25rem">✨</span><span style="color:#F5A05A;font-weight:600">Preferensi</span>
+                <i data-lucide="sparkles" style="width:20px;height:20px"></i><span style="color:#F5A05A;font-weight:600">Preferensi</span>
             </a>
             <a href="/alamat" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#C9B99A;font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
-                <span style="font-size:1.25rem">📍</span>Alamat
+                <i data-lucide="map-pin" style="width:20px;height:20px"></i>Alamat
             </a>
             <a href="/status-box" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#C9B99A;font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
-                <span style="font-size:1.25rem">📦</span>Paket
+                <i data-lucide="package" style="width:20px;height:20px"></i>Paket
             </a>
             <a href="#" onclick="toggleMobileMenu()" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#C9B99A;font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
-                <span style="font-size:1.25rem">☰</span>Lainnya
+                <i data-lucide="menu" style="width:20px;height:20px"></i>Lainnya
             </a>
         </div>
     </div>
@@ -310,12 +322,12 @@
             <div style="width:40px;height:4px;background:#EDE0CC;border-radius:9999px;margin:0 auto 1.25rem"></div>
             <p style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#C9B99A;margin-bottom:0.75rem">Menu Pelanggan</p>
             <nav style="display:flex;flex-direction:column;gap:0.25rem">
-                <a href="/status-box" style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:0.75rem;font-size:0.9rem;color:rgba(59,31,14,0.7);text-decoration:none;font-family:'DM Sans',sans-serif" onmouseover="this.style.background='#EDE0CC'" onmouseout="this.style.background='transparent'">🚚 &nbsp;Status Box</a>
-                <a href="/retur" style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:0.75rem;font-size:0.9rem;color:rgba(59,31,14,0.7);text-decoration:none;font-family:'DM Sans',sans-serif" onmouseover="this.style.background='#EDE0CC'" onmouseout="this.style.background='transparent'">↩️ &nbsp;Retur</a>
+                <a href="/status-box" style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:0.75rem;font-size:0.9rem;color:rgba(59,31,14,0.7);text-decoration:none;font-family:'DM Sans',sans-serif" onmouseover="this.style.background='#EDE0CC'" onmouseout="this.style.background='transparent'"><i data-lucide="truck" style="width:18px;height:18px"></i> &nbsp;Status Box</a>
+                <a href="/retur" style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:0.75rem;font-size:0.9rem;color:rgba(59,31,14,0.7);text-decoration:none;font-family:'DM Sans',sans-serif" onmouseover="this.style.background='#EDE0CC'" onmouseout="this.style.background='transparent'"><i data-lucide="undo-2" style="width:18px;height:18px"></i> &nbsp;Retur</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:0.75rem;font-size:0.9rem;color:#ef4444;text-decoration:none;font-family:'DM Sans',sans-serif;width:100%;background:none;border:none;cursor:pointer;text-align:left">
-                        🚪 &nbsp;Keluar
+                        <i data-lucide="log-out" style="width:18px;height:18px"></i> &nbsp;Keluar
                     </button>
                 </form>
             </nav>
@@ -342,6 +354,7 @@
             }
         }
     </script>
+    <script>lucide.createIcons();</script>
 </body>
 
 </html>

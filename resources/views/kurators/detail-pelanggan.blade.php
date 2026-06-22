@@ -62,8 +62,8 @@ $warnaMeta = [
 
     {{-- BREADCRUMB & BACK --}}
     <div class="flex items-center gap-2 text-sm font-body text-crate-stone">
-        <a href="{{ url('/kurator/pelanggan') }}" class="hover:text-crate-brown transition-colors">
-            ← Profil Pelanggan
+        <a href="{{ url('/kurator/pelanggan') }}" class="hover:text-crate-brown transition-colors flex items-center gap-1">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Profil Pelanggan
         </a>
         <span>/</span>
         <span class="text-crate-brown font-medium">{{ $pelanggan['nama'] }}</span>
@@ -100,13 +100,13 @@ $warnaMeta = [
             {{-- CTA kurator --}}
             <div class="flex flex-col sm:items-end gap-2 shrink-0">
                 <a href="{{ url('/kurator/pilih-item/' . $pelanggan['id']) }}"
-                    class="btn-curator text-white font-body font-semibold px-5 py-2.5 rounded-xl text-sm text-center">
-                    👕 Mulai Kurasi Box
+                    class="btn-curator text-white font-body font-semibold px-5 py-2.5 rounded-xl text-sm text-center flex items-center justify-center gap-2">
+                    <i data-lucide="shirt" class="w-4 h-4"></i> Mulai Kurasi Box
                 </a>
                 <a href="{{ url('/kurator/susun-box?pelanggan=' . $pelanggan['id']) }}"
                     class="border border-cur-teal text-cur-teal font-body font-semibold px-5 py-2.5 rounded-xl text-sm
-                          hover:bg-cur-teal-bg transition-colors text-center">
-                    📦 Susun Isi Box
+                        hover:bg-cur-teal-bg transition-colors text-center flex items-center justify-center gap-2">
+                    <i data-lucide="package" class="w-4 h-4"></i> Susun Isi Box
                 </a>
             </div>
         </div>
@@ -117,7 +117,9 @@ $warnaMeta = [
 
         {{-- ===== UKURAN & BODY ===== --}}
         <div class="card-wood rounded-2xl p-6">
-            <h2 class="font-display text-base text-crate-brown font-bold mb-4">📏 Ukuran Pakaian</h2>
+            <h2 class="font-display text-base text-crate-brown font-bold mb-4 flex items-center gap-2">
+                <i data-lucide="ruler" class="w-4 h-4 text-crate-orange"></i> Ukuran Pakaian
+            </h2>
 
             <div class="grid grid-cols-2 gap-3 mb-4">
                 <div class="bg-crate-cream rounded-xl p-4 text-center border border-crate-sand">
@@ -132,14 +134,14 @@ $warnaMeta = [
 
             <div class="grid grid-cols-2 gap-3">
                 <div class="flex items-center gap-3 bg-crate-cream rounded-xl p-3 border border-crate-sand">
-                    <span class="text-xl">📏</span>
+                    <i data-lucide="ruler" class="w-5 h-5 text-crate-orange"></i>
                     <div>
                         <p class="text-crate-stone text-xs font-body">Tinggi Badan</p>
                         <p class="text-crate-brown font-semibold text-sm font-body">{{ $pelanggan['tinggi'] }} cm</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-3 bg-crate-cream rounded-xl p-3 border border-crate-sand">
-                    <span class="text-xl">⚖️</span>
+                    <i data-lucide="scale" class="w-5 h-5 text-crate-orange"></i>
                     <div>
                         <p class="text-crate-stone text-xs font-body">Berat Badan</p>
                         <p class="text-crate-brown font-semibold text-sm font-body">{{ $pelanggan['berat'] }} kg</p>
@@ -150,7 +152,9 @@ $warnaMeta = [
 
         {{-- ===== GAYA BERPAKAIAN ===== --}}
         <div class="card-wood rounded-2xl p-6">
-            <h2 class="font-display text-base text-crate-brown font-bold mb-4">🎨 Gaya Berpakaian</h2>
+            <h2 class="font-display text-base text-crate-brown font-bold mb-4 flex items-center gap-2">
+                <i data-lucide="palette" class="w-4 h-4 text-crate-orange"></i> Gaya Berpakaian
+            </h2>
             <div class="flex flex-wrap gap-2 mb-4">
                 @foreach($pelanggan['gaya'] ?? [] as $g)
                 <span class="bg-cur-teal-bg border border-cur-teal/25 text-cur-teal
@@ -176,7 +180,9 @@ $warnaMeta = [
 
         {{-- ===== JENIS PAKAIAN ===== --}}
         <div class="card-wood rounded-2xl p-6">
-            <h2 class="font-display text-base text-crate-brown font-bold mb-4">👕 Jenis Pakaian Diinginkan</h2>
+            <h2 class="font-display text-base text-crate-brown font-bold mb-4 flex items-center gap-2">
+                <i data-lucide="shirt" class="w-4 h-4 text-crate-orange"></i> Jenis Pakaian Diinginkan
+            </h2>
             <div class="flex flex-wrap gap-2">
                 @foreach($pelanggan['jenis_pakaian'] as $jp)
                 <span class="bg-crate-sand text-crate-brown text-sm font-body px-3 py-1.5 rounded-full border border-crate-stone/20">
@@ -187,11 +193,13 @@ $warnaMeta = [
 
             @if(!empty($pelanggan['pantangan']))
             <div class="mt-4 pt-4 border-t border-crate-sand">
-                <p class="text-xs font-body font-semibold text-red-500/80 uppercase tracking-wider mb-2">🚫 Pantangan</p>
+                <p class="text-xs font-body font-semibold text-red-500/80 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <i data-lucide="ban" class="w-3.5 h-3.5"></i> Pantangan
+                </p>
                 <div class="flex flex-wrap gap-2">
                     @foreach($pelanggan['pantangan'] as $pt)
-                    <span class="bg-red-50 border border-red-200 text-red-600 text-sm font-body px-3 py-1.5 rounded-full">
-                        🚫 {{ $pt }}
+                    <span class="bg-red-50 border border-red-200 text-red-600 text-sm font-body px-3 py-1.5 rounded-full inline-flex items-center gap-1.5">
+                        <i data-lucide="ban" class="w-3.5 h-3.5"></i> {{ $pt }}
                     </span>
                     @endforeach
                 </div>
@@ -201,7 +209,9 @@ $warnaMeta = [
 
         {{-- ===== CATATAN KURATOR ===== --}}
         <div class="card-wood rounded-2xl p-6">
-            <h2 class="font-display text-base text-crate-brown font-bold mb-4">📝 Catatan dari Pelanggan</h2>
+            <h2 class="font-display text-base text-crate-brown font-bold mb-4 flex items-center gap-2">
+                <i data-lucide="file-text" class="w-4 h-4 text-crate-orange"></i> Catatan dari Pelanggan
+            </h2>
             @if($pelanggan['catatan'])
             <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
                 <p class="text-crate-brown text-sm font-body leading-relaxed">
@@ -229,9 +239,11 @@ $warnaMeta = [
 
     {{-- ===== ALAMAT PENGIRIMAN ===== --}}
     <div class="card-wood rounded-2xl p-6">
-        <h2 class="font-display text-base text-crate-brown font-bold mb-3">📍 Alamat Pengiriman</h2>
-        <div class="flex items-start gap-3 bg-crate-cream rounded-xl p-4 border border-crate-sand">
-            <span class="text-xl mt-0.5">🏠</span>
+    <h2 class="font-display text-base text-crate-brown font-bold mb-3 flex items-center gap-2">
+    <i data-lucide="map-pin" class="w-4 h-4 text-crate-orange"></i> Alamat Pengiriman
+</h2>
+<div class="flex items-start gap-3 bg-crate-cream rounded-xl p-4 border border-crate-sand">
+    <i data-lucide="home" class="w-5 h-5 mt-0.5 text-crate-orange"></i>
             @if($pelanggan['alamat'])
             <p class="...">
                 {{ $pelanggan['alamat']['nama_penerima'] }} · {{ $pelanggan['alamat']['no_telepon'] }}<br>
@@ -251,12 +263,14 @@ $warnaMeta = [
     @if(!empty($pelanggan['riwayat']))
     <div class="card-wood rounded-2xl overflow-hidden">
         <div class="px-6 py-4 border-b border-crate-sand">
-            <h2 class="font-display text-base text-crate-brown font-bold">📦 Riwayat Box</h2>
+            <h2 class="font-display text-base text-crate-brown font-bold flex items-center gap-2">
+                <i data-lucide="package" class="w-4 h-4 text-crate-orange"></i> Riwayat Box
+            </h2>
         </div>
         <div class="divide-y divide-crate-sand/60">
             @foreach($pelanggan['riwayat'] as $r)
             <div class="flex items-center gap-4 px-6 py-4">
-                <span class="text-2xl">📦</span>
+                <i data-lucide="package" class="w-6 h-6 text-crate-orange"></i>
                 <div class="flex-1">
                     <p class="text-crate-brown font-semibold text-sm font-body">{{ $r['periode'] }}</p>
                     <p class="text-crate-stone text-xs font-body">{{ $r['item'] }} item dikurasi</p>
@@ -274,11 +288,11 @@ $warnaMeta = [
     <div class="flex items-center justify-between pt-2 pb-6">
         <a href="{{ url('/kurator/pelanggan') }}"
             class="flex items-center gap-2 text-crate-stone font-body text-sm hover:text-crate-brown transition-colors">
-            ← Kembali ke Daftar
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali ke Daftar
         </a>
         <a href="{{ url('/kurator/pilih-item/' . $pelanggan['id']) }}"
-            class="btn-curator text-white font-body font-semibold px-7 py-3 rounded-2xl text-sm shadow-lg">
-            👕 Mulai Kurasi Box →
+            class="btn-curator text-white font-body font-semibold px-7 py-3 rounded-2xl text-sm shadow-lg flex items-center gap-2">
+            <i data-lucide="shirt" class="w-4 h-4"></i> Mulai Kurasi Box <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </a>
     </div>
 

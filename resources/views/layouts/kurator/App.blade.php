@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cratefit Kurator — @yield('title', 'Dashboard Kurator')</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Caveat:wght@600&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -29,8 +30,8 @@
                         'cur-gold': '#B8860B',
                     },
                     fontFamily: {
-                        'display': ['Playfair Display', 'serif'],
-                        'body': ['DM Sans', 'sans-serif'],
+                        'display': ['Plus Jakarta Sans', 'sans-serif'],
+                        'body': ['Plus Jakarta Sans', 'sans-serif'],
                         'script': ['Caveat', 'cursive'],
                     },
                 }
@@ -39,7 +40,7 @@
     </script>
     <style>
         body {
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #F2EDE3;
         }
 
@@ -190,7 +191,7 @@
                     @csrf
                     <button type="submit"
                         class="hidden sm:flex items-center gap-1.5 text-crate-stone hover:text-white text-xs font-body transition-colors ml-2">
-                        <span>↗</span> Keluar
+                        <i data-lucide="log-out" class="w-3.5 h-3.5"></i> Keluar
                     </button>
                 </form>
             </div>
@@ -220,9 +221,9 @@
                 <nav class="sidebar-nav space-y-1">
                     @php
                     $menu = [
-                    ['icon' => '👥', 'label' => 'Profil Pelanggan', 'route' => '/kurator/pelanggan'],
-                    ['icon' => '👕', 'label' => 'Pilih Item', 'route' => '/kurator/pilih-item'],
-                    ['icon' => '📦', 'label' => 'Susun Isi Box', 'route' => '/kurator/susun-box'],
+                    ['icon' => 'users', 'label' => 'Profil Pelanggan', 'route' => '/kurator/pelanggan'],
+                    ['icon' => 'shirt', 'label' => 'Pilih Item', 'route' => '/kurator/pilih-item'],
+                    ['icon' => 'package', 'label' => 'Susun Isi Box', 'route' => '/kurator/susun-box'],
                     ];
                     @endphp
 
@@ -235,8 +236,8 @@
                                   {{ $isActive
                                       ? 'bg-cur-teal/10 text-cur-teal font-semibold border border-cur-teal/20'
                                       : 'text-crate-brown/70 hover:bg-crate-sand hover:text-crate-brown' }}">
-                        <span class="text-base">{{ $item['icon'] }}</span>
-                        {{ $item['label'] }}
+                            <i data-lucide="{{ $item['icon'] }}" class="w-4 h-4 shrink-0 {{ $isActive ? 'text-cur-teal' : 'text-crate-brown/60' }}"></i>
+                            {{ $item['label'] }}
                         @if($isActive)
                         <span class="ml-auto w-1.5 h-1.5 rounded-full bg-cur-teal"></span>
                         @endif
@@ -267,26 +268,26 @@
         <div style="display:flex;justify-content:space-around;align-items:center;height:60px">
             <a href="{{ url('/kurator/pelanggan') }}"
                 style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;
-                      color:{{ request()->is('kurator/pelanggan*') ? '#6ECFBB' : '#C9B99A' }};
-                      font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
-                <span style="font-size:1.25rem">👥</span>Pelanggan
+                    color:{{ request()->is('kurator/pelanggan*') ? '#6ECFBB' : '#C9B99A' }};
+                    font-size:0.6rem;font-family:'Plus Jakarta Sans',sans-serif;padding:0 0.75rem">
+                <i data-lucide="users" style="width:20px;height:20px"></i>Pelanggan
             </a>
             <a href="{{ url('/kurator/pilih-item') }}"
                 style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;
-                      color:{{ request()->is('kurator/pilih-item*') ? '#6ECFBB' : '#C9B99A' }};
-                      font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
-                <span style="font-size:1.25rem">👕</span>Pilih Item
+                    color:{{ request()->is('kurator/pilih-item*') ? '#6ECFBB' : '#C9B99A' }};
+                    font-size:0.6rem;font-family:'Plus Jakarta Sans',sans-serif;padding:0 0.75rem">
+                <i data-lucide="shirt" style="width:20px;height:20px"></i>Pilih Item
             </a>
             <a href="{{ url('/kurator/susun-box') }}"
                 style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;
-                      color:{{ request()->is('kurator/susun-box*') ? '#6ECFBB' : '#C9B99A' }};
-                      font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
-                <span style="font-size:1.25rem">📦</span>Susun Box
+                    color:{{ request()->is('kurator/susun-box*') ? '#6ECFBB' : '#C9B99A' }};
+                    font-size:0.6rem;font-family:'Plus Jakarta Sans',sans-serif;padding:0 0.75rem">
+                <i data-lucide="package" style="width:20px;height:20px"></i>Susun Box
             </a>
             <a href="#" onclick="toggleMobileMenu()"
                 style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;
-                      color:#C9B99A;font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
-                <span style="font-size:1.25rem">☰</span>Lainnya
+                    color:#C9B99A;font-size:0.6rem;font-family:'Plus Jakarta Sans',sans-serif;padding:0 0.75rem">
+                <i data-lucide="menu" style="width:20px;height:20px"></i>Lainnya
             </a>
         </div>
     </div>
@@ -303,27 +304,27 @@
             <nav style="display:flex;flex-direction:column;gap:0.25rem">
                 <a href="{{ url('/kurator/pelanggan') }}"
                     style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:0.75rem;
-                          font-size:0.9rem;color:rgba(59,31,14,0.7);text-decoration:none;font-family:'DM Sans',sans-serif">
-                    👥 &nbsp;Profil Pelanggan
+                        font-size:0.9rem;color:rgba(59,31,14,0.7);text-decoration:none;font-family:'Plus Jakarta Sans',sans-serif">
+                    <i data-lucide="users" style="width:18px;height:18px"></i> &nbsp;Profil Pelanggan
                 </a>
                 <a href="{{ url('/kurator/pilih-item') }}"
                     style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:0.75rem;
-                          font-size:0.9rem;color:rgba(59,31,14,0.7);text-decoration:none;font-family:'DM Sans',sans-serif">
-                    👕 &nbsp;Pilih Item
+                        font-size:0.9rem;color:rgba(59,31,14,0.7);text-decoration:none;font-family:'Plus Jakarta Sans',sans-serif">
+                    <i data-lucide="shirt" style="width:18px;height:18px"></i> &nbsp;Pilih Item
                 </a>
                 <a href="{{ url('/kurator/susun-box') }}"
                     style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:0.75rem;
-                          font-size:0.9rem;color:rgba(59,31,14,0.7);text-decoration:none;font-family:'DM Sans',sans-serif">
-                    📦 &nbsp;Susun Isi Box
+                        font-size:0.9rem;color:rgba(59,31,14,0.7);text-decoration:none;font-family:'Plus Jakarta Sans',sans-serif">
+                    <i data-lucide="package" style="width:18px;height:18px"></i> &nbsp;Susun Isi Box
                 </a>
             </nav>
             <form method="POST" action="/kurator/logout" class="mt-4">
                 @csrf
                 <button type="submit"
                     style="width:100%;padding:0.75rem;background:#EDE0CC;border-radius:0.75rem;
-                               font-size:0.875rem;color:rgba(59,31,14,0.7);font-family:'DM Sans',sans-serif;
-                               border:none;cursor:pointer;text-align:center">
-                    ↗ Keluar
+                            font-size:0.875rem;color:rgba(59,31,14,0.7);font-family:'Plus Jakarta Sans',sans-serif;
+                            border:none;cursor:pointer;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.5rem">
+                    <i data-lucide="log-out" style="width:16px;height:16px"></i> Keluar
                 </button>
             </form>
         </div>
@@ -344,7 +345,7 @@
             }
         }
     </script>
-
+    <script>lucide.createIcons();</script>
     @stack('scripts')
 </body>
 

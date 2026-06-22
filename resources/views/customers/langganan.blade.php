@@ -14,14 +14,14 @@
     {{-- FLASH MESSAGE --}}
     @if(session('success'))
     <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl flex items-center gap-3">
-        <span class="text-green-500 text-lg">✅</span>
+        <i data-lucide="check-circle" class="w-5 h-5 text-green-500"></i>
         <p class="text-green-700 text-sm font-body">{{ session('success') }}</p>
     </div>
     @endif
 
     @if(session('error'))
     <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-center gap-3">
-        <span class="text-red-400 text-lg">⚠️</span>
+        <i data-lucide="alert-triangle" class="w-5 h-5 text-red-400"></i>
         <p class="text-red-600 text-sm font-body">{{ session('error') }}</p>
     </div>
     @endif
@@ -31,7 +31,9 @@
 
         {{-- ===== PERIODE LANGGANAN ===== --}}
         <div class="card-wood rounded-2xl p-6 mb-6" style="animation-delay:0.05s">
-            <h2 class="font-display text-lg text-crate-brown font-bold mb-1">🗓️ Periode Pengiriman</h2>
+            <h2 class="font-display text-lg text-crate-brown font-bold mb-1 flex items-center gap-2">
+                <i data-lucide="calendar" class="w-5 h-5 text-crate-orange"></i> Periode Pengiriman
+            </h2>
             <p class="text-crate-stone text-xs font-body mb-5">Seberapa sering kamu ingin menerima box?</p>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -40,21 +42,21 @@
                 [
                 'value' => 'bulanan',
                 'label' => 'Bulanan',
-                'icon' => '📦',
+                'icon' => 'package',
                 'desc' => '1 box setiap bulan',
                 'badge' => null,
                 ],
                 [
                 'value' => '2bulan',
                 'label' => '2 Bulan Sekali',
-                'icon' => '🎁',
+                'icon' => 'gift',
                 'desc' => '1 box setiap 2 bulan',
                 'badge' => 'Paling Populer',
                 ],
                 [
                 'value' => '3bulan',
                 'label' => '3 Bulan Sekali',
-                'icon' => '🌟',
+                'icon' => 'star',
                 'desc' => '1 box setiap 3 bulan',
                 'badge' => null,
                 ],
@@ -73,7 +75,9 @@
                     <div class="tag-btn h-full border-2 border-crate-sand bg-crate-cream rounded-2xl p-5 text-center
                                     peer-checked:border-crate-orange peer-checked:bg-crate-orange/5
                                     hover:border-crate-amber transition-all">
-                        <div class="text-3xl mb-2">{{ $p['icon'] }}</div>
+                        <div class="mb-2 flex justify-center">
+                            <i data-lucide="{{ $p['icon'] }}" class="w-8 h-8 text-crate-orange"></i>
+                        </div>
                         <p class="font-display font-bold text-crate-brown text-base">{{ $p['label'] }}</p>
                         <p class="font-body text-crate-stone text-xs mt-1">{{ $p['desc'] }}</p>
                     </div>
@@ -87,7 +91,9 @@
 
         {{-- ===== PILIH PAKET ===== --}}
         <div class="card-wood rounded-2xl p-6 mb-6" style="animation-delay:0.1s">
-            <h2 class="font-display text-lg text-crate-brown font-bold mb-1">📋 Pilih Paket</h2>
+            <h2 class="font-display text-lg text-crate-brown font-bold mb-1 flex items-center gap-2">
+                <i data-lucide="clipboard-list" class="w-5 h-5 text-crate-orange"></i> Pilih Paket
+            </h2>
             <p class="text-crate-stone text-xs font-body mb-5">Sesuaikan paket dengan kebutuhan dan budget kamu</p>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
@@ -97,8 +103,8 @@
                         {{ old('paket', optional($pakets->firstWhere('highlight', true))->slug ?? $pakets->first()?->slug) === $paket->slug ? 'checked' : '' }}>
 
                     @if($paket->highlight)
-                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 z-10 bg-crate-brown text-crate-cream text-xs font-body font-semibold px-3 py-0.5 rounded-full whitespace-nowrap">
-                        ⭐ Rekomendasi
+                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 z-10 bg-crate-brown text-crate-cream text-xs font-body font-semibold px-3 py-0.5 rounded-full whitespace-nowrap inline-flex items-center gap-1">
+                        <i data-lucide="star" class="w-3 h-3"></i> Rekomendasi
                     </span>
                     @endif
 
@@ -129,12 +135,12 @@
                         <ul class="space-y-2 flex-1">
                             @foreach($paket->fitur ?? [] as $f)
                             <li class="flex items-start gap-2 text-xs font-body text-crate-brown/80">
-                                <span class="text-crate-orange mt-0.5 shrink-0">✓</span>{{ $f }}
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-crate-orange mt-0.5 shrink-0"></i>{{ $f }}
                             </li>
                             @endforeach
                             @foreach($paket->tidak ?? [] as $t)
                             <li class="flex items-start gap-2 text-xs font-body text-crate-stone/60 line-through">
-                                <span class="mt-0.5 shrink-0">✗</span>{{ $t }}
+                                <i data-lucide="x" class="w-3.5 h-3.5 mt-0.5 shrink-0"></i>{{ $t }}
                             </li>
                             @endforeach
                         </ul>
@@ -149,15 +155,17 @@
 
         {{-- ===== METODE PEMBAYARAN ===== --}}
         <div class="card-wood rounded-2xl p-6 mb-6" style="animation-delay:0.15s">
-            <h2 class="font-display text-lg text-crate-brown font-bold mb-1">💳 Metode Pembayaran</h2>
+            <h2 class="font-display text-lg text-crate-brown font-bold mb-1 flex items-center gap-2">
+                <i data-lucide="credit-card" class="w-5 h-5 text-crate-orange"></i> Metode Pembayaran
+            </h2>
             <p class="text-crate-stone text-xs font-body mb-5">Pilih cara pembayaran yang paling mudah buat kamu</p>
 
             @php
             $metodes = [
-            ['value' => 'transfer_bank', 'label' => 'Transfer Bank', 'icon' => '🏦', 'desc' => 'BCA, Mandiri, BNI, BRI'],
-            ['value' => 'ewallet', 'label' => 'E-Wallet', 'icon' => '📱', 'desc' => 'GoPay, OVO, DANA, ShopeePay'],
-            ['value' => 'qris', 'label' => 'QRIS', 'icon' => '🔲', 'desc' => 'Scan & bayar dari semua e-wallet'],
-            ['value' => 'cod', 'label' => 'Bayar di Tempat', 'icon' => '💵', 'desc' => 'COD (area tertentu)'],
+            ['value' => 'transfer_bank', 'label' => 'Transfer Bank', 'icon' => 'landmark', 'desc' => 'BCA, Mandiri, BNI, BRI'],
+            ['value' => 'ewallet', 'label' => 'E-Wallet', 'icon' => 'smartphone', 'desc' => 'GoPay, OVO, DANA, ShopeePay'],
+            ['value' => 'qris', 'label' => 'QRIS', 'icon' => 'qr-code', 'desc' => 'Scan & bayar dari semua e-wallet'],
+            ['value' => 'cod', 'label' => 'Bayar di Tempat', 'icon' => 'banknote', 'desc' => 'COD (area tertentu)'],
             ];
             @endphp
 
@@ -169,7 +177,9 @@
                     <div class="tag-btn border-2 border-crate-sand bg-crate-cream rounded-2xl p-4 text-center
                                     peer-checked:border-crate-orange peer-checked:bg-crate-orange/5
                                     hover:border-crate-amber transition-all">
-                        <div class="text-2xl mb-1.5">{{ $m['icon'] }}</div>
+                        <div class="mb-1.5 flex justify-center">
+                            <i data-lucide="{{ $m['icon'] }}" class="w-6 h-6 text-crate-orange"></i>
+                        </div>
                         <p class="font-body font-semibold text-crate-brown text-xs">{{ $m['label'] }}</p>
                         <p class="font-body text-crate-stone text-xs mt-0.5 leading-tight">{{ $m['desc'] }}</p>
                     </div>
@@ -183,7 +193,9 @@
 
         {{-- ===== RINGKASAN PESANAN ===== --}}
         <div class="card-wood rounded-2xl p-6 mb-6" style="animation-delay:0.2s">
-            <h2 class="font-display text-lg text-crate-brown font-bold mb-4">🧾 Ringkasan Pesanan</h2>
+            <h2 class="font-display text-lg text-crate-brown font-bold mb-4 flex items-center gap-2">
+                <i data-lucide="receipt" class="w-5 h-5 text-crate-orange"></i> Ringkasan Pesanan
+            </h2>
 
             <div class="bg-crate-cream rounded-xl border border-crate-sand p-5 space-y-3">
                 <div class="flex justify-between items-center text-sm font-body">
@@ -237,11 +249,11 @@
         <div class="flex items-center justify-between pt-2 pb-8">
             <a href="{{ url('/alamat') }}"
                 class="flex items-center gap-2 text-crate-stone font-body text-sm hover:text-crate-brown transition-colors">
-                ← Kembali
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali
             </a>
             <button type="submit"
                 class="btn-primary text-white font-body font-semibold px-8 py-3.5 rounded-2xl text-sm shadow-lg flex items-center gap-2">
-                🎉 Mulai Langganan →
+                <i data-lucide="party-popper" class="w-4 h-4"></i> Mulai Langganan <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </button>
         </div>
 

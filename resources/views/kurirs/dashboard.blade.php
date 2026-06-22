@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cratefit Kurir — Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
@@ -112,7 +114,7 @@
         {{-- NOTIFIKASI --}}
         @if(session('success'))
         <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl flex items-center gap-3">
-            <span class="text-lg">✅</span>
+            <i data-lucide="check-circle" class="w-5 h-5 text-green-600"></i>
             <p class="text-green-700 text-sm font-body">{{ session('success') }}</p>
         </div>
         @endif
@@ -136,7 +138,9 @@
         {{-- BOX DALAM PENGIRIMAN --}}
         @if($boxDalamPengiriman->count() > 0)
         <div class="mb-8">
-            <h2 class="font-display text-lg font-bold text-crate-brown mb-4">🚚 Sedang Dikirim</h2>
+            <h2 class="font-display text-lg font-bold text-crate-brown mb-4 flex items-center gap-2">
+                <i data-lucide="truck" class="w-5 h-5 text-crate-orange"></i> Sedang Dikirim
+            </h2>
             <div class="space-y-4">
                 @foreach($boxDalamPengiriman as $box)
                 <div class="relative card-wood rounded-2xl p-5 overflow-hidden">
@@ -145,8 +149,8 @@
                             <p class="font-display font-bold text-crate-brown text-base">{{ $box->kode_box }}</p>
                             <p class="text-crate-stone text-sm font-body mt-0.5">{{ $box->pelanggan->name }}</p>
                             @if($box->langganan?->alamat)
-                            <p class="text-crate-stone text-xs font-body mt-1 leading-relaxed max-w-sm">
-                                📍 {{ $box->langganan->alamat->alamat_lengkap }},
+                            <p class="text-crate-stone text-xs font-body mt-1 leading-relaxed max-w-sm flex gap-1">
+                                <i data-lucide="map-pin" class="w-3.5 h-3.5 shrink-0 mt-0.5"></i> {{ $box->langganan->alamat->alamat_lengkap }},
                                 {{ $box->langganan->alamat->kecamatan }},
                                 {{ $box->langganan->alamat->kota }}
                             </p>
@@ -166,8 +170,8 @@
                             @csrf
                             <button type="submit"
                                 class="btn-primary text-white font-body font-semibold
-                                           px-4 py-2.5 rounded-xl text-sm shadow">
-                                ✅ Konfirmasi Tiba
+                                        px-4 py-2.5 rounded-xl text-sm shadow flex items-center gap-2">
+                                <i data-lucide="check-circle" class="w-4 h-4"></i> Konfirmasi Tiba
                             </button>
                         </form>
                     </div>
@@ -179,10 +183,14 @@
 
         {{-- BOX SIAP DIKIRIM --}}
         <div class="mb-8">
-            <h2 class="font-display text-lg font-bold text-crate-brown mb-4">📦 Siap Dikirim</h2>
+            <h2 class="font-display text-lg font-bold text-crate-brown mb-4 flex items-center gap-2">
+                <i data-lucide="package" class="w-5 h-5 text-crate-orange"></i> Siap Dikirim
+            </h2>
             @if($boxSiapDikirim->count() === 0)
             <div class="relative card-wood rounded-2xl p-8 text-center overflow-hidden">
-                <p class="text-4xl mb-3">📭</p>
+                <div class="mb-3 flex justify-center">
+                    <i data-lucide="inbox" class="w-10 h-10 text-crate-stone"></i>
+                </div>
                 <p class="font-display font-bold text-crate-brown">Tidak ada box</p>
                 <p class="text-crate-stone text-sm font-body mt-1">Semua box sudah diambil atau belum ada yang siap.</p>
             </div>
@@ -205,8 +213,8 @@
                         <button type="button"
                             onclick="toggleForm('form-{{ $box->id }}')"
                             class="btn-primary text-white font-body font-semibold
-                                       px-4 py-2.5 rounded-xl text-sm shadow shrink-0">
-                            🚚 Ambil & Kirim
+                                    px-4 py-2.5 rounded-xl text-sm shadow shrink-0 flex items-center gap-2">
+                            <i data-lucide="truck" class="w-4 h-4"></i> Ambil & Kirim
                         </button>
                     </div>
 
@@ -257,8 +265,8 @@
                             </div>
                             <button type="submit"
                                 class="btn-primary text-white font-body font-semibold
-                       px-5 py-2.5 rounded-xl text-sm shadow">
-                                Konfirmasi Pengiriman →
+                                    px-5 py-2.5 rounded-xl text-sm shadow flex items-center gap-2">
+                                Konfirmasi Pengiriman <i data-lucide="arrow-right" class="w-4 h-4"></i>
                             </button>
                         </form>
                     </div>
@@ -271,7 +279,9 @@
         {{-- ─── RETUR PICKUP ─────────────────────────────── --}}
         @if($returPickup->count() > 0)
         <div class="mb-8">
-            <h2 class="font-display text-xl text-crate-brown font-bold mb-4">↩️ Penjemputan Retur</h2>
+            <h2 class="font-display text-xl text-crate-brown font-bold mb-4 flex items-center gap-2">
+                <i data-lucide="undo-2" class="w-5 h-5 text-crate-orange"></i> Penjemputan Retur
+            </h2>
             <div class="space-y-4">
                 @foreach($returPickup as $retur)
                 <div class="card-wood relative rounded-2xl p-5">
@@ -283,19 +293,19 @@
                             </p>
                         </div>
                         <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs
-                             font-body font-semibold bg-blue-100 text-blue-700 border border-blue-200 shrink-0">
-                            🏍️ Perlu Dijemput
+                            font-body font-semibold bg-blue-100 text-blue-700 border border-blue-200 shrink-0">
+                            <i data-lucide="truck" class="w-3.5 h-3.5"></i> Perlu Dijemput
                         </span>
                     </div>
-                    <p class="text-crate-stone text-xs font-body mb-4">
-                        📍 Alamat: {{ $retur->box?->langganan?->alamat?->alamat_lengkap ?? 'Lihat detail pelanggan' }}
+                    <p class="text-crate-stone text-xs font-body mb-4 flex items-start gap-1">
+                        <i data-lucide="map-pin" class="w-3.5 h-3.5 shrink-0 mt-0.5"></i> Alamat: {{ $retur->box?->langganan?->alamat?->alamat_lengkap ?? 'Lihat detail pelanggan' }}
                     </p>
                     <form action="{{ url('/kurir/retur/' . $retur->id . '/konfirmasi-jemput') }}" method="POST">
                         @csrf
                         <button type="submit"
                             class="btn-primary text-white font-body font-semibold px-5 py-2.5
-                               rounded-xl text-sm shadow flex items-center gap-2">
-                            ✅ Konfirmasi Sudah Dijemput
+                            rounded-xl text-sm shadow flex items-center gap-2">
+                            <i data-lucide="check-circle" class="w-4 h-4"></i> Konfirmasi Sudah Dijemput
                         </button>
                     </form>
                 </div>
@@ -307,7 +317,9 @@
         {{-- RIWAYAT --}}
         @if($riwayat->count() > 0)
         <div class="mb-8">
-            <h2 class="font-display text-lg font-bold text-crate-brown mb-4">📋 Riwayat Terakhir</h2>
+            <h2 class="font-display text-lg font-bold text-crate-brown mb-4 flex items-center gap-2">
+                <i data-lucide="clipboard-list" class="w-5 h-5 text-crate-orange"></i> Riwayat Terakhir
+            </h2>
             <div class="relative card-wood rounded-2xl overflow-hidden">
                 <table class="w-full text-sm font-body">
                     <thead class="bg-crate-cream">
@@ -350,6 +362,8 @@
             el.classList.toggle('hidden');
         }
     </script>
+    <script>lucide.createIcons();</script>
+
 
 </body>
 

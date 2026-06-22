@@ -12,7 +12,7 @@
 
     @if(session('info'))
     <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-xl flex items-center gap-3">
-        <span class="text-blue-400 text-lg">ℹ️</span>
+        <i data-lucide="info" class="w-5 h-5 text-blue-400"></i>
         <p class="text-blue-700 text-sm font-body">{{ session('info') }}</p>
     </div>
     @endif
@@ -27,8 +27,8 @@
                     <p class="text-crate-stone text-sm font-body">{{ $langganan->paket->jumlah_item }} item per box</p>
                 </div>
             </div>
-            <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold px-3 py-1.5 rounded-full font-body">
-                ● Aktif
+            <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold px-3 py-1.5 rounded-full font-body inline-flex items-center gap-1.5">
+                <i data-lucide="circle" class="w-2.5 h-2.5 fill-emerald-500 text-emerald-500"></i> Aktif
             </span>
         </div>
     </div>
@@ -36,7 +36,9 @@
     {{-- Status Box Aktif --}}
     @if($box)
     <div class="card-wood rounded-2xl p-6 mb-6">
-        <h2 class="font-display text-base font-bold text-crate-brown mb-4">📦 Status Box</h2>
+        <h2 class="font-display text-base font-bold text-crate-brown mb-4 flex items-center gap-2">
+            <i data-lucide="package" class="w-5 h-5 text-crate-orange"></i> Status Box
+        </h2>
 
         {{-- Progress Status --}}
         @php
@@ -58,11 +60,11 @@
         ];
         $currentStep = $statusStep[$box->status] ?? 1;
         $steps = [
-        1 => ['label' => 'Menunggu', 'icon' => '⏳'],
-        2 => ['label' => 'Dikurasi', 'icon' => '✂️'],
-        3 => ['label' => 'Siap Kirim','icon' => '📦'],
-        4 => ['label' => 'Dikirim', 'icon' => '🚚'],
-        5 => ['label' => 'Diterima', 'icon' => '✅'],
+        1 => ['label' => 'Menunggu', 'icon' => 'clock'],
+        2 => ['label' => 'Dikurasi', 'icon' => 'scissors'],
+        3 => ['label' => 'Siap Kirim','icon' => 'package'],
+        4 => ['label' => 'Dikirim', 'icon' => 'truck'],
+        5 => ['label' => 'Diterima', 'icon' => 'check'],
         ];
         @endphp
 
@@ -70,11 +72,11 @@
         <div class="flex items-center justify-between mb-6">
             @foreach($steps as $step => $info)
             <div class="flex flex-col items-center flex-1">
-                <div class="w-9 h-9 rounded-full flex items-center justify-center text-sm mb-1
+                <div class="w-9 h-9 rounded-full flex items-center justify-center mb-1
                         {{ $currentStep >= $step
                             ? 'bg-crate-orange text-white'
                             : 'bg-crate-sand text-crate-stone' }}">
-                    {{ $info['icon'] }}
+                    <i data-lucide="{{ $info['icon'] }}" class="w-4 h-4"></i>
                 </div>
                 <p class="text-xs font-body text-center
                        {{ $currentStep >= $step ? 'text-crate-brown font-semibold' : 'text-crate-stone' }}">
@@ -117,7 +119,7 @@
         <div class="space-y-2">
             @foreach($box->items as $boxItem)
             <div class="flex items-center gap-3 bg-white rounded-xl px-4 py-3 border border-crate-sand">
-                <span class="text-2xl">👕</span>
+                <i data-lucide="shirt" class="w-6 h-6 text-crate-orange"></i>
                 <div class="flex-1 min-w-0">
                     <p class="text-sm font-body font-semibold text-crate-brown truncate">
                         {{ $boxItem->item->nama }}
@@ -139,15 +141,17 @@
         @csrf
         <button type="submit"
             class="w-full bg-crate-orange text-white font-body font-semibold
-                       px-6 py-3 rounded-2xl text-sm hover:bg-crate-brown transition-colors">
-            ✅ Konfirmasi Box Sudah Diterima
+                    px-6 py-3 rounded-2xl text-sm hover:bg-crate-brown transition-colors flex items-center justify-center gap-2">
+            <i data-lucide="check-circle" class="w-4 h-4"></i> Konfirmasi Box Sudah Diterima
         </button>
     </form>
     @endif
 </div>
 @else
 <div class="card-wood rounded-2xl p-6 mb-6 text-center">
-    <p class="text-4xl mb-3">⏳</p>
+    <div class="mb-3 flex justify-center">
+        <i data-lucide="clock" class="w-10 h-10 text-crate-orange"></i>
+    </div>
     <p class="font-display font-bold text-crate-brown">Box Sedang Disiapkan</p>
     <p class="text-crate-stone text-sm font-body mt-1">Kurator sedang memilihkan item terbaik untukmu.</p>
 </div>
@@ -155,7 +159,9 @@
 
 {{-- Detail Langganan --}}
 <div class="card-wood rounded-2xl p-6 mb-6">
-    <h2 class="font-display text-base font-bold text-crate-brown mb-4">📋 Detail Langganan</h2>
+    <h2 class="font-display text-base font-bold text-crate-brown mb-4 flex items-center gap-2">
+        <i data-lucide="clipboard-list" class="w-5 h-5 text-crate-orange"></i> Detail Langganan
+    </h2>
     <div class="space-y-3 text-sm font-body">
         <div class="flex justify-between items-center">
             <span class="text-crate-stone">Harga per periode</span>
@@ -192,7 +198,9 @@
 
 {{-- Alamat Pengiriman --}}
 <div class="card-wood rounded-2xl p-6 mb-6">
-    <h2 class="font-display text-base font-bold text-crate-brown mb-4">📍 Alamat Pengiriman</h2>
+    <h2 class="font-display text-base font-bold text-crate-brown mb-4 flex items-center gap-2">
+        <i data-lucide="map-pin" class="w-5 h-5 text-crate-orange"></i> Alamat Pengiriman
+    </h2>
     <p class="text-crate-brown font-semibold text-sm font-body">{{ $langganan->alamat->nama_penerima }}</p>
     <p class="text-crate-stone text-sm font-body mt-1 leading-relaxed">
         {{ $langganan->alamat->alamat_lengkap }},
@@ -213,8 +221,8 @@
 <div class="flex flex-col sm:flex-row gap-3 pb-8">
     <a href="{{ url('/retur') }}"
         class="flex-1 text-center border-2 border-crate-sand text-crate-brown font-body font-semibold
-                  px-6 py-3 rounded-2xl text-sm hover:border-crate-amber transition-colors">
-        📦 Ajukan Retur
+                px-6 py-3 rounded-2xl text-sm hover:border-crate-amber transition-colors flex items-center justify-center gap-2">
+        <i data-lucide="package" class="w-4 h-4"></i> Ajukan Retur
     </a>
     <form action="{{ url('/langganan/batalkan') }}" method="POST"
         onsubmit="return confirm('Yakin ingin membatalkan langganan?')">

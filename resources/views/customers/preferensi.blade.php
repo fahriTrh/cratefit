@@ -16,7 +16,9 @@
 
         {{-- ===== UKURAN PAKAIAN ===== --}}
         <div class="card-wood rounded-2xl p-6" style="animation-delay:0.05s">
-            <h2 class="font-display text-lg text-crate-brown font-bold mb-1">📏 Ukuran Pakaian</h2>
+            <h2 class="font-display text-lg text-crate-brown font-bold mb-1 flex items-center gap-2">
+                <i data-lucide="ruler" class="w-5 h-5 text-crate-orange"></i> Ukuran Pakaian
+            </h2>
             <p class="text-crate-stone text-xs font-body mb-5">Pilih ukuran yang biasa kamu pakai</p>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-5">
@@ -89,19 +91,21 @@
 
         {{-- ===== STYLE ===== --}}
         <div class="card-wood rounded-2xl p-6" style="animation-delay:0.1s">
-            <h2 class="font-display text-lg text-crate-brown font-bold mb-1">🎨 Gaya Berpakaian</h2>
+            <h2 class="font-display text-lg text-crate-brown font-bold mb-1 flex items-center gap-2">
+                <i data-lucide="palette" class="w-5 h-5 text-crate-orange"></i> Gaya Berpakaian
+            </h2>
             <p class="text-crate-stone text-xs font-body mb-5">Pilih satu atau lebih gaya favoritmu</p>
 
             @php
             $styles = [
-            ['emoji'=>'🧥','name'=>'Casual', 'desc'=>'Santai sehari-hari'],
-            ['emoji'=>'✨','name'=>'Streetwear', 'desc'=>'Edgy & urban'],
-            ['emoji'=>'🌸','name'=>'Feminine', 'desc'=>'Soft & flowy'],
-            ['emoji'=>'🏛️','name'=>'Vintage', 'desc'=>'Retro & klasik'],
-            ['emoji'=>'🖤','name'=>'Minimalis', 'desc'=>'Clean & simpel'],
-            ['emoji'=>'🤠','name'=>'Boho', 'desc'=>'Bohemian & earthy'],
-            ['emoji'=>'💼','name'=>'Smart Casual', 'desc'=>'Rapi tapi santai'],
-            ['emoji'=>'🎭','name'=>'Eclectic', 'desc'=>'Campur & berani'],
+            ['icon'=>'shirt',          'name'=>'Casual', 'desc'=>'Santai sehari-hari'],
+            ['icon'=>'sparkles',       'name'=>'Streetwear', 'desc'=>'Edgy & urban'],
+            ['icon'=>'flower-2',       'name'=>'Feminine', 'desc'=>'Soft & flowy'],
+            ['icon'=>'landmark',       'name'=>'Vintage', 'desc'=>'Retro & klasik'],
+            ['icon'=>'circle',         'name'=>'Minimalis', 'desc'=>'Clean & simpel'],
+            ['icon'=>'sun',            'name'=>'Boho', 'desc'=>'Bohemian & earthy'],
+            ['icon'=>'briefcase',      'name'=>'Smart Casual', 'desc'=>'Rapi tapi santai'],
+            ['icon'=>'shuffle',        'name'=>'Eclectic', 'desc'=>'Campur & berani'],
             ];
             @endphp
 
@@ -113,7 +117,9 @@
                     <div class="tag-btn h-full border-2 border-crate-sand bg-crate-cream rounded-2xl p-4 text-center
                                     peer-checked:border-crate-orange peer-checked:bg-crate-orange/5
                                     hover:border-crate-amber transition-all">
-                        <div class="text-2xl mb-1">{{ $style['emoji'] }}</div>
+                        <div class="mb-1 flex justify-center">
+                            <i data-lucide="{{ $style['icon'] }}" class="w-7 h-7 text-crate-orange"></i>
+                        </div>
                         <p class="font-body font-semibold text-crate-brown text-sm">{{ $style['name'] }}</p>
                         <p class="font-body text-crate-stone text-xs mt-0.5">{{ $style['desc'] }}</p>
                     </div>
@@ -125,7 +131,9 @@
 
         {{-- ===== WARNA FAVORIT ===== --}}
         <div class="card-wood rounded-2xl p-6" style="animation-delay:0.15s">
-            <h2 class="font-display text-lg text-crate-brown font-bold mb-1">🎨 Warna Favorit</h2>
+            <h2 class="font-display text-lg text-crate-brown font-bold mb-1 flex items-center gap-2">
+                <i data-lucide="palette" class="w-5 h-5 text-crate-orange"></i> Warna Favorit
+            </h2>
             <p class="text-crate-stone text-xs font-body mb-5">Pilih warna yang sering kamu pakai (maks. 5)</p>
 
             @php
@@ -166,7 +174,9 @@
 
         {{-- ===== PREFERENSI ITEM ===== --}}
         <div class="card-wood rounded-2xl p-6" style="animation-delay:0.2s">
-            <h2 class="font-display text-lg text-crate-brown font-bold mb-1">👕 Jenis Pakaian yang Diinginkan</h2>
+            <h2 class="font-display text-lg text-crate-brown font-bold mb-1 flex items-center gap-2">
+                <i data-lucide="shirt" class="w-5 h-5 text-crate-orange"></i> Jenis Pakaian yang Diinginkan
+            </h2>
             <p class="text-crate-stone text-xs font-body mb-5">Pilih item apa yang boleh masuk ke dalam box kamu</p>
 
             @php
@@ -192,7 +202,9 @@
 
         {{-- ===== PANTANGAN / CATATAN ===== --}}
         <div class="card-wood rounded-2xl p-6" style="animation-delay:0.25s">
-            <h2 class="font-display text-lg text-crate-brown font-bold mb-1">🚫 Pantangan & Catatan Khusus</h2>
+            <h2 class="font-display text-lg text-crate-brown font-bold mb-1 flex items-center gap-2">
+                <i data-lucide="ban" class="w-5 h-5 text-crate-orange"></i> Pantangan & Catatan Khusus
+            </h2>
             <p class="text-crate-stone text-xs font-body mb-5">Ceritakan item yang TIDAK ingin kamu terima, atau hal lain yang perlu diketahui kurator</p>
 
             <div class="grid sm:grid-cols-2 gap-4">
@@ -205,12 +217,12 @@
                         <label class="cursor-pointer">
                             <input type="checkbox" name="pantangan[]" value="{{ $pantang }}" class="sr-only peer"
                                 {{ in_array($pantang, old('pantangan', $preferensi->pantangan ?? [])) ? 'checked' : '' }}>
-                            <span class="tag-btn inline-block px-3 py-1.5 rounded-lg border border-crate-sand bg-crate-cream
-                                             text-sm font-body text-crate-brown
-                                             peer-checked:bg-red-100 peer-checked:text-red-700 peer-checked:border-red-300
-                                             hover:border-crate-amber transition-all">
-                                🚫 {{ $pantang }}
-                            </span>
+                                <span class="tag-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-crate-sand bg-crate-cream
+                                                text-sm font-body text-crate-brown
+                                                peer-checked:bg-red-100 peer-checked:text-red-700 peer-checked:border-red-300
+                                                hover:border-crate-amber transition-all">
+                                    <i data-lucide="ban" class="w-3.5 h-3.5"></i> {{ $pantang }}
+                                </span>
                         </label>
                         @endforeach
                     </div>

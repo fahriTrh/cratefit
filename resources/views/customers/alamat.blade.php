@@ -8,13 +8,15 @@
     <div class="mb-8">
         <p class="text-crate-orange font-script text-lg mb-1">Langkah 3 dari 4</p>
         <h1 class="font-display text-3xl text-crate-brown font-bold">Alamat Pengiriman</h1>
-        <p class="text-crate-stone font-body mt-1 text-sm">Pastikan alamatmu benar ya — box Cratefit akan dikirim ke sini! 📦</p>
+        <p class="text-crate-stone font-body mt-1 text-sm flex items-center gap-1.5">Pastikan alamatmu benar ya — box Cratefit akan dikirim ke sini! <i data-lucide="package" class="w-4 h-4 text-crate-orange inline"></i></p>
     </div>
 
     {{-- SAVED ADDRESSES (jika sudah ada) --}}
     @if(isset($addresses) && $addresses->count())
     <div class="card-wood rounded-2xl p-6 mb-6">
-        <h2 class="font-display text-lg text-crate-brown font-bold mb-4">📋 Alamat Tersimpan</h2>
+        <h2 class="font-display text-lg text-crate-brown font-bold mb-4 flex items-center gap-2">
+            <i data-lucide="clipboard-list" class="w-5 h-5 text-crate-orange"></i> Alamat Tersimpan
+        </h2>
         <div class="grid sm:grid-cols-2 gap-4">
             @foreach($addresses as $addr)
             <label class="cursor-pointer group">
@@ -60,8 +62,9 @@
 
     {{-- FORM TAMBAH ALAMAT BARU --}}
     <div class="card-wood rounded-2xl p-6">
-        <h2 class="font-display text-lg text-crate-brown font-bold mb-1">
-            {{ isset($addresses) && $addresses->count() ? '➕ Tambah Alamat Baru' : '📍 Isi Alamat Pengiriman' }}
+        <h2 class="font-display text-lg text-crate-brown font-bold mb-1 flex items-center gap-2">
+            <i data-lucide="{{ isset($addresses) && $addresses->count() ? 'plus' : 'map-pin' }}" class="w-5 h-5 text-crate-orange"></i>
+            {{ isset($addresses) && $addresses->count() ? 'Tambah Alamat Baru' : 'Isi Alamat Pengiriman' }}
         </h2>
         <p class="text-crate-stone text-xs font-body mb-6">Lengkapi data penerima dan lokasi pengiriman</p>
 
@@ -76,19 +79,28 @@
                     Label Alamat
                 </label>
                 <div class="flex flex-wrap gap-2 mb-3">
-                    @foreach(['Rumah','Kos','Asrama','Kantor','Lainnya'] as $label)
-                    <label class="cursor-pointer">
-                        <input type="radio" name="label" value="{{ $label }}" class="sr-only peer"
-                            {{ old('label', $editAlamat->label ?? 'Rumah') === $label ? 'checked' : '' }}>
-                        <span class="tag-btn inline-block px-4 py-2 rounded-full border border-crate-sand bg-crate-cream
-                                         text-sm font-body text-crate-brown
-                                         peer-checked:bg-crate-brown peer-checked:text-crate-cream peer-checked:border-crate-brown
-                                         hover:border-crate-amber transition-all">
-                            {{ $label === 'Rumah' ? '🏠' : ($label === 'Kos' ? '🏘️' : ($label === 'Asrama' ? '🏫' : ($label === 'Kantor' ? '🏢' : '📌'))) }}
-                            {{ $label }}
-                        </span>
-                    </label>
-                    @endforeach
+                @php
+                $labelIcons = [
+                    'Rumah' => 'home',
+                    'Kos' => 'building',
+                    'Asrama' => 'school',
+                    'Kantor' => 'building-2',
+                    'Lainnya' => 'map-pin',
+                ];
+                @endphp
+                @foreach(['Rumah','Kos','Asrama','Kantor','Lainnya'] as $label)
+                <label class="cursor-pointer">
+                    <input type="radio" name="label" value="{{ $label }}" class="sr-only peer"
+                        {{ old('label', $editAlamat->label ?? 'Rumah') === $label ? 'checked' : '' }}>
+                    <span class="tag-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-crate-sand bg-crate-cream
+                                    text-sm font-body text-crate-brown
+                                    peer-checked:bg-crate-brown peer-checked:text-crate-cream peer-checked:border-crate-brown
+                                    hover:border-crate-amber transition-all">
+                        <i data-lucide="{{ $labelIcons[$label] }}" class="w-3.5 h-3.5"></i>
+                        {{ $label }}
+                    </span>
+                </label>
+                @endforeach
                 </div>
                 @error('label')<p class="text-red-500 text-xs">{{ $message }}</p>@enderror
             </div>
@@ -244,12 +256,12 @@
     {{-- ===== ACTION BUTTONS ===== --}}
     <div class="flex items-center justify-between pt-2 pb-8">
         <a href="{{ url('/preferensi') }}"
-            class="flex items-center gap-2 text-crate-stone font-body text-sm hover:text-crate-brown transition-colors">
-            ← Kembali ke Preferensi
+        class="flex items-center gap-2 text-crate-stone font-body text-sm hover:text-crate-brown transition-colors">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali ke Preferensi
         </a>
         <button type="submit"
-            class="btn-primary text-white font-body font-semibold px-8 py-3.5 rounded-2xl text-sm shadow-lg">
-            Simpan & Pilih Paket →
+            class="btn-primary text-white font-body font-semibold px-8 py-3.5 rounded-2xl text-sm shadow-lg flex items-center gap-2">
+            Simpan & Pilih Paket <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </button>
     </div>
 

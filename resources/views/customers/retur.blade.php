@@ -60,14 +60,16 @@
 
     {{-- PAGE HEADER --}}
     <div class="mb-8">
-        <h1 class="font-display text-3xl text-crate-brown font-bold">↩️ Retur Pakaian</h1>
+        <h1 class="font-display text-3xl text-crate-brown font-bold flex items-center gap-2">
+            <i data-lucide="undo-2" class="w-7 h-7 text-crate-orange"></i> Retur Pakaian
+        </h1>
         <p class="text-crate-stone font-body mt-1 text-sm">Pilih item yang ingin dikembalikan dari box terakhirmu.</p>
     </div>
 
     {{-- FLASH MESSAGE --}}
     @if(session('success'))
     <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-2xl flex gap-3">
-        <span class="text-xl shrink-0">✅</span>
+        <i data-lucide="check-circle" class="w-5 h-5 shrink-0 text-green-600"></i>
         <div>
             <p class="text-green-800 font-body font-semibold text-sm">{{ session('success') }}</p>
         </div>
@@ -76,7 +78,7 @@
 
     @if(session('error'))
     <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-2xl flex gap-3">
-        <span class="text-xl shrink-0">❌</span>
+        <i data-lucide="x-circle" class="w-5 h-5 shrink-0 text-red-600"></i>
         <div>
             <p class="text-red-700 font-body font-semibold text-sm">{{ session('error') }}</p>
         </div>
@@ -85,7 +87,7 @@
 
     {{-- INFO KEBIJAKAN RETUR --}}
     <div class="mb-6 p-4 bg-crate-amber/10 border border-crate-amber/30 rounded-2xl flex gap-3">
-        <span class="text-xl shrink-0">ℹ️</span>
+        <i data-lucide="info" class="w-5 h-5 shrink-0 text-crate-amber"></i>
         <div>
             <p class="text-crate-brown font-body font-semibold text-sm mb-1">Kebijakan Retur Cratefit</p>
             <ul class="text-crate-stone font-body text-xs space-y-1">
@@ -125,11 +127,13 @@
 
         {{-- PILIH ITEM --}}
         <div class="card-wood rounded-2xl p-6 mb-6">
-            <h2 class="font-display text-lg text-crate-brown font-bold mb-1">👕 Pilih Item yang Diretur</h2>
+            <h2 class="font-display text-lg text-crate-brown font-bold mb-1 flex items-center gap-2">
+                <i data-lucide="shirt" class="w-5 h-5 text-crate-orange"></i> Pilih Item yang Diretur
+            </h2>
             <p class="text-crate-stone text-xs font-body mb-5">Centang item yang ingin dikembalikan (maks. 2 item)</p>
 
             @error('item_retur')
-            <p class="text-red-500 text-xs font-body mb-3">⚠️ {{ $message }}</p>
+            <p class="text-red-500 text-xs font-body mb-3 flex items-center gap-1.5"><i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i> {{ $message }}</p>
             @enderror
 
             <div class="space-y-3" id="item-list">
@@ -155,7 +159,9 @@
                         </div>
 
                         {{-- Foto placeholder --}}
-                        <div class="w-14 h-14 bg-crate-sand rounded-xl flex items-center justify-center text-2xl shrink-0">👕</div>
+                        <div class="w-14 h-14 bg-crate-sand rounded-xl flex items-center justify-center shrink-0">
+                            <i data-lucide="shirt" class="w-6 h-6 text-crate-brown/60"></i>
+                        </div>
 
                         {{-- Info item --}}
                         <div class="flex-1 min-w-0">
@@ -184,7 +190,9 @@
 
         {{-- ALASAN RETUR --}}
         <div class="card-wood rounded-2xl p-6 mb-6">
-            <h2 class="font-display text-lg text-crate-brown font-bold mb-1">📝 Alasan Retur</h2>
+            <h2 class="font-display text-lg text-crate-brown font-bold mb-1 flex items-center gap-2">
+                <i data-lucide="file-text" class="w-5 h-5 text-crate-orange"></i> Alasan Retur
+            </h2>
             <p class="text-crate-stone text-xs font-body mb-5">Pilih alasan utama pengembalian item</p>
 
             @error('alasan_retur')
@@ -193,12 +201,12 @@
 
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
                 @foreach([
-                    ['value'=>'tidak_cocok_ukuran', 'label'=>'Tidak Cocok Ukuran',  'icon'=>'📏'],
-                    ['value'=>'tidak_suka_style',   'label'=>'Tidak Suka Gaya',      'icon'=>'🎨'],
-                    ['value'=>'kualitas_kurang',     'label'=>'Kualitas Kurang',      'icon'=>'🔍'],
-                    ['value'=>'warna_tidak_sesuai',  'label'=>'Warna Tidak Sesuai',   'icon'=>'🎨'],
-                    ['value'=>'kondisi_rusak',       'label'=>'Kondisi Rusak/Cacat',  'icon'=>'⚠️'],
-                    ['value'=>'lainnya',             'label'=>'Lainnya',              'icon'=>'💬'],
+                    ['value'=>'tidak_cocok_ukuran', 'label'=>'Tidak Cocok Ukuran',  'icon'=>'ruler'],
+                    ['value'=>'tidak_suka_style',   'label'=>'Tidak Suka Gaya',      'icon'=>'palette'],
+                    ['value'=>'kualitas_kurang',     'label'=>'Kualitas Kurang',      'icon'=>'search'],
+                    ['value'=>'warna_tidak_sesuai',  'label'=>'Warna Tidak Sesuai',   'icon'=>'palette'],
+                    ['value'=>'kondisi_rusak',       'label'=>'Kondisi Rusak/Cacat',  'icon'=>'alert-triangle'],
+                    ['value'=>'lainnya',             'label'=>'Lainnya',              'icon'=>'message-circle'],
                 ] as $alasan)
                 <label class="cursor-pointer">
                     <input type="radio"
@@ -209,7 +217,9 @@
                     <div class="tag-btn border-2 border-crate-sand bg-crate-cream rounded-2xl p-3 text-center
                                 peer-checked:border-crate-orange peer-checked:bg-crate-orange/5
                                 hover:border-crate-amber transition-all">
-                        <div class="text-xl mb-1">{{ $alasan['icon'] }}</div>
+                        <div class="mb-1 flex justify-center">
+                            <i data-lucide="{{ $alasan['icon'] }}" class="w-5 h-5 text-crate-orange"></i>
+                        </div>
                         <p class="font-body font-semibold text-crate-brown text-xs leading-tight">{{ $alasan['label'] }}</p>
                     </div>
                 </label>
@@ -230,7 +240,9 @@
 
         {{-- METODE PENGEMBALIAN --}}
         <div class="card-wood rounded-2xl p-6 mb-6">
-            <h2 class="font-display text-lg text-crate-brown font-bold mb-1">🚚 Metode Pengembalian</h2>
+            <h2 class="font-display text-lg text-crate-brown font-bold mb-1 flex items-center gap-2">
+                <i data-lucide="truck" class="w-5 h-5 text-crate-orange"></i> Metode Pengembalian
+            </h2>
             <p class="text-crate-stone text-xs font-body mb-5">Pilih cara kamu mengirim item kembali</p>
 
             @error('metode_pengembalian')
@@ -242,14 +254,14 @@
                     [
                         'value' => 'drop_off',
                         'label' => 'Drop Off ke Ekspedisi',
-                        'icon'  => '📦',
+                        'icon'  => 'package',
                         'desc'  => 'Antar sendiri ke gerai JNE/SiCepat terdekat. Label retur akan dikirim via email.',
                         'badge' => null,
                     ],
                     [
                         'value' => 'pickup',
                         'label' => 'Dijemput Kurir',
-                        'icon'  => '🏍️',
+                        'icon'  => 'truck',
                         'desc'  => 'Kurir kami akan menjemput item di alamatmu. Tersedia di area tertentu.',
                         'badge' => 'Area terbatas',
                     ],
@@ -264,7 +276,7 @@
                                 peer-checked:border-crate-orange peer-checked:bg-crate-orange/5
                                 hover:border-crate-amber transition-all">
                         <div class="flex items-start justify-between mb-3">
-                            <div class="text-2xl">{{ $metode['icon'] }}</div>
+                            <div><i data-lucide="{{ $metode['icon'] }}" class="w-6 h-6 text-crate-orange"></i></div>
                             @if($metode['badge'])
                             <span class="text-xs font-body text-crate-stone bg-crate-sand px-2 py-0.5 rounded-full">
                                 {{ $metode['badge'] }}
@@ -281,7 +293,9 @@
 
         {{-- RINGKASAN --}}
         <div class="card-wood rounded-2xl p-6 mb-6">
-            <h2 class="font-display text-lg text-crate-brown font-bold mb-4">🧾 Ringkasan Pengajuan</h2>
+            <h2 class="font-display text-lg text-crate-brown font-bold mb-4 flex items-center gap-2">
+                <i data-lucide="receipt" class="w-5 h-5 text-crate-orange"></i> Ringkasan Pengajuan
+            </h2>
 
             <div class="bg-crate-cream rounded-xl border border-crate-sand p-5 space-y-3">
                 <div class="flex justify-between items-center text-sm font-body">
@@ -308,14 +322,14 @@
         {{-- ACTION BUTTONS --}}
         <div class="flex items-center justify-between pt-2 pb-8">
             <a href="{{ url('/status-box') }}"
-               class="flex items-center gap-2 text-crate-stone font-body text-sm hover:text-crate-brown transition-colors">
-                ← Kembali
+            class="flex items-center gap-2 text-crate-stone font-body text-sm hover:text-crate-brown transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali
             </a>
             <button type="submit" id="btn-submit"
                     class="btn-primary text-white font-body font-semibold px-8 py-3.5 rounded-2xl text-sm
-                           shadow-lg flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed
-                           disabled:transform-none disabled:shadow-none">
-                ↩️ Ajukan Retur
+                        shadow-lg flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed
+                        disabled:transform-none disabled:shadow-none">
+                <i data-lucide="undo-2" class="w-4 h-4"></i> Ajukan Retur
             </button>
         </div>
 
@@ -324,16 +338,18 @@
     @else
     {{-- ─── TIDAK BISA RETUR (batas habis) ─── --}}
     <div class="card-wood rounded-2xl p-8 mb-6 text-center">
-        <div class="text-5xl mb-4">⏰</div>
+        <div class="mb-4 flex justify-center">
+            <i data-lucide="clock-alert" class="w-12 h-12 text-crate-orange"></i>
+        </div>
         <h2 class="font-display text-xl text-crate-brown font-bold mb-2">Batas Retur Sudah Lewat</h2>
         <p class="text-crate-stone font-body text-sm max-w-sm mx-auto">
             Kamu hanya bisa mengajukan retur dalam 3 hari setelah box diterima.
             Batas retur untuk Box #{{ $box['kode'] }} sudah berakhir pada {{ $box['batas_retur'] }}.
         </p>
         <a href="{{ url('/status-box') }}"
-           class="inline-flex items-center gap-2 mt-6 btn-primary text-white font-body font-semibold
-                  px-6 py-3 rounded-2xl text-sm shadow-lg">
-            ← Kembali ke Status Box
+        class="inline-flex items-center gap-2 mt-6 btn-primary text-white font-body font-semibold
+                px-6 py-3 rounded-2xl text-sm shadow-lg">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali ke Status Box
         </a>
     </div>
     @endif
@@ -341,7 +357,9 @@
     {{-- ─── RIWAYAT RETUR ────────────────────────────────────────── --}}
     <div class="card-wood rounded-2xl p-6 mb-6">
         <div class="flex items-center justify-between mb-5">
-            <h2 class="font-display text-lg text-crate-brown font-bold">📜 Riwayat Retur</h2>
+            <h2 class="font-display text-lg text-crate-brown font-bold flex items-center gap-2">
+                <i data-lucide="scroll-text" class="w-5 h-5 text-crate-orange"></i> Riwayat Retur
+            </h2>
             <span class="text-crate-stone text-xs font-body">{{ count($riwayat) }} pengajuan</span>
         </div>
 
@@ -375,8 +393,8 @@
                 <div class="flex flex-wrap gap-2">
                     @foreach($r['items'] as $namaItem)
                     <span class="inline-flex items-center gap-1.5 bg-white border border-crate-sand
-                                 rounded-lg px-3 py-1 text-xs font-body text-crate-brown">
-                        👕 {{ $namaItem }}
+                                rounded-lg px-3 py-1 text-xs font-body text-crate-brown">
+                        <i data-lucide="shirt" class="w-3.5 h-3.5"></i> {{ $namaItem }}
                     </span>
                     @endforeach
                     <span class="inline-flex items-center bg-crate-sand/60 rounded-lg px-3 py-1
@@ -398,7 +416,9 @@
         </div>
         @else
         <div class="text-center py-10">
-            <p class="text-3xl mb-2">📭</p>
+            <div class="mb-2 flex justify-center">
+                <i data-lucide="inbox" class="w-8 h-8 text-crate-stone"></i>
+            </div>
             <p class="text-crate-stone font-body text-sm">Belum ada riwayat retur.</p>
         </div>
         @endif
