@@ -15,15 +15,22 @@
         tailwind.config = {
             theme: {
                 extend: {
+                    // colors: {
+                    //     'crate-brown': '#3B1F0E',
+                    //     'crate-dark': '#2A1508',
+                    //     'crate-orange': '#C85A1A',
+                    //     'crate-amber': '#E07A3A',
+                    //     'crate-warm': '#F5A05A',
+                    //     'crate-cream': '#FAF3E8',
+                    //     'crate-sand': '#EDE0CC',
+                    //     'crate-stone': '#C9B99A',
+                    // },
                     colors: {
-                        'crate-brown': '#3B1F0E',
-                        'crate-dark': '#2A1508',
-                        'crate-orange': '#C85A1A',
-                        'crate-amber': '#E07A3A',
-                        'crate-warm': '#F5A05A',
-                        'crate-cream': '#FAF3E8',
-                        'crate-sand': '#EDE0CC',
-                        'crate-stone': '#C9B99A',
+                        'crate-primary': '#D8A98C',
+                        'crate-accent': '#E9D8CC',
+                        'crate-bg': '#F8F5F2',
+                        'crate-card': '#FFFFFF',
+                        'crate-text': '#2B2B2B',
                     },
                     // fontFamily: {
                     //     'display': ['Playfair Display', 'serif'],
@@ -40,14 +47,27 @@
         }
     </script>
     <style>
+        :root {
+            --primary: #D8A98C;
+            --accent: #E9D8CC;
+            --background: #F8F5F2;
+            --card: #FFFFFF;
+            --text: #2B2B2B;
+        }
         /* body {
             font-family: 'DM Sans', sans-serif;
             background-color: #FAF3E8;
         } */
 
-        body {
+        /* body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #FAF3E8;
+        } */
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F8F5F2;
+            color: #2B2B2B;
         }
 
         /* Texture overlay */
@@ -69,7 +89,7 @@
         }
 
         /* Step indicator active */
-        .step-active {
+        /* .step-active {
             background: #C85A1A;
             color: white;
         }
@@ -82,6 +102,21 @@
         .step-todo {
             background: #EDE0CC;
             color: #9B7B5A;
+        } */
+
+        .step-active {
+            background: #D8A98C;
+            color: white;
+        }
+
+        .step-done {
+            background: #2B2B2B;
+            color: white;
+        }
+
+        .step-todo {
+            background: #E9D8CC;
+            color: #2B2B2B;
         }
 
         /* Tag toggle */
@@ -107,12 +142,19 @@
         }
 
         /* Input focus */
-        input:focus,
+        /* input:focus,
         select:focus,
         textarea:focus {
             outline: none;
             border-color: #C85A1A;
             box-shadow: 0 0 0 3px rgba(200, 90, 26, 0.15);
+        } */
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #D8A98C;
+            box-shadow: 0 0 0 3px rgba(216, 169, 140, 0.2);
         }
 
         /* Animate fade-in sections */
@@ -132,24 +174,39 @@
             }
         }
 
-        .btn-primary {
+        /* .btn-primary {
             background: linear-gradient(135deg, #C85A1A, #E07A3A);
             transition: all 0.2s;
+        } */
+
+        .btn-primary {
+            background: #D8A98C;
         }
+
+        /* .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(200, 90, 26, 0.35);
+        } */
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(200, 90, 26, 0.35);
+            box-shadow: 0 8px 24px rgba(216, 169, 140, 0.35);
         }
 
-        .card-wood {
+        /* .card-wood {
             background: white;
             border: 1px solid #EDE0CC;
             position: relative;
             overflow: hidden;
+        } */
+
+        .card-wood {
+            background: #FFFFFF;
+            border: 1px solid #E9D8CC;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
         }
 
-        .card-wood::before {
+        /* .card-wood::before {
             content: '';
             position: absolute;
             top: 0;
@@ -157,25 +214,36 @@
             right: 0;
             height: 4px;
             background: linear-gradient(90deg, #3B1F0E, #C85A1A, #E07A3A, #3B1F0E);
+        } */
+
+        .card-wood::before {
+            background: #D8A98C;
         }
+
     </style>
 </head>
 
 <body class="min-h-screen relative z-10">
 
     {{-- TOP NAV --}}
-    <nav class="bg-crate-brown text-crate-cream sticky top-0 z-50 shadow-lg py-2">
+    <nav class="bg-white border-b border-crate-accent text-crate-cream sticky top-0 z-50 shadow-lg py-2">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
             {{-- Logo --}}
             <div class="flex items-center gap-3">
-                <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-crate-cream flex items-center justify-center overflow-hidden border border-white">
+                <!-- <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-crate-cream flex items-center justify-center overflow-hidden border border-white">
                     <img class="w-full h-full" src="{{ asset('assets/imgs/logo-circle.png') }}">
-                    <!-- <span class="text-crate-orange font-script text-lg leading-none">C</span> -->
+                    <span class="text-crate-orange font-script text-lg leading-none">C</span>
+                </div> -->
+                <div class="w-16 h-16 md:w-32 md:h-28 flex items-center justify-center overflow-hidden">
+                    <img
+                        class="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+                        src="{{ asset('assets/imgs/cratefit-new-nobg.png') }}"
+                        alt="Cratefit">
                 </div>
-                <div>
+                <!-- <div>
                     <span class="font-script text-2xl text-crate-warm tracking-wide">Cratefit</span>
                     <span class="hidden sm:block text-crate-stone text-xs font-body ml-1">Stylish tanpa ribet</span>
-                </div>
+                </div> -->
             </div>
 
             {{-- User --}}
@@ -286,7 +354,7 @@
     </div>
 
     {{-- FOOTER --}}
-    <footer class="mt-16 bg-crate-brown text-crate-stone">
+    <footer class="mt-16 bg-white border-t border-crate-accent text-crate-stone">
         <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-2">
             <span class="font-script text-crate-warm text-xl">Cratefit</span>
             <p class="text-xs font-body text-center">"Stylish tanpa ribet, hemat tanpa kehilangan style."</p>
@@ -295,45 +363,47 @@
     </footer>
 
     <!-- MOBILE BOTTOM NAV -->
-    <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50" style="background:#3B1F0E;border-top:1px solid rgba(255,255,255,0.08);padding-bottom:env(safe-area-inset-bottom)">
+    <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50"
+        style="background:#FFFFFF;border-top:1px solid #E9D8CC;padding-bottom:env(safe-area-inset-bottom)">
         <div style="display:flex;justify-content:space-around;align-items:center;height:60px">
-            <!-- <a href="#" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#C9B99A;font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
-                <span style="font-size:1.25rem">👤</span>Profil
-            </a> -->
-            <a href="/preferensi" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#F5A05A;font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
-                <i data-lucide="sparkles" style="width:20px;height:20px"></i><span style="color:#F5A05A;font-weight:600">Preferensi</span>
+            <a href="/preferensi" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#D8A98C;font-size:0.6rem;font-family:'Plus Jakarta Sans',sans-serif;padding:0 0.75rem">
+                <i data-lucide="sparkles" style="width:20px;height:20px"></i><span style="color:#D8A98C;font-weight:600">Preferensi</span>
             </a>
-            <a href="/alamat" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#C9B99A;font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
+            <a href="/alamat" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#2B2B2B;opacity:0.45;font-size:0.6rem;font-family:'Plus Jakarta Sans',sans-serif;padding:0 0.75rem">
                 <i data-lucide="map-pin" style="width:20px;height:20px"></i>Alamat
             </a>
-            <a href="/status-box" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#C9B99A;font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
+            <a href="/status-box" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#2B2B2B;opacity:0.45;font-size:0.6rem;font-family:'Plus Jakarta Sans',sans-serif;padding:0 0.75rem">
                 <i data-lucide="package" style="width:20px;height:20px"></i>Paket
             </a>
-            <a href="#" onclick="toggleMobileMenu()" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#C9B99A;font-size:0.6rem;font-family:'DM Sans',sans-serif;padding:0 0.75rem">
+            <a href="#" onclick="toggleMobileMenu()" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#2B2B2B;opacity:0.45;font-size:0.6rem;font-family:'Plus Jakarta Sans',sans-serif;padding:0 0.75rem">
                 <i data-lucide="menu" style="width:20px;height:20px"></i>Lainnya
             </a>
         </div>
     </div>
 
     <!-- MOBILE SLIDE-UP DRAWER (untuk "Lainnya") -->
-    <div id="mobile-drawer" onclick="toggleMobileMenu()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:60;backdrop-filter:blur(2px)">
-        <div onclick="event.stopPropagation()" style="position:absolute;bottom:0;left:0;right:0;background:#FAF3E8;border-radius:1.5rem 1.5rem 0 0;padding:1.5rem 1.5rem calc(1.5rem + env(safe-area-inset-bottom))">
+    <div id="mobile-drawer" onclick="toggleMobileMenu()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:60;backdrop-filter:blur(2px)">
+        <div onclick="event.stopPropagation()" style="position:absolute;bottom:0;left:0;right:0;background:#F8F5F2;border-radius:1.5rem 1.5rem 0 0;padding:1.5rem 1.5rem calc(1.5rem + env(safe-area-inset-bottom))">
             <!-- Handle -->
-            <div style="width:40px;height:4px;background:#EDE0CC;border-radius:9999px;margin:0 auto 1.25rem"></div>
-            <p style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#C9B99A;margin-bottom:0.75rem">Menu Pelanggan</p>
+            <div style="width:40px;height:4px;background:#E9D8CC;border-radius:9999px;margin:0 auto 1.25rem"></div>
+            <p style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#2B2B2B;opacity:0.4;margin-bottom:0.75rem">Menu Pelanggan</p>
             <nav style="display:flex;flex-direction:column;gap:0.25rem">
-                <a href="/status-box" style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:0.75rem;font-size:0.9rem;color:rgba(59,31,14,0.7);text-decoration:none;font-family:'DM Sans',sans-serif" onmouseover="this.style.background='#EDE0CC'" onmouseout="this.style.background='transparent'"><i data-lucide="truck" style="width:18px;height:18px"></i> &nbsp;Status Box</a>
-                <a href="/retur" style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:0.75rem;font-size:0.9rem;color:rgba(59,31,14,0.7);text-decoration:none;font-family:'DM Sans',sans-serif" onmouseover="this.style.background='#EDE0CC'" onmouseout="this.style.background='transparent'"><i data-lucide="undo-2" style="width:18px;height:18px"></i> &nbsp;Retur</a>
+                <a href="/status-box" style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:0.75rem;font-size:0.9rem;color:#2B2B2B;opacity:0.7;text-decoration:none;font-family:'Plus Jakarta Sans',sans-serif" onmouseover="this.style.background='#E9D8CC'" onmouseout="this.style.background='transparent'">
+                    <i data-lucide="truck" style="width:18px;height:18px"></i> &nbsp;Status Box
+                </a>
+                <a href="/retur" style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:0.75rem;font-size:0.9rem;color:#2B2B2B;opacity:0.7;text-decoration:none;font-family:'Plus Jakarta Sans',sans-serif" onmouseover="this.style.background='#E9D8CC'" onmouseout="this.style.background='transparent'">
+                    <i data-lucide="undo-2" style="width:18px;height:18px"></i> &nbsp;Retur
+                </a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit" style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:0.75rem;font-size:0.9rem;color:#ef4444;text-decoration:none;font-family:'DM Sans',sans-serif;width:100%;background:none;border:none;cursor:pointer;text-align:left">
+                    <button type="submit" style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:0.75rem;font-size:0.9rem;color:#ef4444;text-decoration:none;font-family:'Plus Jakarta Sans',sans-serif;width:100%;background:none;border:none;cursor:pointer;text-align:left">
                         <i data-lucide="log-out" style="width:18px;height:18px"></i> &nbsp;Keluar
                     </button>
                 </form>
             </nav>
-            <div style="margin-top:1rem;padding:0.75rem;background:white;border-radius:0.75rem;border:1px solid #EDE0CC;text-align:center">
-                <p style="color:#C9B99A;font-size:0.75rem;margin:0">Paket aktif</p>
-                <p style="color:#C85A1A;font-family:'Playfair Display',serif;font-weight:700;font-size:0.875rem;margin:2px 0 0">— Belum berlangganan —</p>
+            <div style="margin-top:1rem;padding:0.75rem;background:#FFFFFF;border-radius:0.75rem;border:1px solid #E9D8CC;text-align:center">
+                <p style="color:#2B2B2B;opacity:0.4;font-size:0.75rem;margin:0">Paket aktif</p>
+                <p style="color:#D8A98C;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:0.875rem;margin:2px 0 0">— Belum berlangganan —</p>
             </div>
         </div>
     </div>

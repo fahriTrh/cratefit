@@ -48,24 +48,24 @@
 <div class="fade-in space-y-6">
 
     {{-- BREADCRUMB --}}
-    <div class="flex items-center gap-2 text-sm font-body text-crate-stone">
-        <a href="{{ url('/kurator/pelanggan') }}" class="hover:text-crate-brown transition-colors">← Profil Pelanggan</a>
+    <div class="flex items-center gap-2 text-sm font-body text-crate-text/50">
+        <a href="{{ url('/kurator/pelanggan') }}" class="hover:text-crate-text transition-colors">← Profil Pelanggan</a>
         <span>/</span>
-        <a href="{{ url('/kurator/pelanggan/' . $pelanggan['id']) }}" class="hover:text-crate-brown transition-colors">
+        <a href="{{ url('/kurator/pelanggan/' . $pelanggan['id']) }}" class="hover:text-crate-text transition-colors">
             {{ $pelanggan['nama'] }}
         </a>
         <span>/</span>
-        <span class="text-crate-brown font-medium">Pilih Item</span>
+        <span class="text-crate-text font-medium">Pilih Item</span>
     </div>
 
     {{-- HEADER --}}
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
             <p class="text-cur-teal font-script text-lg mb-0.5">Kurasi Box</p>
-            <h1 class="font-display text-3xl text-crate-brown font-bold">Pilih Item</h1>
-            <p class="text-crate-stone font-body mt-1 text-sm">
-                Pilih item yang cocok untuk <span class="font-semibold text-crate-brown">{{ $pelanggan['nama'] }}</span>
-                · Periode <span class="font-semibold text-crate-brown">{{ $pelanggan['periode'] }}</span>
+            <h1 class="font-display text-3xl text-crate-text font-bold">Pilih Item</h1>
+            <p class="text-crate-text/50 font-body mt-1 text-sm">
+                Pilih item yang cocok untuk <span class="font-semibold text-crate-text">{{ $pelanggan['nama'] }}</span>
+                · Periode <span class="font-semibold text-crate-text">{{ $pelanggan['periode'] }}</span>
             </p>
         </div>
         <button type="button" id="btn-lanjut" onclick="lanjutSusunBox()"
@@ -87,29 +87,29 @@
                         {{ $pelanggan['avatar'] }}
                     </div>
                     <div class="min-w-0">
-                        <p class="font-body font-semibold text-crate-brown text-sm truncate">{{ $pelanggan['nama'] }}</p>
-                        <p class="text-crate-stone text-xs font-body">{{ $pelanggan['paket'] }}</p>
+                        <p class="font-body font-semibold text-crate-text text-sm truncate">{{ $pelanggan['nama'] }}</p>
+                        <p class="text-crate-text/50 text-xs font-body">{{ $pelanggan['paket'] }}</p>
                     </div>
                 </div>
                 <div class="flex gap-2 mb-4">
-                    <div class="flex-1 bg-crate-cream rounded-xl p-3 text-center border border-crate-sand">
-                        <p class="text-crate-stone text-xs font-body mb-0.5">Atasan</p>
-                        <p class="font-display text-xl font-bold text-crate-orange">{{ $pelanggan['ukuran_atasan'] }}</p>
+                    <div class="flex-1 bg-crate-accent rounded-xl p-3 text-center border border-crate-sand">
+                        <p class="text-crate-text/50 text-xs font-body mb-0.5">Atasan</p>
+                        <p class="font-display text-xl font-bold text-crate-primary">{{ $pelanggan['ukuran_atasan'] }}</p>
                     </div>
-                    <div class="flex-1 bg-crate-cream rounded-xl p-3 text-center border border-crate-sand">
-                        <p class="text-crate-stone text-xs font-body mb-0.5">Bawahan</p>
-                        <p class="font-display text-xl font-bold text-crate-orange">{{ $pelanggan['ukuran_bawahan'] }}</p>
+                    <div class="flex-1 bg-crate-accent rounded-xl p-3 text-center border border-crate-sand">
+                        <p class="text-crate-text/50 text-xs font-body mb-0.5">Bawahan</p>
+                        <p class="font-display text-xl font-bold text-crate-primary">{{ $pelanggan['ukuran_bawahan'] }}</p>
                     </div>
                 </div>
-                <p class="text-xs font-body font-semibold text-crate-brown/60 uppercase tracking-wider mb-2">Gaya</p>
+                <p class="text-xs font-body font-semibold text-crate-text/60 uppercase tracking-wider mb-2">Gaya</p>
                 <div class="flex flex-wrap gap-1.5 mb-4">
                     @foreach($pelanggan['gaya'] as $g)
                     <span class="bg-cur-teal-bg border border-cur-teal/25 text-cur-teal
                                  text-xs font-body font-semibold px-2.5 py-1 rounded-full">{{ $g }}</span>
                     @endforeach
                 </div>
-                <p class="text-xs font-body font-semibold text-crate-brown/60 uppercase tracking-wider mb-2">Warna Favorit</p>
-                <p class="text-crate-brown text-xs font-body mb-4">{{ implode(', ', $pelanggan['warna']) }}</p>
+                <p class="text-xs font-body font-semibold text-crate-text/60 uppercase tracking-wider mb-2">Warna Favorit</p>
+                <p class="text-crate-text text-xs font-body mb-4">{{ implode(', ', $pelanggan['warna']) }}</p>
                 @if(!empty($pelanggan['pantangan']))
                 <p class="text-xs font-body font-semibold text-red-500/70 uppercase tracking-wider mb-2">🚫 Pantangan</p>
                 <div class="flex flex-wrap gap-1.5">
@@ -125,22 +125,22 @@
             {{-- Keranjang --}}
             <div class="card-wood rounded-2xl p-5" id="sidebar-keranjang">
                 <div class="flex items-center justify-between mb-3">
-                    <h3 class="font-display text-sm text-crate-brown font-bold">🛒 Item Dipilih</h3>
+                    <h3 class="font-display text-sm text-crate-text font-bold">🛒 Item Dipilih</h3>
                     <span id="badge-count"
                           class="bg-crate-orange text-white text-xs font-body font-bold
                                  w-6 h-6 rounded-full flex items-center justify-center">0</span>
                 </div>
-                <div id="list-terpilih" class="space-y-2 text-xs font-body text-crate-stone min-h-[60px]">
+                <div id="list-terpilih" class="space-y-2 text-xs font-body text-crate-text/50 min-h-[60px]">
                     <p class="italic">Belum ada item dipilih.</p>
                 </div>
                 <div class="mt-3 pt-3 border-t border-crate-sand">
                     <div class="flex items-center justify-between text-xs font-body">
-                        <span class="text-crate-stone">Batas paket:</span>
-                        <span class="font-semibold text-crate-brown">
+                        <span class="text-crate-text/50">Batas paket:</span>
+                        <span class="font-semibold text-crate-text">
                             <span id="count-current">0</span> / {{ $maxItem }} item
                         </span>
                     </div>
-                    <div class="mt-2 h-2 bg-crate-sand rounded-full overflow-hidden">
+                    <div class="mt-2 h-2 bg-crate-accent rounded-full overflow-hidden">
                         <div id="progress-bar" class="h-full bg-crate-orange rounded-full transition-all duration-300"
                              style="width:0%"></div>
                     </div>
@@ -153,37 +153,37 @@
             <div class="card-wood rounded-2xl p-4 mb-4">
                 <div class="flex flex-col sm:flex-row gap-3">
                     <div class="relative flex-1">
-                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-crate-stone text-sm">🔍</span>
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-crate-text/50 text-sm">🔍</span>
                         <input type="text" id="input-search" placeholder="Cari nama item..."
                                class="pl-9 pr-4 py-2.5 rounded-xl border border-crate-sand bg-white text-sm font-body
-                                      text-crate-brown placeholder-crate-stone w-full transition-all">
+                                      text-crate-text placeholder-crate-stone w-full transition-all">
                     </div>
                     <select id="filter-kategori"
-                            class="border border-crate-sand bg-white rounded-xl px-3 py-2.5 text-sm font-body text-crate-brown transition-all">
+                            class="border border-crate-sand bg-white rounded-xl px-3 py-2.5 text-sm font-body text-crate-text transition-all">
                         <option value="">Semua Kategori</option>
                         @foreach(array_unique(array_column($items, 'kategori')) as $kat)
                         <option value="{{ $kat }}">{{ $kat }}</option>
                         @endforeach
                     </select>
                     <select id="filter-ukuran"
-                            class="border border-crate-sand bg-white rounded-xl px-3 py-2.5 text-sm font-body text-crate-brown transition-all">
+                            class="border border-crate-sand bg-white rounded-xl px-3 py-2.5 text-sm font-body text-crate-text transition-all">
                         <option value="">Semua Ukuran</option>
                         @foreach(array_unique(array_column($items, 'ukuran')) as $uk)
                         <option value="{{ $uk }}">{{ $uk }}</option>
                         @endforeach
                     </select>
                     <label class="flex items-center gap-2 cursor-pointer shrink-0 px-3 py-2.5 rounded-xl border border-crate-sand bg-white">
-                        <input type="checkbox" id="toggle-cocok" class="accent-crate-orange w-4 h-4 cursor-pointer">
-                        <span class="text-sm font-body text-crate-brown whitespace-nowrap">✨ Cocok Saja</span>
+                        <input type="checkbox" id="toggle-cocok" class="accent-crate-primary w-4 h-4 cursor-pointer">
+                        <span class="text-sm font-body text-crate-text whitespace-nowrap">✨ Cocok Saja</span>
                     </label>
                 </div>
             </div>
 
             <div class="flex items-center justify-between mb-3 px-1">
-                <p class="text-crate-stone text-xs font-body">
-                    Menampilkan <span id="count-tampil" class="font-semibold text-crate-brown">{{ count($items) }}</span> item
+                <p class="text-crate-text/50 text-xs font-body">
+                    Menampilkan <span id="count-tampil" class="font-semibold text-crate-text">{{ count($items) }}</span> item
                 </p>
-                <p class="text-crate-stone text-xs font-body">✨ = direkomendasikan sesuai preferensi</p>
+                <p class="text-crate-text/50 text-xs font-body">✨ = direkomendasikan sesuai preferensi</p>
             </div>
 
             <div id="grid-items" class="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -196,7 +196,7 @@
                      data-harga="{{ $item['harga'] }}"
                      data-cocok="{{ ($item['cocok'] ?? false) ? '1' : '0' }}"
                      onclick="toggleItem(this)">
-                    <div class="relative bg-crate-sand aspect-[4/3] flex items-center justify-center">
+                    <div class="relative bg-crate-accent aspect-[4/3] flex items-center justify-center">
                         @if($item['foto'])
                             <img src="{{ asset($item['foto']) }}" alt="{{ $item['nama'] }}" class="w-full h-full object-cover">
                         @else
@@ -209,24 +209,24 @@
                     </div>
                     <div class="p-4">
                         <div class="flex items-start justify-between gap-2 mb-2">
-                            <p class="font-body font-semibold text-crate-brown text-sm leading-tight">{{ $item['nama'] }}</p>
-                            <span class="shrink-0 text-crate-orange font-display font-bold text-sm">
+                            <p class="font-body font-semibold text-crate-text text-sm leading-tight">{{ $item['nama'] }}</p>
+                            <span class="shrink-0 text-crate-primary font-display font-bold text-sm">
                                 Rp {{ number_format($item['harga'], 0, ',', '.') }}
                             </span>
                         </div>
                         <div class="flex flex-wrap gap-1.5 mb-3">
-                            <span class="bg-crate-sand text-crate-brown text-xs font-body px-2 py-0.5 rounded-full">{{ $item['kategori'] }}</span>
-                            <span class="bg-crate-sand text-crate-brown text-xs font-body px-2 py-0.5 rounded-full">{{ $item['ukuran'] }}</span>
-                            <span class="bg-crate-sand text-crate-brown text-xs font-body px-2 py-0.5 rounded-full">{{ $item['warna'] }}</span>
+                            <span class="bg-crate-accent text-crate-text text-xs font-body px-2 py-0.5 rounded-full">{{ $item['kategori'] }}</span>
+                            <span class="bg-crate-accent text-crate-text text-xs font-body px-2 py-0.5 rounded-full">{{ $item['ukuran'] }}</span>
+                            <span class="bg-crate-accent text-crate-text text-xs font-body px-2 py-0.5 rounded-full">{{ $item['warna'] }}</span>
                         </div>
                         <div class="flex items-center justify-between">
                             <span class="text-xs font-body font-semibold px-2 py-0.5 rounded-full border
-                                         {{ $kondisiBadge[$item['kondisi']] ?? 'bg-crate-sand text-crate-stone border-crate-sand' }}">
+                                         {{ $kondisiBadge[$item['kondisi']] ?? 'bg-crate-accent text-crate-text/50 border-crate-sand' }}">
                                 {{ $item['kondisi'] }}
                             </span>
                             <div class="flex flex-wrap gap-1">
                                 @foreach($item['tag'] as $tag)
-                                <span class="text-xs font-body text-crate-stone">#{{ $tag }}</span>
+                                <span class="text-xs font-body text-crate-text/50">#{{ $tag }}</span>
                                 @endforeach
                             </div>
                         </div>
@@ -237,8 +237,8 @@
 
             <div id="empty-state" class="hidden text-center py-16">
                 <p class="text-4xl mb-3">🔍</p>
-                <p class="text-crate-brown font-display text-lg font-bold">Tidak ada item ditemukan</p>
-                <p class="text-crate-stone text-sm font-body mt-1">Coba ubah filter atau kata kunci pencarian.</p>
+                <p class="text-crate-text font-display text-lg font-bold">Tidak ada item ditemukan</p>
+                <p class="text-crate-text/50 text-sm font-body mt-1">Coba ubah filter atau kata kunci pencarian.</p>
             </div>
         </div>
     </div>
@@ -249,7 +249,7 @@
                 rounded-2xl px-5 py-4 shadow-xl flex items-center justify-between
                 translate-y-4 opacity-0 pointer-events-none transition-all duration-300">
         <div>
-            <p class="font-body text-xs text-crate-stone">Item dipilih</p>
+            <p class="font-body text-xs text-crate-text/50">Item dipilih</p>
             <p class="font-display font-bold text-crate-warm">
                 <span id="float-count">0</span> / {{ $maxItem }} item
             </p>
@@ -264,7 +264,7 @@
     {{-- ACTION FOOTER --}}
     <div class="flex items-center justify-between pt-2 pb-6">
         <a href="{{ url('/kurator/pelanggan/' . $pelanggan['id']) }}"
-           class="flex items-center gap-2 text-crate-stone font-body text-sm hover:text-crate-brown transition-colors">
+           class="flex items-center gap-2 text-crate-text/50 font-body text-sm hover:text-crate-text transition-colors">
             ← Kembali ke Profil
         </a>
         <button type="button" id="btn-lanjut-bottom" onclick="lanjutSusunBox()"
@@ -336,13 +336,13 @@
 
         const listEl = document.getElementById('list-terpilih');
         if (count === 0) {
-            listEl.innerHTML = '<p class="italic text-xs text-crate-stone">Belum ada item dipilih.</p>';
+            listEl.innerHTML = '<p class="italic text-xs text-crate-text/50">Belum ada item dipilih.</p>';
         } else {
             listEl.innerHTML = Object.entries(selected).map(function(entry) {
                 var hargaFormatted = new Intl.NumberFormat('id-ID').format(entry[1].harga);
                 return '<div class="flex items-center justify-between gap-2 py-1 border-b border-crate-sand/50">'
-                     + '<span class="text-crate-brown font-semibold truncate" style="max-width:130px">' + entry[1].nama + '</span>'
-                     + '<span class="text-crate-orange shrink-0">Rp ' + hargaFormatted + '</span>'
+                     + '<span class="text-crate-text font-semibold truncate" style="max-width:130px">' + entry[1].nama + '</span>'
+                     + '<span class="text-crate-primary shrink-0">Rp ' + hargaFormatted + '</span>'
                      + '</div>';
             }).join('');
         }

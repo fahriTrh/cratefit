@@ -74,7 +74,7 @@ $statusMap = [
 'ditolak' => ['label'=>'Ditolak', 'class'=>'bg-red-100 text-red-600 border border-red-200', 'dot'=>'bg-red-400'],
 ];
 
-$metodeMap = ['drop_off' => '📦 Drop Off', 'pickup' => '🏍️ Pickup'];
+$metodeMap = ['drop_off' => 'drop_off', 'pickup' => 'pickup'];
 
 $totalDiajukan = collect($returs)->where('status', 'diajukan')->count();
 $totalDiproses = collect($returs)->where('status', 'diproses')->count();
@@ -86,9 +86,11 @@ $totalDitolak = collect($returs)->where('status', 'ditolak')->count();
 
     {{-- HEADER --}}
     <div class="mb-6">
-        <p class="text-crate-orange font-script text-lg mb-0.5">Panel Admin</p>
-        <h1 class="font-display text-3xl text-crate-brown font-bold">↩️ Kelola Retur</h1>
-        <p class="text-crate-stone font-body mt-1 text-sm">
+        <p class="text-crate-primary font-script text-lg mb-0.5">Panel Admin</p>
+        <h1 class="font-display text-3xl text-crate-text font-bold flex items-center gap-2">
+            <i data-lucide="undo-2" class="w-7 h-7 text-crate-primary"></i> Kelola Retur
+        </h1>
+        <p class="text-crate-text/50 font-body mt-1 text-sm">
             Tinjau dan proses pengajuan retur dari pelanggan.
         </p>
     </div>
@@ -96,7 +98,7 @@ $totalDitolak = collect($returs)->where('status', 'ditolak')->count();
     {{-- FLASH --}}
     @if(session('success'))
     <div class="mb-5 p-4 bg-green-50 border border-green-200 rounded-2xl flex gap-3">
-        <span class="text-lg">✅</span>
+        <i data-lucide="check-circle" class="w-5 h-5 text-green-600 shrink-0"></i>
         <p class="text-green-800 font-body font-semibold text-sm">{{ session('success') }}</p>
     </div>
     @endif
@@ -104,15 +106,15 @@ $totalDitolak = collect($returs)->where('status', 'ditolak')->count();
     {{-- STATS --}}
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
         @foreach([
-        ['label'=>'Diajukan', 'value'=>$totalDiajukan, 'icon'=>'📥', 'color'=>'text-yellow-700'],
-        ['label'=>'Diproses', 'value'=>$totalDiproses, 'icon'=>'🔄', 'color'=>'text-blue-700'],
-        ['label'=>'Selesai', 'value'=>$totalSelesai, 'icon'=>'✅', 'color'=>'text-green-700'],
-        ['label'=>'Ditolak', 'value'=>$totalDitolak, 'icon'=>'❌', 'color'=>'text-red-600'],
+            ['label'=>'Diajukan', 'value'=>$totalDiajukan, 'icon'=>'inbox',        'color'=>'text-yellow-700'],
+            ['label'=>'Diproses', 'value'=>$totalDiproses, 'icon'=>'refresh-cw',   'color'=>'text-blue-700'],
+            ['label'=>'Selesai',  'value'=>$totalSelesai,  'icon'=>'badge-check',  'color'=>'text-green-700'],
+            ['label'=>'Ditolak',  'value'=>$totalDitolak,  'icon'=>'x-circle',     'color'=>'text-red-600'],
         ] as $stat)
         <div class="card-wood rounded-2xl p-4">
-            <span class="text-xl block mb-1">{{ $stat['icon'] }}</span>
-            <p class="font-display text-2xl font-bold {{ $stat['color'] }}">{{ $stat['value'] }}</p>
-            <p class="text-crate-stone text-xs font-body mt-0.5">{{ $stat['label'] }}</p>
+        <i data-lucide="{{ $stat['icon'] }}" class="w-5 h-5 {{ $stat['color'] }} mb-2"></i>
+        <p class="font-display text-2xl font-bold {{ $stat['color'] }}">{{ $stat['value'] }}</p>
+            <p class="text-crate-text/50 text-xs font-body mt-0.5">{{ $stat['label'] }}</p>
         </div>
         @endforeach
     </div>
@@ -121,15 +123,15 @@ $totalDitolak = collect($returs)->where('status', 'ditolak')->count();
     <div class="card-wood rounded-2xl p-4 mb-4">
         <div class="flex flex-col sm:flex-row gap-3">
             <div class="relative flex-1">
-                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-crate-stone text-sm">🔍</span>
+                <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-crate-text/40"></i>
                 <input type="text"
                     placeholder="Cari kode retur / nama pelanggan..."
-                    class="pl-9 pr-4 py-2.5 rounded-xl border border-crate-sand bg-white
-                              text-sm font-body text-crate-brown placeholder-crate-stone w-full transition-all"
+                    class="pl-9 pr-4 py-2.5 rounded-xl border border-crate-accent bg-white
+                              text-sm font-body text-crate-text placeholder-crate-stone w-full transition-all"
                     oninput="filterRetur(this.value)">
             </div>
-            <select class="border border-crate-sand bg-white rounded-xl px-3 py-2.5
-                           text-sm font-body text-crate-brown transition-all"
+            <select class="border border-crate-accent bg-white rounded-xl px-3 py-2.5
+                           text-sm font-body text-crate-text transition-all"
                 onchange="filterStatus(this.value)">
                 <option value="">Semua Status</option>
                 <option value="diajukan">Diajukan</option>
@@ -137,8 +139,8 @@ $totalDitolak = collect($returs)->where('status', 'ditolak')->count();
                 <option value="selesai">Selesai</option>
                 <option value="ditolak">Ditolak</option>
             </select>
-            <select class="border border-crate-sand bg-white rounded-xl px-3 py-2.5
-                           text-sm font-body text-crate-brown transition-all">
+            <select class="border border-crate-accent bg-white rounded-xl px-3 py-2.5
+                           text-sm font-body text-crate-text transition-all">
                 <option value="">Semua Metode</option>
                 <option value="drop_off">Drop Off</option>
                 <option value="pickup">Pickup</option>
@@ -149,16 +151,16 @@ $totalDitolak = collect($returs)->where('status', 'ditolak')->count();
     {{-- TABEL RETUR --}}
     <div class="card-wood rounded-2xl overflow-hidden">
 
-        <div class="px-6 py-4 border-b border-crate-sand flex items-center justify-between">
-            <h2 class="font-display text-base font-bold text-crate-brown">Daftar Pengajuan Retur</h2>
-            <span class="text-crate-stone text-xs font-body" id="retur-count">{{ count($returs) }} pengajuan</span>
+        <div class="px-6 py-4 border-b border-crate-accent flex items-center justify-between">
+            <h2 class="font-display text-base font-bold text-crate-text">Daftar Pengajuan Retur</h2>
+            <span class="text-crate-text/50 text-xs font-body" id="retur-count">{{ count($returs) }} pengajuan</span>
         </div>
 
-        <div class="divide-y divide-crate-sand/60" id="retur-list">
+        <div class="divide-y divide-crate-accent/60" id="retur-list">
             @forelse($returs as $r)
             @php $rs = $statusMap[$r['status']] ?? $statusMap['diajukan']; @endphp
 
-            <div class="retur-row px-6 py-5 hover:bg-crate-cream/40 transition-colors"
+            <div class="retur-row px-6 py-5 hover:bg-crate-accent/40 transition-colors"
                 data-status="{{ $r['status'] }}"
                 data-nama="{{ strtolower($r['pelanggan']['nama']) }}"
                 data-kode="{{ strtolower($r['kode']) }}">
@@ -176,48 +178,49 @@ $totalDitolak = collect($returs)->where('status', 'ditolak')->count();
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
                             <div>
                                 <div class="flex items-center gap-2 flex-wrap mb-0.5">
-                                    <p class="font-body font-semibold text-crate-brown text-sm">{{ $r['kode'] }}</p>
+                                    <p class="font-body font-semibold text-crate-text text-sm">{{ $r['kode'] }}</p>
                                     <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full
                                                  text-xs font-body font-semibold {{ $rs['class'] }}">
                                         <span class="w-1.5 h-1.5 rounded-full {{ $rs['dot'] }}"></span>
                                         {{ $rs['label'] }}
                                     </span>
                                 </div>
-                                <p class="text-crate-stone text-xs font-body">
+                                <p class="text-crate-text/50 text-xs font-body">
                                     {{ $r['pelanggan']['nama'] }}
-                                    <span class="text-crate-stone/60">·</span>
+                                    <span class="text-crate-text/50/60">·</span>
                                     {{ $r['pelanggan']['email'] }}
                                 </p>
                             </div>
                             <div class="text-left sm:text-right shrink-0">
-                                <p class="text-crate-stone text-xs font-body">Box #{{ $r['box'] }}</p>
-                                <p class="text-crate-brown text-xs font-body font-medium">{{ $r['tanggal'] }}</p>
+                                <p class="text-crate-text/50 text-xs font-body">Box #{{ $r['box'] }}</p>
+                                <p class="text-crate-text text-xs font-body font-medium">{{ $r['tanggal'] }}</p>
                             </div>
                         </div>
 
                         {{-- Item + Alasan + Metode --}}
                         <div class="flex flex-wrap gap-2 mb-3">
                             @foreach($r['items'] as $item)
-                            <span class="inline-flex items-center gap-1 bg-white border border-crate-sand
-                                         rounded-lg px-2.5 py-1 text-xs font-body text-crate-brown">
-                                👕 {{ $item }}
+                            <span class="inline-flex items-center gap-1.5 bg-white border border-crate-accent
+                                        rounded-lg px-2.5 py-1 text-xs font-body text-crate-text">
+                                <i data-lucide="shirt" class="w-3 h-3 shrink-0 text-crate-text/40"></i> {{ $item }}
                             </span>
                             @endforeach
-                            <span class="inline-flex items-center bg-crate-sand/60 rounded-lg px-2.5 py-1
-                                         text-xs font-body text-crate-stone">
+                            <span class="inline-flex items-center bg-crate-accent/60 rounded-lg px-2.5 py-1
+                                         text-xs font-body text-crate-text/50">
                                 {{ $r['alasan'] }}
                             </span>
-                            <span class="inline-flex items-center bg-crate-cream border border-crate-sand/80
-                                         rounded-lg px-2.5 py-1 text-xs font-body text-crate-brown">
-                                {{ $metodeMap[$r['metode']] ?? $r['metode'] }}
+                            <span class="inline-flex items-center gap-1.5 bg-crate-accent border border-crate-accent/80
+                                        rounded-lg px-2.5 py-1 text-xs font-body text-crate-text">
+                                <i data-lucide="{{ $r['metode'] === 'pickup' ? 'bike' : 'package' }}" class="w-3 h-3 shrink-0"></i>
+                                {{ $r['metode'] === 'pickup' ? 'Pickup' : 'Drop Off' }}
                             </span>
                         </div>
 
                         {{-- Catatan pelanggan --}}
                         @if($r['catatan'])
-                        <div class="bg-crate-cream border border-crate-sand rounded-xl px-4 py-2 mb-3">
-                            <p class="text-crate-stone text-xs font-body">
-                                <span class="font-semibold text-crate-brown">Catatan:</span>
+                        <div class="bg-crate-accent border border-crate-accent rounded-xl px-4 py-2 mb-3">
+                            <p class="text-crate-text/50 text-xs font-body">
+                                <span class="font-semibold text-crate-text">Catatan:</span>
                                 {{ $r['catatan'] }}
                             </p>
                         </div>
@@ -233,7 +236,8 @@ $totalDitolak = collect($returs)->where('status', 'ditolak')->count();
                                     class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl
                                                bg-blue-50 border border-blue-200 text-blue-700
                                                text-xs font-body font-semibold hover:bg-blue-100 transition-colors">
-                                    🔄 Proses
+                                    <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Proses
+
                                 </button>
                             </form>
                             {{-- Assign Kurir — hanya untuk metode pickup --}}
@@ -242,7 +246,7 @@ $totalDitolak = collect($returs)->where('status', 'ditolak')->count();
                                 @csrf
                                 @method('PATCH')
                                 <select name="kurir_id" required
-                                    class="border border-crate-sand rounded-xl px-2 py-1.5 text-xs font-body text-crate-brown bg-white">
+                                    class="border border-crate-accent rounded-xl px-2 py-1.5 text-xs font-body text-crate-text bg-white">
                                     <option value="">Pilih Kurir</option>
                                     @foreach($kurirList as $kurir)
                                     <option value="{{ $kurir->id }}">{{ $kurir->name }}</option>
@@ -250,14 +254,14 @@ $totalDitolak = collect($returs)->where('status', 'ditolak')->count();
                                 </select>
                                 <button type="submit"
                                     class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl
-                   bg-crate-amber/20 border border-crate-amber text-crate-brown
+                   bg-crate-amber/20 border border-crate-amber text-crate-text
                    text-xs font-body font-semibold hover:bg-crate-amber/30 transition-colors">
-                                    🏍️ Assign Kurir
+                                    <i data-lucide="bike" class="w-3.5 h-3.5"></i> Assign Kurir
                                 </button>
                             </form>
                             @elseif($r['kurir'])
-                            <span class="text-xs font-body text-crate-stone">
-                                🏍️ Kurir: <span class="text-crate-brown font-semibold">{{ $r['kurir'] }}</span>
+                            <span class="text-xs font-body text-crate-text/50">
+                                🏍️ Kurir: <span class="text-crate-text font-semibold">{{ $r['kurir'] }}</span>
                                 @if($r['tanggal_dijemput'])
                                 · <span class="text-green-600">Dijemput {{ $r['tanggal_dijemput'] }}</span>
                                 @endif
@@ -270,15 +274,18 @@ $totalDitolak = collect($returs)->where('status', 'ditolak')->count();
                                     class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl
                                                bg-green-50 border border-green-200 text-green-700
                                                text-xs font-body font-semibold hover:bg-green-100 transition-colors">
-                                    ✅ Selesaikan
-                                </button>
+                                    
+                                               <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Selesaikan
+
+                                            </button>
                             </form>
                             <button type="button"
                                 onclick="openTolakModal({{ $r['id'] }}, '{{ $r['kode'] }}')"
                                 class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl
                                            bg-red-50 border border-red-200 text-red-600
                                            text-xs font-body font-semibold hover:bg-red-100 transition-colors">
-                                ❌ Tolak
+                                           <i data-lucide="x-circle" class="w-3.5 h-3.5"></i> Tolak
+
                             </button>
                         </div>
 
@@ -291,11 +298,11 @@ $totalDitolak = collect($returs)->where('status', 'ditolak')->count();
                                     class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl
                                                bg-green-50 border border-green-200 text-green-700
                                                text-xs font-body font-semibold hover:bg-green-100 transition-colors">
-                                    ✅ Tandai Selesai
+                                    <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Tandai Selesai
                                 </button>
                             </form>
                             @if($r['kurir'])
-                            <span class="text-xs font-body text-crate-stone">
+                            <span class="text-xs font-body text-crate-text/50">
                                 🏍️ {{ $r['kurir'] }}
                                 @if($r['tanggal_dijemput'])
                                 · <span class="text-green-600">Dijemput {{ $r['tanggal_dijemput'] }}</span>
@@ -312,25 +319,25 @@ $totalDitolak = collect($returs)->where('status', 'ditolak')->count();
             </div>
             @empty
             <div class="px-6 py-16 text-center">
-                <p class="text-4xl mb-3">📭</p>
-                <p class="text-crate-brown font-display text-lg font-bold">Belum ada pengajuan retur</p>
-                <p class="text-crate-stone text-sm font-body mt-1">Pengajuan dari pelanggan akan muncul di sini.</p>
+                <i data-lucide="inbox" class="w-12 h-12 text-crate-text/20 mx-auto mb-3"></i>
+                <p class="text-crate-text font-display text-lg font-bold">Belum ada pengajuan retur</p>
+                <p class="text-crate-text/50 text-sm font-body mt-1">Pengajuan dari pelanggan akan muncul di sini.</p>
             </div>
             @endforelse
         </div>
 
         {{-- Pagination --}}
-        <div class="px-6 py-4 border-t border-crate-sand flex items-center justify-between">
-            <p class="text-crate-stone text-xs font-body">Halaman 1 dari 1</p>
+        <div class="px-6 py-4 border-t border-crate-accent flex items-center justify-between">
+            <p class="text-crate-text/50 text-xs font-body">Halaman 1 dari 1</p>
             <div class="flex gap-2">
                 <button disabled
-                    class="px-3 py-1.5 rounded-lg border border-crate-sand text-xs font-body
-                               text-crate-stone disabled:opacity-40">
+                    class="px-3 py-1.5 rounded-lg border border-crate-accent text-xs font-body
+                               text-crate-text/50 disabled:opacity-40">
                     ← Sebelumnya
                 </button>
                 <button disabled
-                    class="px-3 py-1.5 rounded-lg border border-crate-sand text-xs font-body
-                               text-crate-stone disabled:opacity-40">
+                    class="px-3 py-1.5 rounded-lg border border-crate-accent text-xs font-body
+                               text-crate-text/50 disabled:opacity-40">
                     Berikutnya →
                 </button>
             </div>
@@ -344,34 +351,34 @@ $totalDitolak = collect($returs)->where('status', 'ditolak')->count();
     class="hidden fixed inset-0 z-50 flex items-center justify-center p-4"
     style="background:rgba(0,0,0,0.5);backdrop-filter:blur(4px)">
     <div class="card-wood rounded-2xl p-6 w-full max-w-md">
-        <h3 class="font-display text-xl text-crate-brown font-bold mb-1">Tolak Pengajuan Retur</h3>
-        <p class="text-crate-stone text-xs font-body mb-5" id="modal-kode-label">—</p>
+        <h3 class="font-display text-xl text-crate-text font-bold mb-1">Tolak Pengajuan Retur</h3>
+        <p class="text-crate-text/50 text-xs font-body mb-5" id="modal-kode-label">—</p>
 
         <form id="form-tolak" method="POST">
             @csrf
             @method('PATCH')
 
-            <label class="block text-xs font-body font-semibold text-crate-brown/70 uppercase tracking-wider mb-1.5">
+            <label class="block text-xs font-body font-semibold text-crate-text/70 uppercase tracking-wider mb-1.5">
                 Alasan Penolakan <span class="text-red-500">*</span>
             </label>
             <textarea name="catatan_admin"
                 rows="3"
                 required
                 placeholder="cth: Pakaian terlihat sudah dipakai, label sudah lepas..."
-                class="w-full border border-crate-sand rounded-xl px-4 py-3 text-sm font-body
-                             text-crate-brown bg-crate-cream placeholder-crate-stone resize-none mb-5"></textarea>
+                class="w-full border border-crate-accent rounded-xl px-4 py-3 text-sm font-body
+                             text-crate-text bg-crate-accent placeholder-crate-stone resize-none mb-5"></textarea>
 
             <div class="flex gap-3">
                 <button type="button"
                     onclick="closeModal()"
-                    class="flex-1 border border-crate-sand text-crate-brown font-body font-semibold
-                               py-3 rounded-2xl text-sm hover:bg-crate-sand transition-colors">
+                    class="flex-1 border border-crate-accent text-crate-text font-body font-semibold
+                               py-3 rounded-2xl text-sm hover:bg-crate-accent transition-colors">
                     Batal
                 </button>
                 <button type="submit"
                     class="flex-1 bg-red-500 text-white font-body font-semibold
                                py-3 rounded-2xl text-sm hover:bg-red-600 transition-colors">
-                    ❌ Tolak Retur
+                    <i data-lucide="x-circle" class="w-4 h-4"></i> Tolak Retur
                 </button>
             </div>
         </form>

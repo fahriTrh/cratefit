@@ -36,9 +36,9 @@ $statusLabel = [
     {{-- HEADER --}}
     <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-            <p class="text-crate-orange font-script text-lg mb-0.5">Panel Admin</p>
-            <h1 class="font-display text-3xl text-crate-brown font-bold">Inventory Thrift</h1>
-            <p class="text-crate-stone font-body mt-1 text-sm">
+            <p class="text-crate-primary font-script text-lg mb-0.5">Panel Admin</p>
+            <h1 class="font-display text-3xl text-crate-text font-bold">Inventory Thrift</h1>
+            <p class="text-crate-text/50 font-body mt-1 text-sm">
                 Kelola stok item thrift yang siap dikurasi dan dikirimkan ke pelanggan.
             </p>
         </div>
@@ -53,18 +53,18 @@ $statusLabel = [
     <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-6">
         @php
         $stats = [
-        ['label' => 'Total Unit Stok', 'value' => $totalItem, 'icon' => '👕', 'color' => 'text-crate-brown'],
-        ['label' => 'Item Tersedia', 'value' => $totalTersedia, 'icon' => '✅', 'color' => 'text-emerald-600'],
-        ['label' => 'Sedang Dikurasi', 'value' => $totalDikurasi, 'icon' => '✂️', 'color' => 'text-violet-600'],
-        ['label' => 'Stok Habis', 'value' => $totalHabis, 'icon' => '⚠️', 'color' => 'text-red-500'],
-        ['label' => 'Nilai Inventory', 'value' => 'Rp ' . number_format($nilaiInventory, 0, ',', '.'), 'icon' => '💰', 'color' => 'text-amber-600'],
+            ['label' => 'Total Unit Stok',  'value' => $totalItem,      'icon' => 'layers',     'color' => 'text-crate-text'],
+            ['label' => 'Item Tersedia',    'value' => $totalTersedia,  'icon' => 'badge-check', 'color' => 'text-emerald-600'],
+            ['label' => 'Sedang Dikurasi',  'value' => $totalDikurasi,  'icon' => 'scissors',   'color' => 'text-violet-600'],
+            ['label' => 'Stok Habis',       'value' => $totalHabis,     'icon' => 'alert-circle','color' => 'text-red-500'],
+            ['label' => 'Nilai Inventory',  'value' => 'Rp ' . number_format($nilaiInventory, 0, ',', '.'), 'icon' => 'wallet', 'color' => 'text-amber-600'],
         ];
         @endphp
         @foreach($stats as $stat)
         <div class="card-wood rounded-2xl p-4">
-            <span class="text-xl block mb-1">{{ $stat['icon'] }}</span>
-            <p class="font-display text-lg font-bold {{ $stat['color'] }} leading-tight">{{ $stat['value'] }}</p>
-            <p class="text-crate-stone text-xs font-body mt-0.5">{{ $stat['label'] }}</p>
+        <i data-lucide="{{ $stat['icon'] }}" class="w-5 h-5 {{ $stat['color'] }} mb-2"></i>
+        <p class="font-display text-lg font-bold {{ $stat['color'] }} leading-tight">{{ $stat['value'] }}</p>
+            <p class="text-crate-text/50 text-xs font-body mt-0.5">{{ $stat['label'] }}</p>
         </div>
         @endforeach
     </div>
@@ -75,18 +75,18 @@ $statusLabel = [
 
             {{-- Search --}}
             <div class="relative flex-1">
-                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-crate-stone text-sm">🔍</span>
+                <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-crate-text/40"></i>
                 <input type="text"
                     id="search-input"
                     placeholder="Cari nama item, kode, brand..."
-                    class="pl-9 pr-4 py-2.5 rounded-xl border border-crate-sand bg-white
-                              text-sm font-body text-crate-brown placeholder-crate-stone w-full transition-all">
+                    class="pl-9 pr-4 py-2.5 rounded-xl border border-crate-accent bg-white
+                              text-sm font-body text-crate-text placeholder-crate-stone w-full transition-all">
             </div>
 
             {{-- Filter Kategori --}}
             <select id="filter-kategori"
-                class="border border-crate-sand bg-white rounded-xl px-3 py-2.5
-                           text-sm font-body text-crate-brown transition-all">
+                class="border border-crate-accent bg-white rounded-xl px-3 py-2.5
+                           text-sm font-body text-crate-text transition-all">
                 <option value="">Semua Kategori</option>
                 <option value="Atasan">Atasan</option>
                 <option value="Bawahan">Bawahan</option>
@@ -96,8 +96,8 @@ $statusLabel = [
 
             {{-- Filter Ukuran --}}
             <select id="filter-ukuran"
-                class="border border-crate-sand bg-white rounded-xl px-3 py-2.5
-                           text-sm font-body text-crate-brown transition-all">
+                class="border border-crate-accent bg-white rounded-xl px-3 py-2.5
+                           text-sm font-body text-crate-text transition-all">
                 <option value="">Semua Ukuran</option>
                 <option value="XS">XS</option>
                 <option value="S">S</option>
@@ -109,8 +109,8 @@ $statusLabel = [
 
             {{-- Filter Status --}}
             <select id="filter-status"
-                class="border border-crate-sand bg-white rounded-xl px-3 py-2.5
-                           text-sm font-body text-crate-brown transition-all">
+                class="border border-crate-accent bg-white rounded-xl px-3 py-2.5
+                           text-sm font-body text-crate-text transition-all">
                 <option value="">Semua Status</option>
                 <option value="tersedia">Tersedia</option>
                 <option value="dikurasi">Dikurasi</option>
@@ -119,8 +119,8 @@ $statusLabel = [
 
             {{-- Urutkan --}}
             <select id="filter-urut"
-                class="border border-crate-sand bg-white rounded-xl px-3 py-2.5
-                           text-sm font-body text-crate-brown transition-all">
+                class="border border-crate-accent bg-white rounded-xl px-3 py-2.5
+                           text-sm font-body text-crate-text transition-all">
                 <option value="terbaru">Terbaru Masuk</option>
                 <option value="harga-naik">Harga ↑</option>
                 <option value="harga-turun">Harga ↓</option>
@@ -136,15 +136,15 @@ $statusLabel = [
             $allTags = collect($items)->pluck('tags')->flatten()->unique()->values();
             @endphp
             <button onclick="filterTag('')"
-                class="tag-quick px-3 py-1 rounded-full border border-crate-sand text-xs font-body
-                           text-crate-stone hover:border-crate-orange hover:text-crate-orange transition-colors
+                class="tag-quick px-3 py-1 rounded-full border border-crate-accent text-xs font-body
+                           text-crate-text/50 hover:border-crate-orange hover:text-crate-primary transition-colors
                            bg-white selected" data-tag="">
                 Semua
             </button>
             @foreach($allTags as $tag)
             <button onclick="filterTag('{{ $tag }}')"
-                class="tag-quick px-3 py-1 rounded-full border border-crate-sand text-xs font-body
-                           text-crate-stone hover:border-crate-orange hover:text-crate-orange transition-colors
+                class="tag-quick px-3 py-1 rounded-full border border-crate-accent text-xs font-body
+                           text-crate-text/50 hover:border-crate-orange hover:text-crate-primary transition-colors
                            bg-white" data-tag="{{ $tag }}">
                 #{{ $tag }}
             </button>
@@ -155,23 +155,23 @@ $statusLabel = [
     {{-- TABEL INVENTORY --}}
     <div class="card-wood rounded-2xl overflow-hidden">
 
-        <div class="px-6 py-4 border-b border-crate-sand flex items-center justify-between">
-            <h2 class="font-display text-base font-bold text-crate-brown">Daftar Item Thrift</h2>
+        <div class="px-6 py-4 border-b border-crate-accent flex items-center justify-between">
+            <h2 class="font-display text-base font-bold text-crate-text">Daftar Item Thrift</h2>
             <div class="flex items-center gap-3">
-                <span class="text-crate-stone text-xs font-body" id="count-label">
+                <span class="text-crate-text/50 text-xs font-body" id="count-label">
                     {{ count($items) }} item terdaftar
                 </span>
                 {{-- Toggle view --}}
-                <div class="flex border border-crate-sand rounded-lg overflow-hidden">
+                <div class="flex border border-crate-accent rounded-lg overflow-hidden">
                     <button id="btn-view-table"
                         onclick="setView('table')"
-                        class="px-3 py-1.5 text-xs font-body bg-crate-orange text-white transition-colors"
+                        style="background:#D8A98C;color:white" class="px-3 py-1.5 text-xs font-body transition-colors"
                         title="Tampilan tabel">
                         ☰
                     </button>
                     <button id="btn-view-grid"
                         onclick="setView('grid')"
-                        class="px-3 py-1.5 text-xs font-body text-crate-stone hover:bg-crate-sand transition-colors"
+                        class="px-3 py-1.5 text-xs font-body text-crate-text/50 hover:bg-crate-accent transition-colors"
                         title="Tampilan grid">
                         ⊞
                     </button>
@@ -184,20 +184,20 @@ $statusLabel = [
             <div class="overflow-x-auto">
                 <table class="w-full text-sm font-body">
                     <thead>
-                        <tr class="bg-crate-cream border-b border-crate-sand">
-                            <th class="text-left px-6 py-3 text-crate-stone text-xs font-semibold uppercase tracking-wider">Item</th>
-                            <th class="text-left px-4 py-3 text-crate-stone text-xs font-semibold uppercase tracking-wider hidden md:table-cell">Kategori</th>
-                            <th class="text-center px-4 py-3 text-crate-stone text-xs font-semibold uppercase tracking-wider">Ukuran</th>
-                            <th class="text-left px-4 py-3 text-crate-stone text-xs font-semibold uppercase tracking-wider hidden sm:table-cell">Kondisi</th>
-                            <th class="text-right px-4 py-3 text-crate-stone text-xs font-semibold uppercase tracking-wider">Harga</th>
-                            <th class="text-center px-4 py-3 text-crate-stone text-xs font-semibold uppercase tracking-wider">Stok</th>
-                            <th class="text-center px-4 py-3 text-crate-stone text-xs font-semibold uppercase tracking-wider">Status</th>
-                            <th class="text-center px-4 py-3 text-crate-stone text-xs font-semibold uppercase tracking-wider">Aksi</th>
+                        <tr class="bg-crate-accent border-b border-crate-accent">
+                            <th class="text-left px-6 py-3 text-crate-text/50 text-xs font-semibold uppercase tracking-wider">Item</th>
+                            <th class="text-left px-4 py-3 text-crate-text/50 text-xs font-semibold uppercase tracking-wider hidden md:table-cell">Kategori</th>
+                            <th class="text-center px-4 py-3 text-crate-text/50 text-xs font-semibold uppercase tracking-wider">Ukuran</th>
+                            <th class="text-left px-4 py-3 text-crate-text/50 text-xs font-semibold uppercase tracking-wider hidden sm:table-cell">Kondisi</th>
+                            <th class="text-right px-4 py-3 text-crate-text/50 text-xs font-semibold uppercase tracking-wider">Harga</th>
+                            <th class="text-center px-4 py-3 text-crate-text/50 text-xs font-semibold uppercase tracking-wider">Stok</th>
+                            <th class="text-center px-4 py-3 text-crate-text/50 text-xs font-semibold uppercase tracking-wider">Status</th>
+                            <th class="text-center px-4 py-3 text-crate-text/50 text-xs font-semibold uppercase tracking-wider">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody id="tbody-items" class="divide-y divide-crate-sand/60">
+                    <tbody id="tbody-items" class="divide-y divide-crate-accent/60">
                         @forelse($items as $item)
-                        <tr class="hover:bg-crate-cream/40 transition-colors group item-row"
+                        <tr class="hover:bg-crate-accent/40 transition-colors group item-row"
                             data-nama="{{ strtolower($item['nama']) }}"
                             data-kode="{{ strtolower($item['kode']) }}"
                             data-brand="{{ strtolower($item['brand']) }}"
@@ -213,7 +213,7 @@ $statusLabel = [
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
                                     {{-- Foto placeholder --}}
-                                    <div class="w-10 h-10 rounded-xl bg-crate-sand/70 border border-crate-sand
+                                    <div class="w-10 h-10 rounded-xl bg-crate-accent/70 border border-crate-accent
                                                 flex items-center justify-center text-base shrink-0 overflow-hidden">
                                         @if($item['foto'])
                                         <img src="{{ asset($item['foto']) }}" alt="{{ $item['nama'] }}" class="w-full h-full object-cover">
@@ -222,13 +222,13 @@ $statusLabel = [
                                         @endif
                                     </div>
                                     <div class="min-w-0">
-                                        <p class="font-semibold text-crate-brown text-sm truncate max-w-[160px]">
+                                        <p class="font-semibold text-crate-text text-sm truncate max-w-[160px]">
                                             {{ $item['nama'] }}
                                         </p>
                                         <div class="flex items-center gap-1.5 flex-wrap mt-0.5">
-                                            <span class="text-crate-stone text-xs">{{ $item['kode'] }}</span>
+                                            <span class="text-crate-text/50 text-xs">{{ $item['kode'] }}</span>
                                             @if($item['brand'] !== 'Unbranded')
-                                            <span class="text-xs bg-crate-sand text-crate-brown px-1.5 py-0.5 rounded font-semibold">
+                                            <span class="text-xs bg-crate-accent text-crate-text px-1.5 py-0.5 rounded font-semibold">
                                                 {{ $item['brand'] }}
                                             </span>
                                             @endif
@@ -239,14 +239,14 @@ $statusLabel = [
 
                             {{-- Kategori --}}
                             <td class="px-4 py-4 hidden md:table-cell">
-                                <p class="text-crate-brown text-xs">{{ $item['kategori'] }}</p>
-                                <p class="text-crate-stone text-xs mt-0.5">{{ $item['jenis'] }}</p>
+                                <p class="text-crate-text text-xs">{{ $item['kategori'] }}</p>
+                                <p class="text-crate-text/50 text-xs mt-0.5">{{ $item['jenis'] }}</p>
                             </td>
 
                             {{-- Ukuran --}}
                             <td class="px-4 py-4 text-center">
-                                <span class="font-display font-bold text-crate-brown text-sm
-                                             bg-crate-cream border border-crate-sand px-2.5 py-1 rounded-lg">
+                                <span class="font-display font-bold text-crate-text text-sm
+                                             bg-crate-accent border border-crate-accent px-2.5 py-1 rounded-lg">
                                     {{ $item['ukuran'] }}
                                 </span>
                             </td>
@@ -254,14 +254,14 @@ $statusLabel = [
                             {{-- Kondisi --}}
                             <td class="px-4 py-4 hidden sm:table-cell">
                                 <span class="text-xs font-body font-semibold px-2 py-0.5 rounded-full border
-                                             {{ $kondisiColor[$item['kondisi']] ?? 'bg-crate-sand text-crate-stone border-crate-sand' }}">
+                                             {{ $kondisiColor[$item['kondisi']] ?? 'bg-crate-accent text-crate-text/50 border-crate-accent' }}">
                                     {{ $item['kondisi'] }}
                                 </span>
                             </td>
 
                             {{-- Harga --}}
                             <td class="px-4 py-4 text-right">
-                                <span class="font-bold text-crate-orange text-sm">
+                                <span class="font-bold text-crate-primary text-sm">
                                     Rp {{ number_format($item['harga'], 0, ',', '.') }}
                                 </span>
                             </td>
@@ -269,7 +269,7 @@ $statusLabel = [
                             {{-- Stok --}}
                             <td class="px-4 py-4 text-center">
                                 <span class="font-display font-bold text-lg
-                                             {{ $item['stok'] === 0 ? 'text-red-500' : ($item['stok'] === 1 ? 'text-amber-500' : 'text-crate-brown') }}">
+                                             {{ $item['stok'] === 0 ? 'text-red-500' : ($item['stok'] === 1 ? 'text-amber-500' : 'text-crate-text') }}">
                                     {{ $item['stok'] }}
                                 </span>
                             </td>
@@ -289,9 +289,9 @@ $statusLabel = [
                                     {{-- Edit --}}
                                     <button onclick="openModalEdit({{ json_encode($item) }})"
                                         title="Edit"
-                                        class="w-8 h-8 rounded-lg border border-crate-sand flex items-center justify-center
-                                                   text-crate-stone hover:text-crate-brown hover:bg-crate-sand transition-colors text-sm">
-                                        ✏️
+                                        class="w-8 h-8 rounded-lg border border-crate-accent flex items-center justify-center
+                                            text-crate-text/40 hover:text-crate-text hover:bg-crate-accent transition-colors">
+                                        <i data-lucide="pencil" class="w-4 h-4"></i>
                                     </button>
 
                                     {{-- Tambah Stok --}}
@@ -302,8 +302,8 @@ $statusLabel = [
                                         <input type="hidden" name="aksi" value="tambah">
                                         <button type="submit"
                                             title="Tambah stok (+1)"
-                                            class="w-8 h-8 rounded-lg border border-crate-sand flex items-center justify-center
-                                                   text-crate-stone hover:text-crate-brown hover:bg-crate-sand transition-colors text-sm">
+                                            class="w-8 h-8 rounded-lg border border-crate-accent flex items-center justify-center
+                                                   text-crate-text/50 hover:text-crate-text hover:bg-crate-accent transition-colors text-sm">
                                             +
                                         </button>
                                     </form>
@@ -316,8 +316,8 @@ $statusLabel = [
                                         @method('DELETE')
                                         <button type="submit"
                                             title="Hapus"
-                                            class="w-8 h-8 rounded-lg border border-crate-sand flex items-center justify-center
-                                                   text-crate-stone hover:text-crate-brown hover:bg-crate-sand transition-colors text-sm">
+                                            class="w-8 h-8 rounded-lg border border-crate-accent flex items-center justify-center
+                                                   text-crate-text/50 hover:text-crate-text hover:bg-crate-accent transition-colors text-sm">
                                             🗑
                                         </button>
                                     </form>
@@ -328,9 +328,9 @@ $statusLabel = [
                         @empty
                         <tr>
                             <td colspan="8" class="px-6 py-16 text-center">
-                                <p class="text-4xl mb-3">👕</p>
-                                <p class="text-crate-brown font-display text-lg font-bold">Belum ada item</p>
-                                <p class="text-crate-stone text-sm font-body mt-1">
+                                <i data-lucide="shirt" class="w-12 h-12 text-crate-text/20 mx-auto mb-3"></i>
+                                <p class="text-crate-text font-display text-lg font-bold">Belum ada item</p>
+                                <p class="text-crate-text/50 text-sm font-body mt-1">
                                     Tambahkan item thrift untuk mulai mengkurasi box.
                                 </p>
                                 <button onclick="openModal('modal-tambah')"
@@ -350,7 +350,7 @@ $statusLabel = [
         <div id="view-grid" class="hidden p-5">
             <div id="grid-items" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                 @foreach($items as $item)
-                <div class="grid-item-card border border-crate-sand rounded-2xl overflow-hidden bg-white
+                <div class="grid-item-card border border-crate-accent rounded-2xl overflow-hidden bg-white
                             hover:shadow-md hover:border-crate-stone/40 transition-all group
                             flex flex-col"
                     data-nama="{{ strtolower($item['nama']) }}"
@@ -365,13 +365,13 @@ $statusLabel = [
                     data-masuk="{{ $item['masuk'] }}">
 
                     {{-- Foto --}}
-                    <div class="aspect-square bg-crate-cream/80 flex items-center justify-center
-                                text-5xl border-b border-crate-sand relative">
+                    <div class="aspect-square bg-crate-accent/80 flex items-center justify-center
+                                text-5xl border-b border-crate-accent relative">
                         @if($item['foto'])
                         <img src="{{ asset($item['foto']) }}" alt="{{ $item['nama'] }}"
                             class="w-full h-full object-cover">
                         @else
-                        👕
+                        <i data-lucide="shirt" class="w-5 h-5 text-crate-text/20"></i>
                         @endif
                         {{-- Status badge overlay --}}
                         <span class="absolute top-2 right-2 text-xs font-body font-semibold
@@ -391,24 +391,24 @@ $statusLabel = [
 
                     {{-- Info --}}
                     <div class="p-3 flex-1 flex flex-col">
-                        <p class="font-body font-semibold text-crate-brown text-xs leading-tight truncate">
+                        <p class="font-body font-semibold text-crate-text text-xs leading-tight truncate">
                             {{ $item['nama'] }}
                         </p>
-                        <p class="text-crate-stone text-xs mt-0.5">{{ $item['kode'] }} · {{ $item['ukuran'] }}</p>
+                        <p class="text-crate-text/50 text-xs mt-0.5">{{ $item['kode'] }} · {{ $item['ukuran'] }}</p>
                         <div class="mt-auto pt-2 flex items-center justify-between">
-                            <span class="font-bold text-crate-orange text-sm">
+                            <span class="font-bold text-crate-primary text-sm">
                                 Rp {{ number_format($item['harga'], 0, ',', '.') }}
                             </span>
-                            <span class="font-display font-bold text-crate-brown text-sm">
+                            <span class="font-display font-bold text-crate-text text-sm">
                                 ×{{ $item['stok'] }}
                             </span>
                         </div>
                         {{-- Aksi grid --}}
                         <div class="mt-2 flex gap-1.5">
                             <button onclick="openModalEdit({{ json_encode($item) }})"
-                                class="flex-1 border border-crate-sand text-crate-stone hover:bg-crate-sand
-                                           rounded-lg py-1.5 text-xs font-body transition-colors">
-                                ✏️ Edit
+                                class="flex-1 border border-crate-accent text-crate-text/50 hover:bg-crate-accent
+                                    rounded-lg py-1.5 text-xs font-body transition-colors flex items-center justify-center gap-1">
+                                <i data-lucide="pencil" class="w-3.5 h-3.5"></i> Edit
                             </button>
                             <form action="{{ url('/admin/inventory/' . $item['id']) }}"
                                 method="POST"
@@ -416,9 +416,10 @@ $statusLabel = [
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
-                                    class="flex-1 border border-crate-sand text-crate-stone hover:bg-crate-sand
-                                           rounded-lg py-1.5 text-xs font-body transition-colors">
-                                    🗑
+                                    class="border border-crate-accent text-crate-text/40 hover:text-red-500
+                                        hover:bg-red-50 hover:border-red-200 rounded-lg py-1.5 px-2.5
+                                        text-xs font-body transition-colors flex items-center justify-center">
+                                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                                 </button>
                             </form>
                         </div>
@@ -430,19 +431,19 @@ $statusLabel = [
 
         {{-- Tidak ada hasil filter --}}
         <div id="no-result" class="hidden px-6 py-16 text-center">
-            <p class="text-3xl mb-3">🔍</p>
-            <p class="text-crate-brown font-display text-base font-bold">Tidak ada item yang cocok</p>
-            <p class="text-crate-stone text-sm font-body mt-1">Coba ubah kata kunci atau filter pencarian.</p>
+            <i data-lucide="search-x" class="w-12 h-12 text-crate-text/20 mx-auto mb-3"></i>
+            <p class="text-crate-text font-display text-base font-bold">Tidak ada item yang cocok</p>
+            <p class="text-crate-text/50 text-sm font-body mt-1">Coba ubah kata kunci atau filter pencarian.</p>
         </div>
 
         {{-- Pagination --}}
-        <div class="px-6 py-4 border-t border-crate-sand flex items-center justify-between">
-            <p class="text-crate-stone text-xs font-body">Halaman 1 dari 1</p>
+        <div class="px-6 py-4 border-t border-crate-accent flex items-center justify-between">
+            <p class="text-crate-text/50 text-xs font-body">Halaman 1 dari 1</p>
             <div class="flex gap-2">
-                <button disabled class="px-3 py-1.5 rounded-lg border border-crate-sand text-xs font-body
-                                        text-crate-stone disabled:opacity-40">← Sebelumnya</button>
-                <button disabled class="px-3 py-1.5 rounded-lg border border-crate-sand text-xs font-body
-                                        text-crate-stone disabled:opacity-40">Berikutnya →</button>
+                <button disabled class="px-3 py-1.5 rounded-lg border border-crate-accent text-xs font-body
+                                        text-crate-text/50 disabled:opacity-40">← Sebelumnya</button>
+                <button disabled class="px-3 py-1.5 rounded-lg border border-crate-accent text-xs font-body
+                                        text-crate-text/50 disabled:opacity-40">Berikutnya →</button>
             </div>
         </div>
 
@@ -456,12 +457,12 @@ $statusLabel = [
 <div id="modal-tambah"
     class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden"
     style="background:rgba(42,21,8,0.55);backdrop-filter:blur(4px)">
-    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-crate-sand">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-crate-accent">
 
-        <div class="flex items-center justify-between px-6 py-4 border-b border-crate-sand sticky top-0 bg-white z-10">
-            <h3 class="font-display font-bold text-crate-brown text-lg">+ Tambah Item Thrift</h3>
+        <div class="flex items-center justify-between px-6 py-4 border-b border-crate-accent sticky top-0 bg-white z-10">
+            <h3 class="font-display font-bold text-crate-text text-lg">+ Tambah Item Thrift</h3>
             <button onclick="closeModal('modal-tambah')"
-                class="w-8 h-8 rounded-lg text-crate-stone hover:text-crate-brown hover:bg-crate-sand
+                class="w-8 h-8 rounded-lg text-crate-text/50 hover:text-crate-text hover:bg-crate-accent
                            flex items-center justify-center transition-colors text-xl leading-none">×</button>
         </div>
 
@@ -543,7 +544,7 @@ $statusLabel = [
                 <div>
                     <label class="field-label">Harga Satuan (Rp) <span class="text-red-400">*</span></label>
                     <div class="relative">
-                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-crate-stone text-xs font-body">Rp</span>
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-crate-text/50 text-xs font-body">Rp</span>
                         <input type="number" name="harga" min="0" step="500" placeholder="45000" required
                             class="field-input w-full pl-9">
                     </div>
@@ -570,7 +571,7 @@ $statusLabel = [
                 <div class="sm:col-span-2">
                     <label class="field-label">
                         Tags / Style
-                        <span class="text-crate-stone font-normal normal-case tracking-normal">(pisahkan dengan koma)</span>
+                        <span class="text-crate-text/50 font-normal normal-case tracking-normal">(pisahkan dengan koma)</span>
                     </label>
                     <input type="text" name="tags" placeholder="casual, vintage, streetwear, feminine"
                         class="field-input w-full">
@@ -580,7 +581,7 @@ $statusLabel = [
                 <div class="sm:col-span-2">
                     <label class="field-label">
                         Catatan
-                        <span class="text-crate-stone font-normal normal-case tracking-normal">(opsional)</span>
+                        <span class="text-crate-text/50 font-normal normal-case tracking-normal">(opsional)</span>
                     </label>
                     <textarea name="catatan" rows="2"
                         placeholder="Catatan tambahan tentang kondisi, detail unik, dll..."
@@ -591,16 +592,16 @@ $statusLabel = [
                 <div class="sm:col-span-2">
                     <label class="field-label">
                         Foto Item
-                        <span class="text-crate-stone font-normal normal-case tracking-normal">(opsional, JPG/PNG maks. 2MB)</span>
+                        <span class="text-crate-text/50 font-normal normal-case tracking-normal">(opsional, JPG/PNG maks. 2MB)</span>
                     </label>
                     <label for="foto-tambah"
-                        class="flex items-center gap-3 border-2 border-dashed border-crate-sand
+                        class="flex items-center gap-3 border-2 border-dashed border-crate-accent
                                   rounded-xl px-4 py-3 cursor-pointer hover:border-crate-orange/50
-                                  hover:bg-crate-cream/40 transition-all">
-                        <span class="text-2xl">📷</span>
+                                  hover:bg-crate-accent/40 transition-all">
+                        <i data-lucide="camera" class="w-6 h-6 text-crate-text/30"></i>
                         <div>
-                            <p class="text-crate-brown text-xs font-body font-semibold">Klik untuk unggah foto</p>
-                            <p class="text-crate-stone text-xs font-body" id="foto-tambah-name">Belum ada file dipilih</p>
+                            <p class="text-crate-text text-xs font-body font-semibold">Klik untuk unggah foto</p>
+                            <p class="text-crate-text/50 text-xs font-body" id="foto-tambah-name">Belum ada file dipilih</p>
                         </div>
                         <input type="file" name="foto" id="foto-tambah"
                             accept="image/jpeg,image/png" class="sr-only"
@@ -610,10 +611,10 @@ $statusLabel = [
 
             </div>
 
-            <div class="flex items-center justify-end gap-3 pt-2 border-t border-crate-sand">
+            <div class="flex items-center justify-end gap-3 pt-2 border-t border-crate-accent">
                 <button type="button" onclick="closeModal('modal-tambah')"
-                    class="px-5 py-2.5 border border-crate-sand text-crate-stone font-body font-semibold
-                               text-sm rounded-xl hover:bg-crate-sand hover:text-crate-brown transition-colors">
+                    class="px-5 py-2.5 border border-crate-accent text-crate-text/50 font-body font-semibold
+                               text-sm rounded-xl hover:bg-crate-accent hover:text-crate-text transition-colors">
                     Batal
                 </button>
                 <button type="submit"
@@ -631,12 +632,14 @@ $statusLabel = [
 <div id="modal-edit"
     class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden"
     style="background:rgba(42,21,8,0.55);backdrop-filter:blur(4px)">
-    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-crate-sand">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-crate-accent">
 
-        <div class="flex items-center justify-between px-6 py-4 border-b border-crate-sand sticky top-0 bg-white z-10">
-            <h3 class="font-display font-bold text-crate-brown text-lg">✏️ Edit Item Thrift</h3>
+        <div class="flex items-center justify-between px-6 py-4 border-b border-crate-accent sticky top-0 bg-white z-10">
+            <h3 class="font-display font-bold text-crate-text text-lg flex items-center gap-2">
+                <i data-lucide="pencil" class="w-4 h-4 text-crate-primary"></i> Edit Item Thrift
+            </h3>
             <button onclick="closeModal('modal-edit')"
-                class="w-8 h-8 rounded-lg text-crate-stone hover:text-crate-brown hover:bg-crate-sand
+                class="w-8 h-8 rounded-lg text-crate-text/50 hover:text-crate-text hover:bg-crate-accent
                            flex items-center justify-center transition-colors text-xl leading-none">×</button>
         </div>
 
@@ -704,7 +707,7 @@ $statusLabel = [
                 <div>
                     <label class="field-label">Harga Satuan (Rp) <span class="text-red-400">*</span></label>
                     <div class="relative">
-                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-crate-stone text-xs font-body">Rp</span>
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-crate-text/50 text-xs font-body">Rp</span>
                         <input type="number" name="harga" id="edit-harga" min="0" step="500" required
                             class="field-input w-full pl-9">
                     </div>
@@ -727,23 +730,23 @@ $statusLabel = [
                 <div class="sm:col-span-2">
                     <label class="field-label">
                         Tags / Style
-                        <span class="text-crate-stone font-normal normal-case tracking-normal">(pisahkan dengan koma)</span>
+                        <span class="text-crate-text/50 font-normal normal-case tracking-normal">(pisahkan dengan koma)</span>
                     </label>
                     <input type="text" name="tags" id="edit-tags" class="field-input w-full">
                 </div>
 
                 <div class="sm:col-span-2">
                     <label class="field-label">Foto Baru
-                        <span class="text-crate-stone font-normal normal-case tracking-normal">(kosongkan jika tidak ingin mengubah)</span>
+                        <span class="text-crate-text/50 font-normal normal-case tracking-normal">(kosongkan jika tidak ingin mengubah)</span>
                     </label>
                     <label for="foto-edit"
-                        class="flex items-center gap-3 border-2 border-dashed border-crate-sand
+                        class="flex items-center gap-3 border-2 border-dashed border-crate-accent
                                   rounded-xl px-4 py-3 cursor-pointer hover:border-crate-orange/50
-                                  hover:bg-crate-cream/40 transition-all">
+                                  hover:bg-crate-accent/40 transition-all">
                         <span class="text-2xl">📷</span>
                         <div>
-                            <p class="text-crate-brown text-xs font-body font-semibold">Klik untuk ganti foto</p>
-                            <p class="text-crate-stone text-xs font-body" id="foto-edit-name">Belum ada file dipilih</p>
+                            <p class="text-crate-text text-xs font-body font-semibold">Klik untuk ganti foto</p>
+                            <p class="text-crate-text/50 text-xs font-body" id="foto-edit-name">Belum ada file dipilih</p>
                         </div>
                         <input type="file" name="foto" id="foto-edit"
                             accept="image/jpeg,image/png" class="sr-only"
@@ -753,15 +756,15 @@ $statusLabel = [
 
             </div>
 
-            <div class="flex items-center justify-end gap-3 pt-2 border-t border-crate-sand">
+            <div class="flex items-center justify-end gap-3 pt-2 border-t border-crate-accent">
                 <button type="button" onclick="closeModal('modal-edit')"
-                    class="px-5 py-2.5 border border-crate-sand text-crate-stone font-body font-semibold
-                               text-sm rounded-xl hover:bg-crate-sand hover:text-crate-brown transition-colors">
+                    class="px-5 py-2.5 border border-crate-accent text-crate-text/50 font-body font-semibold
+                               text-sm rounded-xl hover:bg-crate-accent hover:text-crate-text transition-colors">
                     Batal
                 </button>
                 <button type="submit"
                     class="btn-primary text-white font-body font-semibold px-6 py-2.5 rounded-xl text-sm shadow">
-                    💾 Simpan Perubahan
+                    <i data-lucide="save" class="w-4 h-4"></i> Simpan Perubahan
                 </button>
             </div>
         </form>
@@ -771,9 +774,9 @@ $statusLabel = [
 <style>
     .field-label {
         display: block;
-        color: #3B1F0E;
+        color: #2B2B2B;
         font-size: 0.7rem;
-        font-family: 'DM Sans', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.05em;
@@ -781,26 +784,26 @@ $statusLabel = [
     }
 
     .field-input {
-        border: 1px solid #EDE0CC;
+        border: 1px solid #E9D8CC;
         background: white;
         border-radius: 0.75rem;
         padding: 0.625rem 1rem;
         font-size: 0.875rem;
-        font-family: 'DM Sans', sans-serif;
-        color: #3B1F0E;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        color: #2B2B2B;
         transition: all 0.15s;
     }
 
     .field-input:focus {
         outline: none;
-        border-color: #C85A1A;
-        box-shadow: 0 0 0 3px rgba(200, 90, 26, 0.12);
+        border-color: #D8A98C;
+        box-shadow: 0 0 0 3px rgba(216, 169, 140, 0.2);
     }
 
     .tag-quick.selected {
-        background: #C85A1A;
+        background: #D8A98C;
         color: white;
-        border-color: #C85A1A;
+        border-color: #D8A98C;
     }
 </style>
 
@@ -860,24 +863,20 @@ $statusLabel = [
     // ===== Toggle view tabel / grid =====
     function setView(mode) {
         const tableEl = document.getElementById('view-table');
-        const gridEl = document.getElementById('view-grid');
-        const btnT = document.getElementById('btn-view-table');
-        const btnG = document.getElementById('btn-view-grid');
+        const gridEl  = document.getElementById('view-grid');
+        const btnT    = document.getElementById('btn-view-table');
+        const btnG    = document.getElementById('btn-view-grid');
 
         if (mode === 'table') {
             tableEl.classList.remove('hidden');
             gridEl.classList.add('hidden');
-            btnT.classList.add('bg-crate-orange', 'text-white');
-            btnT.classList.remove('text-crate-stone');
-            btnG.classList.remove('bg-crate-orange', 'text-white');
-            btnG.classList.add('text-crate-stone');
+            btnT.style.cssText = 'background:#D8A98C;color:white';
+            btnG.style.cssText = 'background:white;color:#2B2B2B';
         } else {
             gridEl.classList.remove('hidden');
             tableEl.classList.add('hidden');
-            btnG.classList.add('bg-crate-orange', 'text-white');
-            btnG.classList.remove('text-crate-stone');
-            btnT.classList.remove('bg-crate-orange', 'text-white');
-            btnT.classList.add('text-crate-stone');
+            btnG.style.cssText = 'background:#D8A98C;color:white';
+            btnT.style.cssText = 'background:white;color:#2B2B2B';
         }
         applyFilters();
     }

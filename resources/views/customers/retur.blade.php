@@ -60,10 +60,10 @@
 
     {{-- PAGE HEADER --}}
     <div class="mb-8">
-        <h1 class="font-display text-3xl text-crate-brown font-bold flex items-center gap-2">
-            <i data-lucide="undo-2" class="w-7 h-7 text-crate-orange"></i> Retur Pakaian
+        <h1 class="font-display text-3xl text-crate-text font-bold flex items-center gap-2">
+            <i data-lucide="undo-2" class="w-7 h-7 text-crate-primary"></i> Retur Pakaian
         </h1>
-        <p class="text-crate-stone font-body mt-1 text-sm">Pilih item yang ingin dikembalikan dari box terakhirmu.</p>
+        <p class="text-gray-500 font-body mt-1 text-sm">Pilih item yang ingin dikembalikan dari box terakhirmu.</p>
     </div>
 
     {{-- FLASH MESSAGE --}}
@@ -86,14 +86,14 @@
     @endif
 
     {{-- INFO KEBIJAKAN RETUR --}}
-    <div class="mb-6 p-4 bg-crate-amber/10 border border-crate-amber/30 rounded-2xl flex gap-3">
-        <i data-lucide="info" class="w-5 h-5 shrink-0 text-crate-amber"></i>
+    <div class="mb-6 p-4 bg-crate-primary/10 border border-crate-primary/30 rounded-2xl flex gap-3">
+        <i data-lucide="info" class="w-5 h-5 shrink-0 text-crate-primary"></i>
         <div>
-            <p class="text-crate-brown font-body font-semibold text-sm mb-1">Kebijakan Retur Cratefit</p>
-            <ul class="text-crate-stone font-body text-xs space-y-1">
-                <li>• Retur hanya bisa diajukan dalam <span class="text-crate-brown font-medium">3 hari</span> setelah box diterima.</li>
-                <li>• Pakaian harus dalam kondisi <span class="text-crate-brown font-medium">belum dipakai</span> dan label masih terpasang.</li>
-                <li>• Maksimal <span class="text-crate-brown font-medium">2 item</span> per periode pengiriman.</li>
+            <p class="text-crate-text font-body font-semibold text-sm mb-1">Kebijakan Retur Cratefit</p>
+            <ul class="text-gray-500 font-body text-xs space-y-1">
+                <li>• Retur hanya bisa diajukan dalam <span class="text-crate-text font-medium">3 hari</span> setelah box diterima.</li>
+                <li>• Pakaian harus dalam kondisi <span class="text-crate-text font-medium">belum dipakai</span> dan label masih terpasang.</li>
+                <li>• Maksimal <span class="text-crate-text font-medium">2 item</span> per periode pengiriman.</li>
                 <li>• Biaya pengiriman retur ditanggung pelanggan.</li>
             </ul>
         </div>
@@ -110,9 +110,9 @@
         <div class="card-wood rounded-2xl p-6 mb-6">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
-                    <p class="text-crate-stone text-xs font-body font-medium uppercase tracking-wider mb-1">Box yang Diterima</p>
-                    <p class="font-display font-bold text-crate-brown text-lg">Box #{{ $box['kode'] }}</p>
-                    <p class="text-crate-stone text-xs font-body mt-0.5">
+                    <p class="text-gray-500 text-xs font-body font-medium uppercase tracking-wider mb-1">Box yang Diterima</p>
+                    <p class="font-display font-bold text-crate-text text-lg">Box #{{ $box['kode'] }}</p>
+                    <p class="text-gray-500 text-xs font-body mt-0.5">
                         Diterima: {{ $box['tanggal_terima'] }}
                         &nbsp;·&nbsp;
                         Batas retur: <span class="text-red-500 font-medium">{{ $box['batas_retur'] }}</span>
@@ -127,10 +127,10 @@
 
         {{-- PILIH ITEM --}}
         <div class="card-wood rounded-2xl p-6 mb-6">
-            <h2 class="font-display text-lg text-crate-brown font-bold mb-1 flex items-center gap-2">
-                <i data-lucide="shirt" class="w-5 h-5 text-crate-orange"></i> Pilih Item yang Diretur
+            <h2 class="font-display text-lg text-crate-text font-bold mb-1 flex items-center gap-2">
+                <i data-lucide="shirt" class="w-5 h-5 text-crate-primary"></i> Pilih Item yang Diretur
             </h2>
-            <p class="text-crate-stone text-xs font-body mb-5">Centang item yang ingin dikembalikan (maks. 2 item)</p>
+            <p class="text-gray-500 text-xs font-body mb-5">Centang item yang ingin dikembalikan (maks. 2 item)</p>
 
             @error('item_retur')
             <p class="text-red-500 text-xs font-body mb-3 flex items-center gap-1.5"><i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i> {{ $message }}</p>
@@ -145,12 +145,12 @@
                            data-nama="{{ $item['nama'] }}"
                            class="sr-only peer item-checkbox"
                            {{ in_array($item['id'], old('item_retur', [])) ? 'checked' : '' }}>
-                    <div class="flex items-center gap-4 border-2 border-crate-sand bg-crate-cream rounded-2xl p-4
-                                peer-checked:border-crate-orange peer-checked:bg-crate-orange/5
-                                hover:border-crate-amber transition-all select-none">
+                    <div class="flex items-center gap-4 border-2 border-crate-accent bg-white rounded-2xl p-4
+                                peer-checked:border-crate-primary peer-checked:bg-crate-primary/5
+                                hover:border-crate-primary transition-all select-none">
 
                         {{-- Checkbox visual --}}
-                        <div class="check-box w-5 h-5 rounded-md border-2 border-crate-sand bg-white shrink-0
+                        <div class="check-box w-5 h-5 rounded-md border-2 border-crate-accent bg-white shrink-0
                                     flex items-center justify-center transition-all">
                             <svg class="check-icon w-3 h-3 text-white hidden" fill="none" viewBox="0 0 24 24"
                                  stroke="currentColor" stroke-width="3">
@@ -159,14 +159,14 @@
                         </div>
 
                         {{-- Foto placeholder --}}
-                        <div class="w-14 h-14 bg-crate-sand rounded-xl flex items-center justify-center shrink-0">
-                            <i data-lucide="shirt" class="w-6 h-6 text-crate-brown/60"></i>
+                        <div class="w-14 h-14 bg-crate-accent rounded-xl flex items-center justify-center shrink-0">
+                            <i data-lucide="shirt" class="w-6 h-6 text-crate-text/40"></i>
                         </div>
 
                         {{-- Info item --}}
                         <div class="flex-1 min-w-0">
-                            <p class="font-body font-semibold text-crate-brown text-sm">{{ $item['nama'] }}</p>
-                            <p class="text-crate-stone text-xs font-body mt-0.5">
+                            <p class="font-body font-semibold text-crate-text text-sm">{{ $item['nama'] }}</p>
+                            <p class="text-gray-500 text-xs font-body mt-0.5">
                                 {{ $item['kategori'] }} &nbsp;·&nbsp;
                                 Ukuran {{ $item['ukuran'] }} &nbsp;·&nbsp;
                                 {{ $item['warna'] }}
@@ -179,21 +179,21 @@
             </div>
 
             <div class="flex items-center justify-between mt-4">
-                <p class="text-crate-stone text-xs font-body">
-                    <span id="counter" class="text-crate-brown font-bold text-base">0</span>/2 item dipilih
+                <p class="text-gray-500 text-xs font-body">
+                    <span id="counter" class="text-crate-text font-bold text-base">0</span>/2 item dipilih
                 </p>
-                <div class="h-1.5 w-32 bg-crate-sand rounded-full overflow-hidden">
-                    <div id="progress-bar" class="h-full bg-crate-orange rounded-full transition-all duration-300" style="width:0%"></div>
+                <div class="h-1.5 w-32 bg-crate-accent rounded-full overflow-hidden">
+                    <div id="progress-bar" class="h-full bg-crate-primary rounded-full transition-all duration-300" style="width:0%"></div>
                 </div>
             </div>
         </div>
 
         {{-- ALASAN RETUR --}}
         <div class="card-wood rounded-2xl p-6 mb-6">
-            <h2 class="font-display text-lg text-crate-brown font-bold mb-1 flex items-center gap-2">
-                <i data-lucide="file-text" class="w-5 h-5 text-crate-orange"></i> Alasan Retur
+            <h2 class="font-display text-lg text-crate-text font-bold mb-1 flex items-center gap-2">
+                <i data-lucide="file-text" class="w-5 h-5 text-crate-primary"></i> Alasan Retur
             </h2>
-            <p class="text-crate-stone text-xs font-body mb-5">Pilih alasan utama pengembalian item</p>
+            <p class="text-gray-500 text-xs font-body mb-5">Pilih alasan utama pengembalian item</p>
 
             @error('alasan_retur')
             <p class="text-red-500 text-xs font-body mb-3">⚠️ {{ $message }}</p>
@@ -214,36 +214,36 @@
                            value="{{ $alasan['value'] }}"
                            class="sr-only peer alasan-radio"
                            {{ old('alasan_retur') === $alasan['value'] ? 'checked' : '' }}>
-                    <div class="tag-btn border-2 border-crate-sand bg-crate-cream rounded-2xl p-3 text-center
-                                peer-checked:border-crate-orange peer-checked:bg-crate-orange/5
-                                hover:border-crate-amber transition-all">
+                    <div class="tag-btn border-2 border-crate-accent bg-white rounded-2xl p-3 text-center
+                                peer-checked:border-crate-primary peer-checked:bg-crate-primary/5
+                                hover:border-crate-primary transition-all">
                         <div class="mb-1 flex justify-center">
-                            <i data-lucide="{{ $alasan['icon'] }}" class="w-5 h-5 text-crate-orange"></i>
+                            <i data-lucide="{{ $alasan['icon'] }}" class="w-5 h-5 text-crate-primary"></i>
                         </div>
-                        <p class="font-body font-semibold text-crate-brown text-xs leading-tight">{{ $alasan['label'] }}</p>
+                        <p class="font-body font-semibold text-crate-text text-xs leading-tight">{{ $alasan['label'] }}</p>
                     </div>
                 </label>
                 @endforeach
             </div>
 
             <div>
-                <label class="block text-xs font-body font-semibold text-crate-brown/70 uppercase tracking-wider mb-1.5">
-                    Catatan Tambahan <span class="normal-case font-normal text-crate-stone">(opsional)</span>
+                <label class="block text-xs font-body font-semibold text-crate-text/70 uppercase tracking-wider mb-1.5">
+                    Catatan Tambahan <span class="normal-case font-normal text-gray-400">(opsional)</span>
                 </label>
                 <textarea name="catatan_retur"
                           rows="3"
                           placeholder="cth: Ukuran M terlalu besar untuk saya, biasanya saya pakai S..."
-                          class="w-full border border-crate-sand rounded-xl px-4 py-3 text-sm font-body text-crate-brown
-                                 bg-crate-cream placeholder-crate-stone resize-none transition-all">{{ old('catatan_retur') }}</textarea>
+                          class="w-full border border-crate-accent rounded-xl px-4 py-3 text-sm font-body text-crate-text
+                                 bg-white placeholder-gray-400 resize-none transition-all">{{ old('catatan_retur') }}</textarea>
             </div>
         </div>
 
         {{-- METODE PENGEMBALIAN --}}
         <div class="card-wood rounded-2xl p-6 mb-6">
-            <h2 class="font-display text-lg text-crate-brown font-bold mb-1 flex items-center gap-2">
-                <i data-lucide="truck" class="w-5 h-5 text-crate-orange"></i> Metode Pengembalian
+            <h2 class="font-display text-lg text-crate-text font-bold mb-1 flex items-center gap-2">
+                <i data-lucide="truck" class="w-5 h-5 text-crate-primary"></i> Metode Pengembalian
             </h2>
-            <p class="text-crate-stone text-xs font-body mb-5">Pilih cara kamu mengirim item kembali</p>
+            <p class="text-gray-500 text-xs font-body mb-5">Pilih cara kamu mengirim item kembali</p>
 
             @error('metode_pengembalian')
             <p class="text-red-500 text-xs font-body mb-3">⚠️ {{ $message }}</p>
@@ -272,19 +272,19 @@
                            value="{{ $metode['value'] }}"
                            class="sr-only peer metode-radio"
                            {{ (old('metode_pengembalian', 'drop_off') === $metode['value']) ? 'checked' : '' }}>
-                    <div class="tag-btn h-full border-2 border-crate-sand bg-crate-cream rounded-2xl p-5
-                                peer-checked:border-crate-orange peer-checked:bg-crate-orange/5
-                                hover:border-crate-amber transition-all">
+                    <div class="tag-btn h-full border-2 border-crate-accent bg-white rounded-2xl p-5
+                                peer-checked:border-crate-primary peer-checked:bg-crate-primary/5
+                                hover:border-crate-primary transition-all">
                         <div class="flex items-start justify-between mb-3">
-                            <div><i data-lucide="{{ $metode['icon'] }}" class="w-6 h-6 text-crate-orange"></i></div>
+                            <div><i data-lucide="{{ $metode['icon'] }}" class="w-6 h-6 text-crate-primary"></i></div>
                             @if($metode['badge'])
-                            <span class="text-xs font-body text-crate-stone bg-crate-sand px-2 py-0.5 rounded-full">
+                            <span class="text-xs font-body text-gray-500 bg-crate-accent px-2 py-0.5 rounded-full">
                                 {{ $metode['badge'] }}
                             </span>
                             @endif
                         </div>
-                        <p class="font-body font-semibold text-crate-brown text-sm mb-1">{{ $metode['label'] }}</p>
-                        <p class="font-body text-crate-stone text-xs leading-relaxed">{{ $metode['desc'] }}</p>
+                        <p class="font-body font-semibold text-crate-text text-sm mb-1">{{ $metode['label'] }}</p>
+                        <p class="font-body text-gray-500 text-xs leading-relaxed">{{ $metode['desc'] }}</p>
                     </div>
                 </label>
                 @endforeach
@@ -293,28 +293,28 @@
 
         {{-- RINGKASAN --}}
         <div class="card-wood rounded-2xl p-6 mb-6">
-            <h2 class="font-display text-lg text-crate-brown font-bold mb-4 flex items-center gap-2">
-                <i data-lucide="receipt" class="w-5 h-5 text-crate-orange"></i> Ringkasan Pengajuan
+            <h2 class="font-display text-lg text-crate-text font-bold mb-4 flex items-center gap-2">
+                <i data-lucide="receipt" class="w-5 h-5 text-crate-primary"></i> Ringkasan Pengajuan
             </h2>
 
-            <div class="bg-crate-cream rounded-xl border border-crate-sand p-5 space-y-3">
+            <div class="bg-crate-bg rounded-xl border border-crate-accent p-5 space-y-3">
                 <div class="flex justify-between items-center text-sm font-body">
-                    <span class="text-crate-stone">Box</span>
-                    <span class="text-crate-brown font-semibold">#{{ $box['kode'] }}</span>
+                    <span class="text-gray-500">Box</span>
+                    <span class="text-crate-text font-semibold">#{{ $box['kode'] }}</span>
                 </div>
                 <div class="flex justify-between items-start text-sm font-body gap-4">
-                    <span class="text-crate-stone shrink-0">Item diretur</span>
-                    <span class="text-crate-brown font-semibold text-right" id="summary-items">
-                        <em class="text-crate-stone font-normal">Belum dipilih</em>
+                    <span class="text-gray-500 shrink-0">Item diretur</span>
+                    <span class="text-crate-text font-semibold text-right" id="summary-items">
+                        <em class="text-gray-400 font-normal">Belum dipilih</em>
                     </span>
                 </div>
                 <div class="flex justify-between items-center text-sm font-body">
-                    <span class="text-crate-stone">Metode</span>
-                    <span class="text-crate-brown font-semibold" id="summary-metode">Drop Off ke Ekspedisi</span>
+                    <span class="text-gray-500">Metode</span>
+                    <span class="text-crate-text font-semibold" id="summary-metode">Drop Off ke Ekspedisi</span>
                 </div>
-                <div class="border-t border-crate-sand pt-3 flex justify-between items-center text-sm font-body">
-                    <span class="text-crate-stone">Biaya pengiriman retur</span>
-                    <span class="text-crate-brown font-semibold">Ditanggung pelanggan</span>
+                <div class="border-t border-crate-accent pt-3 flex justify-between items-center text-sm font-body">
+                    <span class="text-gray-500">Biaya pengiriman retur</span>
+                    <span class="text-crate-text font-semibold">Ditanggung pelanggan</span>
                 </div>
             </div>
         </div>
@@ -322,7 +322,7 @@
         {{-- ACTION BUTTONS --}}
         <div class="flex items-center justify-between pt-2 pb-8">
             <a href="{{ url('/status-box') }}"
-            class="flex items-center gap-2 text-crate-stone font-body text-sm hover:text-crate-brown transition-colors">
+            class="flex items-center gap-2 text-gray-500 font-body text-sm hover:text-crate-text transition-colors">
                 <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali
             </a>
             <button type="submit" id="btn-submit"
@@ -339,10 +339,10 @@
     {{-- ─── TIDAK BISA RETUR (batas habis) ─── --}}
     <div class="card-wood rounded-2xl p-8 mb-6 text-center">
         <div class="mb-4 flex justify-center">
-            <i data-lucide="clock-alert" class="w-12 h-12 text-crate-orange"></i>
+            <i data-lucide="clock-alert" class="w-12 h-12 text-crate-primary"></i>
         </div>
-        <h2 class="font-display text-xl text-crate-brown font-bold mb-2">Batas Retur Sudah Lewat</h2>
-        <p class="text-crate-stone font-body text-sm max-w-sm mx-auto">
+        <h2 class="font-display text-xl text-crate-text font-bold mb-2">Batas Retur Sudah Lewat</h2>
+        <p class="text-gray-500 font-body text-sm max-w-sm mx-auto">
             Kamu hanya bisa mengajukan retur dalam 3 hari setelah box diterima.
             Batas retur untuk Box #{{ $box['kode'] }} sudah berakhir pada {{ $box['batas_retur'] }}.
         </p>
@@ -357,10 +357,10 @@
     {{-- ─── RIWAYAT RETUR ────────────────────────────────────────── --}}
     <div class="card-wood rounded-2xl p-6 mb-6">
         <div class="flex items-center justify-between mb-5">
-            <h2 class="font-display text-lg text-crate-brown font-bold flex items-center gap-2">
-                <i data-lucide="scroll-text" class="w-5 h-5 text-crate-orange"></i> Riwayat Retur
+            <h2 class="font-display text-lg text-crate-text font-bold flex items-center gap-2">
+                <i data-lucide="scroll-text" class="w-5 h-5 text-crate-primary"></i> Riwayat Retur
             </h2>
-            <span class="text-crate-stone text-xs font-body">{{ count($riwayat) }} pengajuan</span>
+            <span class="text-gray-500 text-xs font-body">{{ count($riwayat) }} pengajuan</span>
         </div>
 
         @if(count($riwayat) > 0)
@@ -369,36 +369,36 @@
             @php
                 $rs = $statusMap[$r['status']] ?? $statusMap['diajukan'];
             @endphp
-            <div class="bg-crate-cream border border-crate-sand rounded-2xl p-4 hover:border-crate-amber/50 transition-colors">
+            <div class="bg-crate-bg border border-crate-accent rounded-2xl p-4 hover:border-crate-primary/40 transition-colors">
                 <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-3">
                     <div>
                         <div class="flex items-center gap-2 flex-wrap mb-0.5">
-                            <p class="font-body font-semibold text-crate-brown text-sm">{{ $r['kode'] }}</p>
+                            <p class="font-body font-semibold text-crate-text text-sm">{{ $r['kode'] }}</p>
                             <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs
                                          font-body font-semibold {{ $rs['bg'] }} {{ $rs['text'] }}">
                                 <span class="w-1.5 h-1.5 rounded-full {{ $rs['dot'] }}"></span>
                                 {{ $rs['label'] }}
                             </span>
                         </div>
-                        <p class="text-crate-stone text-xs font-body">
+                        <p class="text-gray-500 text-xs font-body">
                             Box #{{ $r['box'] }} &nbsp;·&nbsp; {{ $r['tanggal'] }}
                         </p>
                     </div>
                     <div class="shrink-0 text-right">
-                        <p class="text-crate-stone text-xs font-body">{{ $r['metode'] }}</p>
+                        <p class="text-gray-500 text-xs font-body">{{ $r['metode'] }}</p>
                     </div>
                 </div>
 
                 {{-- Item + Alasan --}}
                 <div class="flex flex-wrap gap-2">
                     @foreach($r['items'] as $namaItem)
-                    <span class="inline-flex items-center gap-1.5 bg-white border border-crate-sand
-                                rounded-lg px-3 py-1 text-xs font-body text-crate-brown">
+                    <span class="inline-flex items-center gap-1.5 bg-white border border-crate-accent
+                                rounded-lg px-3 py-1 text-xs font-body text-crate-text">
                         <i data-lucide="shirt" class="w-3.5 h-3.5"></i> {{ $namaItem }}
                     </span>
                     @endforeach
-                    <span class="inline-flex items-center bg-crate-sand/60 rounded-lg px-3 py-1
-                                 text-xs font-body text-crate-stone">
+                    <span class="inline-flex items-center bg-crate-accent rounded-lg px-3 py-1
+                                 text-xs font-body text-gray-500">
                         {{ $r['alasan'] }}
                     </span>
                 </div>
@@ -417,9 +417,9 @@
         @else
         <div class="text-center py-10">
             <div class="mb-2 flex justify-center">
-                <i data-lucide="inbox" class="w-8 h-8 text-crate-stone"></i>
+                <i data-lucide="inbox" class="w-8 h-8 text-gray-400"></i>
             </div>
-            <p class="text-crate-stone font-body text-sm">Belum ada riwayat retur.</p>
+            <p class="text-gray-500 font-body text-sm">Belum ada riwayat retur.</p>
         </div>
         @endif
     </div>
@@ -439,12 +439,12 @@
         const box  = cb.closest('label').querySelector('.check-box');
         const icon = cb.closest('label').querySelector('.check-icon');
         if (cb.checked) {
-            box.classList.add('bg-crate-orange', 'border-crate-orange');
-            box.classList.remove('border-crate-sand');
+            box.classList.add('bg-crate-primary', 'border-crate-primary');
+            box.classList.remove('border-crate-accent');
             icon.classList.remove('hidden');
         } else {
-            box.classList.remove('bg-crate-orange', 'border-crate-orange');
-            box.classList.add('border-crate-sand');
+            box.classList.remove('bg-crate-primary', 'border-crate-primary');
+            box.classList.add('border-crate-accent');
             icon.classList.add('hidden');
         }
     }
@@ -459,7 +459,7 @@
 
         // Summary items
         if (jumlah === 0) {
-            summaryItems.innerHTML = '<em class="text-crate-stone font-normal">Belum dipilih</em>';
+            summaryItems.innerHTML = '<em class="text-gray-400 font-normal">Belum dipilih</em>';
         } else {
             summaryItems.textContent = checked.map(c => c.dataset.nama).join(', ');
         }

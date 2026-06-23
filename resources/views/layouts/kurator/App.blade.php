@@ -15,24 +15,20 @@
             theme: {
                 extend: {
                     colors: {
-                        'crate-brown': '#3B1F0E',
-                        'crate-dark': '#2A1508',
-                        'crate-orange': '#C85A1A',
-                        'crate-amber': '#E07A3A',
-                        'crate-warm': '#F5A05A',
-                        'crate-cream': '#FAF3E8',
-                        'crate-sand': '#EDE0CC',
-                        'crate-stone': '#C9B99A',
-                        // Kurator accent — teal/forest agar beda dari portal pelanggan
-                        'cur-teal': '#1A6B5A',
-                        'cur-teal-lt': '#228F76',
-                        'cur-teal-bg': '#EAF4F1',
-                        'cur-gold': '#B8860B',
+                        'crate-primary': '#D8A98C',
+                        'crate-accent':  '#E9D8CC',
+                        'crate-bg':      '#F8F5F2',
+                        'crate-card':    '#FFFFFF',
+                        'crate-text':    '#2B2B2B',
+                        // Pertahankan teal untuk aksen kurator
+                        'cur-teal':      '#1A6B5A',
+                        'cur-teal-lt':   '#228F76',
+                        'cur-teal-bg':   '#EAF4F1',
                     },
                     fontFamily: {
                         'display': ['Plus Jakarta Sans', 'sans-serif'],
-                        'body': ['Plus Jakarta Sans', 'sans-serif'],
-                        'script': ['Caveat', 'cursive'],
+                        'body':    ['Plus Jakarta Sans', 'sans-serif'],
+                        'script':  ['Caveat', 'cursive'],
                     },
                 }
             }
@@ -41,32 +37,30 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #F2EDE3;
+            background-color: #F8F5F2;
+            color: #2B2B2B;
         }
 
-        /* Noise texture */
         body::before {
             content: '';
             position: fixed;
             inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
             pointer-events: none;
             z-index: 0;
         }
 
-        /* Sidebar nav links */
         .sidebar-nav a {
             transition: all 0.2s;
         }
-
         .sidebar-nav a:hover {
             transform: translateX(4px);
         }
 
-        /* Card style */
         .card-wood {
-            background: white;
-            border: 1px solid #EDE0CC;
+            background: #FFFFFF;
+            border: 1px solid #E9D8CC;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
             position: relative;
             overflow: hidden;
         }
@@ -74,85 +68,43 @@
         .card-wood::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #1A6B5A, #228F76, #B8860B, #1A6B5A);
+            background: linear-gradient(90deg, #D8A98C, #1A6B5A, #D8A98C);
         }
 
-        /* Kurator primary button */
         .btn-curator {
-            background: linear-gradient(135deg, #1A6B5A, #228F76);
+            background: #1A6B5A;
             transition: all 0.2s;
         }
-
         .btn-curator:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(26, 107, 90, 0.35);
+            box-shadow: 0 8px 24px rgba(26, 107, 90, 0.3);
         }
 
-        /* Badge status */
-        .badge-menunggu {
-            background: #FEF3C7;
-            color: #92400E;
-            border: 1px solid #FDE68A;
-        }
+        .badge-menunggu         { background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; }
+        .badge-diproses         { background: #DBEAFE; color: #1E40AF; border: 1px solid #BFDBFE; }
+        .badge-selesai          { background: #D1FAE5; color: #065F46; border: 1px solid #6EE7B7; }
+        .badge-dikirim          { background: #EDE9FE; color: #4C1D95; border: 1px solid #C4B5FD; }
 
-        .badge-diproses {
-            background: #DBEAFE;
-            color: #1E40AF;
-            border: 1px solid #BFDBFE;
-        }
-
-        .badge-selesai {
-            background: #D1FAE5;
-            color: #065F46;
-            border: 1px solid #6EE7B7;
-        }
-
-        .badge-dikirim {
-            background: #EDE9FE;
-            color: #4C1D95;
-            border: 1px solid #C4B5FD;
-        }
-
-        /* Input focus */
-        input:focus,
-        select:focus,
-        textarea:focus {
+        input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: #1A6B5A;
             box-shadow: 0 0 0 3px rgba(26, 107, 90, 0.15);
         }
 
-        /* Fade-in */
         .fade-in {
             animation: fadeUp 0.45s ease both;
         }
-
         @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(14px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(14px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* Top nav kurator stripe */
-        .nav-curator {
-            background: linear-gradient(135deg, #2A1508 60%, #1A3D32);
-        }
-
-        /* Kurator badge chip on nav */
         .chip-curator {
-            background: rgba(26, 107, 90, 0.25);
-            border: 1px solid rgba(34, 143, 118, 0.4);
-            color: #6ECFBB;
+            background: rgba(26, 107, 90, 0.1);
+            border: 1px solid rgba(26, 107, 90, 0.25);
+            color: #1A6B5A;
         }
     </style>
 </head>
@@ -160,28 +112,34 @@
 <body class="min-h-screen relative z-10">
 
     {{-- ===== TOP NAV ===== --}}
-    <nav class="nav-curator text-crate-cream sticky top-0 z-50 shadow-lg py-2">
+    <nav class="bg-white sticky top-0 z-50 shadow-sm py-2" style="border-bottom:1px solid #E9D8CC">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
 
             {{-- Logo + role badge --}}
             <div class="flex items-center gap-3">
-                <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-crate-cream flex items-center justify-center overflow-hidden border border-white/20">
+                <!-- <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-crate-cream flex items-center justify-center overflow-hidden border border-white/20">
                     <img class="w-full h-full" src="{{ asset('assets/imgs/logo-circle.png') }}" alt="Cratefit">
+                </div> -->
+                <div class="w-16 h-16 md:w-32 md:h-28 flex items-center justify-center overflow-hidden">
+                    <img
+                        class="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+                        src="{{ asset('assets/imgs/cratefit-new-nobg.png') }}"
+                        alt="Cratefit">
                 </div>
                 <div>
                     <div class="flex items-center gap-2">
-                        <span class="font-script text-2xl text-crate-warm tracking-wide">Cratefit</span>
+                        <!-- <span class="font-script text-2xl text-crate-text tracking-wide">Cratefit</span> -->
                         <span class="chip-curator text-xs font-body font-semibold px-2 py-0.5 rounded-full tracking-wide">KURATOR</span>
                     </div>
-                    <span class="hidden sm:block text-crate-stone text-xs font-body">Panel Kurator Fashion</span>
+                    <span class="hidden sm:block text-crate-text/50 text-xs font-body">Panel Kurator Fashion</span>
                 </div>
             </div>
 
             {{-- Kurator info --}}
             <div class="flex items-center gap-3">
                 <div class="hidden sm:flex flex-col items-end">
-                    <span class="text-crate-stone text-xs font-body">Masuk sebagai</span>
-                    <span class="text-crate-warm font-semibold text-sm font-body">{{ $kuratorNama ?? 'Kurator' }}</span>
+                    <span class="text-crate-text/50 text-xs font-body">Masuk sebagai</span>
+                    <span class="text-cur-teal font-semibold text-sm font-body">{{ $kuratorNama ?? 'Kurator' }}</span>
                 </div>
                 <div class="w-9 h-9 rounded-full bg-cur-teal flex items-center justify-center text-white font-display font-bold text-sm">
                     {{ strtoupper(substr($kuratorNama ?? 'K', 0, 1)) }}

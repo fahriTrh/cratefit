@@ -80,6 +80,14 @@ class KurirDashboardController extends Controller
             'tanggal_tiba' => now(),
         ]);
 
+        \App\Models\Penghasilan::create([
+            'user_id'    => auth()->id(),
+            'box_id'     => $box->id,
+            'peran'      => 'kurir',
+            'nominal'    => \App\Models\TarifOperasional::get('tarif_kurir'),
+            'keterangan' => 'Pengiriman box ' . $box->kode_box,
+        ]);
+
         return redirect('/kurir/dashboard')
             ->with('success', 'Box ' . $box->kode_box . ' dikonfirmasi sudah tiba.');
     }

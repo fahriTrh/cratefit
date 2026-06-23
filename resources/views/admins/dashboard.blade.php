@@ -8,13 +8,13 @@
     {{-- ── HEADER ─────────────────────────────────────────────────────── --}}
     <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-            <p class="text-crate-orange font-script text-lg mb-0.5">Selamat datang kembali</p>
-            <h1 class="font-display text-3xl text-crate-brown font-bold">Dashboard Admin</h1>
-            <p class="text-crate-stone font-body mt-1 text-sm">Ringkasan operasional Cratefit — {{ now()->translatedFormat('l, d F Y') }}</p>
+            <p class="text-crate-primary font-script text-lg mb-0.5">Selamat datang kembali</p>
+            <h1 class="font-display text-3xl text-crate-text font-bold">Dashboard Admin</h1>
+            <p class="text-crate-text/50 font-body mt-1 text-sm">Ringkasan operasional Cratefit — {{ now()->translatedFormat('l, d F Y') }}</p>
         </div>
         <div class="flex gap-2 shrink-0">
         <a href="{{ url('/admin/kelola-retur') }}"
-        class="flex items-center gap-2 bg-white border border-crate-sand text-crate-brown font-body font-semibold px-4 py-2.5 rounded-xl text-sm shadow-sm hover:bg-crate-cream transition-colors">
+        class="flex items-center gap-2 bg-white border border-crate-accent text-crate-text font-body font-semibold px-4 py-2.5 rounded-xl text-sm shadow-sm hover:bg-crate-accent transition-colors">
             <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Kelola Retur
             @if($totalReturMenunggu > 0)
             <span class="bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5 leading-none">{{ $totalReturMenunggu }}</span>
@@ -34,9 +34,9 @@
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
         @php
         $statsPengguna = [
-            ['label' => 'Total Pelanggan',   'value' => $totalPelanggan,        'icon' => 'users',        'sub' => '+' . $pelangganBaruBulanIni . ' bulan ini', 'color' => 'text-crate-brown',   'link' => '/admin/pelanggan'],
+            ['label' => 'Total Pelanggan',   'value' => $totalPelanggan,        'icon' => 'users',        'sub' => '+' . $pelangganBaruBulanIni . ' bulan ini', 'color' => 'text-crate-text',   'link' => '/admin/pelanggan'],
             ['label' => 'Langganan Aktif',   'value' => $totalLanggananAktif,   'icon' => 'badge-check',  'sub' => $totalLanggananBatal . ' dibatalkan',          'color' => 'text-emerald-600',   'link' => '/admin/pelanggan'],
-            ['label' => 'Total Kurator',     'value' => $totalKurator,          'icon' => 'scissors',     'sub' => 'Tim kurasi aktif',                            'color' => 'text-crate-orange',  'link' => '/admin/kurator'],
+            ['label' => 'Total Kurator',     'value' => $totalKurator,          'icon' => 'scissors',     'sub' => 'Tim kurasi aktif',                            'color' => 'text-crate-primary',  'link' => '/admin/kurator'],
             ['label' => 'Total Kurir',       'value' => $totalKurir,            'icon' => 'truck',        'sub' => 'Armada pengiriman',                           'color' => 'text-admin-blue',    'link' => '/admin/kurir'],
         ];
         @endphp
@@ -44,14 +44,14 @@
         @foreach($statsPengguna as $s)
         <a href="{{ url($s['link']) }}" class="card-wood rounded-2xl p-4 hover:shadow-md transition-shadow group">
             <div class="flex items-start justify-between mb-2">
-                <span class="w-9 h-9 rounded-lg bg-crate-cream flex items-center justify-center">
+                <span class="w-9 h-9 rounded-lg bg-crate-accent flex items-center justify-center">
                     <i data-lucide="{{ $s['icon'] }}" class="w-5 h-5 {{ $s['color'] }}"></i>
                 </span>
-                <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-crate-stone group-hover:text-crate-orange transition-colors"></i>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-crate-text/50 group-hover:text-crate-primary transition-colors"></i>
             </div>
             <p class="font-display text-3xl font-bold {{ $s['color'] }}">{{ $s['value'] }}</p>
-            <p class="text-crate-brown text-xs font-body font-semibold mt-0.5">{{ $s['label'] }}</p>
-            <p class="text-crate-stone text-xs font-body mt-0.5">{{ $s['sub'] }}</p>
+            <p class="text-crate-text text-xs font-body font-semibold mt-0.5">{{ $s['label'] }}</p>
+            <p class="text-crate-text/50 text-xs font-body mt-0.5">{{ $s['sub'] }}</p>
         </a>
         @endforeach
     </div>
@@ -62,8 +62,8 @@
         {{-- Box Pipeline --}}
         <div class="card-wood rounded-2xl p-4 col-span-2">
             <div class="flex items-center gap-2 mb-3">
-                <i data-lucide="package" class="w-4 h-4 text-crate-orange"></i>
-                <p class="font-body font-semibold text-crate-brown text-sm">Pipeline Box</p>
+                <i data-lucide="package" class="w-4 h-4 text-crate-primary"></i>
+                <p class="font-body font-semibold text-crate-text text-sm">Pipeline Box</p>
             </div>
             <div class="grid grid-cols-4 gap-2">
                 @php
@@ -79,7 +79,7 @@
                     <span class="inline-block px-2 py-1 rounded-lg text-xs font-semibold {{ $p['color'] }} font-body">
                         {{ $p['label'] }}
                     </span>
-                    <p class="font-display text-2xl font-bold text-crate-brown mt-1">{{ $p['value'] }}</p>
+                    <p class="font-display text-2xl font-bold text-crate-text mt-1">{{ $p['value'] }}</p>
                 </div>
                 @endforeach
             </div>
@@ -88,13 +88,13 @@
         {{-- Inventory --}}
         <a href="{{ url('/admin/inventory') }}" class="card-wood rounded-2xl p-4 hover:shadow-md transition-shadow group">
             <div class="flex items-start justify-between mb-2">
-                <span class="w-9 h-9 rounded-lg bg-crate-cream flex items-center justify-center">
-                    <i data-lucide="archive" class="w-5 h-5 text-crate-brown"></i>
+                <span class="w-9 h-9 rounded-lg bg-crate-accent flex items-center justify-center">
+                    <i data-lucide="archive" class="w-5 h-5 text-crate-text"></i>
                 </span>
-                <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-crate-stone group-hover:text-crate-orange transition-colors"></i>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-crate-text/50 group-hover:text-crate-primary transition-colors"></i>
             </div>
-            <p class="font-display text-3xl font-bold text-crate-brown">{{ $totalInventory }}</p>
-            <p class="text-crate-brown text-xs font-body font-semibold mt-0.5">Total Item</p>
+            <p class="font-display text-3xl font-bold text-crate-text">{{ $totalInventory }}</p>
+            <p class="text-crate-text text-xs font-body font-semibold mt-0.5">Total Item</p>
             <div class="mt-2 flex gap-1.5 flex-wrap">
                 @if($stokHabis > 0)
                 <span class="text-xs bg-red-100 text-red-600 rounded-full px-2 py-0.5 font-body font-semibold">{{ $stokHabis }} habis</span>
@@ -111,13 +111,13 @@
         {{-- Retur --}}
         <a href="{{ url('/admin/kelola-retur') }}" class="card-wood rounded-2xl p-4 hover:shadow-md transition-shadow group">
             <div class="flex items-start justify-between mb-2">
-                <span class="w-9 h-9 rounded-lg bg-crate-cream flex items-center justify-center">
-                    <i data-lucide="rotate-ccw" class="w-5 h-5 {{ $totalReturMenunggu > 0 ? 'text-red-500' : 'text-crate-brown' }}"></i>
+                <span class="w-9 h-9 rounded-lg bg-crate-accent flex items-center justify-center">
+                    <i data-lucide="rotate-ccw" class="w-5 h-5 {{ $totalReturMenunggu > 0 ? 'text-red-500' : 'text-crate-text' }}"></i>
                 </span>
-                <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-crate-stone group-hover:text-crate-orange transition-colors"></i>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-crate-text/50 group-hover:text-crate-primary transition-colors"></i>
             </div>
-            <p class="font-display text-3xl font-bold {{ $totalReturMenunggu > 0 ? 'text-red-500' : 'text-crate-brown' }}">{{ $totalReturMenunggu + $totalReturProses }}</p>
-            <p class="text-crate-brown text-xs font-body font-semibold mt-0.5">Retur Aktif</p>
+            <p class="font-display text-3xl font-bold {{ $totalReturMenunggu > 0 ? 'text-red-500' : 'text-crate-text' }}">{{ $totalReturMenunggu + $totalReturProses }}</p>
+            <p class="text-crate-text text-xs font-body font-semibold mt-0.5">Retur Aktif</p>
             <div class="mt-2 flex gap-1.5 flex-wrap">
                 @if($totalReturMenunggu > 0)
                 <span class="text-xs bg-red-100 text-red-600 rounded-full px-2 py-0.5 font-body font-semibold">{{ $totalReturMenunggu }} menunggu</span>
@@ -138,10 +138,10 @@
             <div class="card-wood rounded-2xl p-5">
                 <div class="flex items-center justify-between mb-4">
                     <div>
-                        <p class="font-body font-semibold text-crate-brown">Tren Langganan Baru</p>
-                        <p class="text-crate-stone text-xs font-body">6 bulan terakhir</p>
+                        <p class="font-body font-semibold text-crate-text">Tren Langganan Baru</p>
+                        <p class="text-crate-text/50 text-xs font-body">6 bulan terakhir</p>
                     </div>
-                    <i data-lucide="trending-up" class="w-6 h-6 text-crate-orange"></i>
+                    <i data-lucide="trending-up" class="w-6 h-6 text-crate-primary"></i>
                 </div>
                 @php
                 $maxGrafik = $grafikLangganan->max('total') ?: 1;
@@ -150,13 +150,13 @@
                     @foreach($grafikLangganan as $data)
                     @php $pct = ($data['total'] / $maxGrafik) * 100; @endphp
                     <div class="flex-1 flex flex-col items-center gap-1">
-                        <span class="text-xs font-body font-semibold text-crate-brown">{{ $data['total'] ?: '' }}</span>
-                        <div class="w-full rounded-t-lg bg-crate-sand overflow-hidden" style="height: 72px;">
+                        <span class="text-xs font-body font-semibold text-crate-text">{{ $data['total'] ?: '' }}</span>
+                        <div class="w-full rounded-t-lg bg-crate-accent overflow-hidden" style="height: 72px;">
                             <div class="w-full rounded-t-lg transition-all duration-700"
-                                 style="height: {{ $pct }}%; background: linear-gradient(to top, #3B1F0E, #C85A1A); margin-top: auto;">
+                                 style="height: {{ $pct }}%; background: linear-gradient(to top, #c49070, #D8A98C); margin-top: auto;">
                             </div>
                         </div>
-                        <span class="text-xs text-crate-stone font-body">{{ $data['bulan'] }}</span>
+                        <span class="text-xs text-crate-text/50 font-body">{{ $data['bulan'] }}</span>
                     </div>
                     @endforeach
                 </div>
@@ -166,23 +166,23 @@
             <div class="card-wood rounded-2xl p-5">
                 <div class="flex items-center justify-between mb-4">
                     <div>
-                        <p class="font-body font-semibold text-crate-brown">Box Terbaru</p>
-                        <p class="text-crate-stone text-xs font-body">6 box paling baru dibuat</p>
+                        <p class="font-body font-semibold text-crate-text">Box Terbaru</p>
+                        <p class="text-crate-text/50 text-xs font-body">6 box paling baru dibuat</p>
                     </div>
-                    <i data-lucide="package" class="w-6 h-6 text-crate-orange"></i>
+                    <i data-lucide="package" class="w-6 h-6 text-crate-primary"></i>
                 </div>
 
                 @if($boxTerbaru->isEmpty())
-                <p class="text-crate-stone text-sm font-body text-center py-6">Belum ada data box.</p>
+                <p class="text-crate-text/50 text-sm font-body text-center py-6">Belum ada data box.</p>
                 @else
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm font-body">
                         <thead>
-                            <tr class="border-b border-crate-sand">
-                                <th class="text-left py-2 text-crate-stone font-semibold text-xs uppercase tracking-wide">Kode Box</th>
-                                <th class="text-left py-2 text-crate-stone font-semibold text-xs uppercase tracking-wide">Pelanggan</th>
-                                <th class="text-left py-2 text-crate-stone font-semibold text-xs uppercase tracking-wide hidden sm:table-cell">Kurator</th>
-                                <th class="text-left py-2 text-crate-stone font-semibold text-xs uppercase tracking-wide">Status</th>
+                            <tr class="border-b border-crate-accent">
+                                <th class="text-left py-2 text-crate-text/50 font-semibold text-xs uppercase tracking-wide">Kode Box</th>
+                                <th class="text-left py-2 text-crate-text/50 font-semibold text-xs uppercase tracking-wide">Pelanggan</th>
+                                <th class="text-left py-2 text-crate-text/50 font-semibold text-xs uppercase tracking-wide hidden sm:table-cell">Kurator</th>
+                                <th class="text-left py-2 text-crate-text/50 font-semibold text-xs uppercase tracking-wide">Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -198,10 +198,10 @@
                             ];
                             $st = $statusBox[$box->status] ?? ['label' => $box->status, 'class' => 'bg-gray-100 text-gray-600'];
                             @endphp
-                            <tr class="border-b border-crate-sand/50 hover:bg-crate-cream/50 transition-colors">
-                                <td class="py-2.5 font-semibold text-crate-brown text-xs">{{ $box->kode_box ?? '-' }}</td>
-                                <td class="py-2.5 text-crate-brown">{{ $box->pelanggan->name ?? '-' }}</td>
-                                <td class="py-2.5 text-crate-stone hidden sm:table-cell">{{ $box->kurator->name ?? '—' }}</td>
+                            <tr class="border-b border-crate-accent/50 hover:bg-crate-accent/50 transition-colors">
+                                <td class="py-2.5 font-semibold text-crate-text text-xs">{{ $box->kode_box ?? '-' }}</td>
+                                <td class="py-2.5 text-crate-text">{{ $box->pelanggan->name ?? '-' }}</td>
+                                <td class="py-2.5 text-crate-text/50 hidden sm:table-cell">{{ $box->kurator->name ?? '—' }}</td>
                                 <td class="py-2.5">
                                     <span class="text-xs px-2 py-0.5 rounded-full font-semibold {{ $st['class'] }}">{{ $st['label'] }}</span>
                                 </td>
@@ -222,26 +222,26 @@
             <div class="card-wood rounded-2xl p-5">
                 <div class="flex items-center justify-between mb-4">
                     <div>
-                        <p class="font-body font-semibold text-crate-brown">Pelanggan Baru</p>
-                        <p class="text-crate-stone text-xs font-body">Terdaftar terakhir</p>
+                        <p class="font-body font-semibold text-crate-text">Pelanggan Baru</p>
+                        <p class="text-crate-text/50 text-xs font-body">Terdaftar terakhir</p>
                     </div>
-                    <a href="{{ url('/admin/pelanggan') }}" class="text-xs text-crate-orange font-body font-semibold hover:underline">Lihat semua →</a>
+                    <a href="{{ url('/admin/pelanggan') }}" class="text-xs text-crate-primary font-body font-semibold hover:underline">Lihat semua →</a>
                 </div>
 
                 @if($pelangganTerbaru->isEmpty())
-                <p class="text-crate-stone text-sm font-body text-center py-6">Belum ada pelanggan.</p>
+                <p class="text-crate-text/50 text-sm font-body text-center py-6">Belum ada pelanggan.</p>
                 @else
                 <div class="flex flex-col gap-3">
                     @foreach($pelangganTerbaru as $p)
                     <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-crate-sand flex items-center justify-center font-display font-bold text-crate-brown text-sm shrink-0">
+                        <div class="w-9 h-9 rounded-full bg-crate-accent flex items-center justify-center font-display font-bold text-crate-text text-sm shrink-0">
                             {{ strtoupper(substr($p->name, 0, 1)) }}
                         </div>
                         <div class="min-w-0">
-                            <p class="font-body font-semibold text-crate-brown text-sm truncate">{{ $p->name }}</p>
-                            <p class="text-crate-stone text-xs font-body truncate">{{ $p->email }}</p>
+                            <p class="font-body font-semibold text-crate-text text-sm truncate">{{ $p->name }}</p>
+                            <p class="text-crate-text/50 text-xs font-body truncate">{{ $p->email }}</p>
                         </div>
-                        <span class="ml-auto text-xs text-crate-stone font-body shrink-0">{{ $p->created_at->diffForHumans(null, true) }}</span>
+                        <span class="ml-auto text-xs text-crate-text/50 font-body shrink-0">{{ $p->created_at->diffForHumans(null, true) }}</span>
                     </div>
                     @endforeach
                 </div>
@@ -252,14 +252,14 @@
             <div class="card-wood rounded-2xl p-5">
                 <div class="flex items-center justify-between mb-4">
                     <div>
-                        <p class="font-body font-semibold text-crate-brown">Retur Perlu Aksi</p>
-                        <p class="text-crate-stone text-xs font-body">Menunggu tindakan admin</p>
+                        <p class="font-body font-semibold text-crate-text">Retur Perlu Aksi</p>
+                        <p class="text-crate-text/50 text-xs font-body">Menunggu tindakan admin</p>
                     </div>
-                    <a href="{{ url('/admin/kelola-retur') }}" class="text-xs text-crate-orange font-body font-semibold hover:underline">Kelola →</a>
+                    <a href="{{ url('/admin/kelola-retur') }}" class="text-xs text-crate-primary font-body font-semibold hover:underline">Kelola →</a>
                 </div>
 
                 @if($returTerbaru->isEmpty())
-                <p class="text-crate-stone text-sm font-body text-center py-6">Tidak ada retur aktif. 🎉</p>
+                <p class="text-crate-text/50 text-sm font-body text-center py-6">Tidak ada retur aktif. 🎉</p>
                 @else
                 <div class="flex flex-col gap-3">
                     @foreach($returTerbaru as $r)
@@ -278,8 +278,8 @@
                             <i data-lucide="rotate-ccw" class="w-4 h-4 text-red-500"></i>
                         </div>
                         <div class="min-w-0">
-                            <p class="font-body font-semibold text-crate-brown text-sm truncate">{{ $r->user->name ?? '-' }}</p>
-                            <p class="text-crate-stone text-xs font-body truncate">{{ $r->kode_retur }}</p>
+                            <p class="font-body font-semibold text-crate-text text-sm truncate">{{ $r->user->name ?? '-' }}</p>
+                            <p class="text-crate-text/50 text-xs font-body truncate">{{ $r->kode_retur }}</p>
                         </div>
                         <span class="ml-auto text-xs px-2 py-0.5 rounded-full font-semibold {{ $sr['class'] }} shrink-0">{{ $sr['label'] }}</span>
                     </div>
@@ -290,7 +290,7 @@
 
             {{-- Akses Cepat --}}
             <div class="card-wood rounded-2xl p-5">
-                <p class="font-body font-semibold text-crate-brown mb-3">Akses Cepat</p>
+                <p class="font-body font-semibold text-crate-text mb-3">Akses Cepat</p>
                 <div class="grid grid-cols-2 gap-2">
                     @php
                     $shortcuts = [
@@ -302,8 +302,8 @@
                     @endphp
                     @foreach($shortcuts as $sc)
                     <a href="{{ url($sc['link']) }}"
-                    class="flex items-center gap-2 bg-crate-cream hover:bg-crate-sand rounded-xl px-3 py-2.5 text-sm font-body font-semibold text-crate-brown transition-colors">
-                        <i data-lucide="{{ $sc['icon'] }}" class="w-4 h-4 text-crate-orange shrink-0"></i>
+                    class="flex items-center gap-2 bg-crate-accent hover:bg-crate-accent rounded-xl px-3 py-2.5 text-sm font-body font-semibold text-crate-text transition-colors">
+                        <i data-lucide="{{ $sc['icon'] }}" class="w-4 h-4 text-crate-primary shrink-0"></i>
                         <span class="leading-tight text-xs">{{ $sc['label'] }}</span>
                     </a>
                     @endforeach

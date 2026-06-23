@@ -347,6 +347,14 @@ class KuratorPelangganController extends Controller
             'tanggal_dikirim'  => in_array($request->status_box, ['dalam_pengiriman']) ? now() : null,
         ]);
 
+        \App\Models\Penghasilan::create([
+            'user_id'    => auth()->id(),
+            'box_id'     => $box->id,
+            'peran'      => 'kurator',
+            'nominal'    => \App\Models\TarifOperasional::get('tarif_kurator'),
+            'keterangan' => 'Kurasi box ' . $box->kode_box,
+        ]);
+
         // Simpan item sesuai urutan
         $urutanIds = array_filter(explode(',', $request->urutan_item));
         foreach ($urutanIds as $urutan => $itemId) {

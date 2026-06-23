@@ -82,30 +82,30 @@ default => 3,
 <div class="fade-in space-y-6">
 
     {{-- BREADCRUMB --}}
-    <div class="flex items-center gap-2 text-sm font-body text-crate-stone flex-wrap">
-        <a href="{{ url('/kurator/pelanggan') }}" class="hover:text-crate-brown transition-colors inline-flex items-center gap-1"><i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Profil Pelanggan</a>
+    <div class="flex items-center gap-2 text-sm font-body text-crate-text/50 flex-wrap">
+        <a href="{{ url('/kurator/pelanggan') }}" class="hover:text-crate-text transition-colors inline-flex items-center gap-1"><i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Profil Pelanggan</a>
         <span>/</span>
-        <a href="{{ url('/kurator/pelanggan/' . $pelanggan['id']) }}" class="hover:text-crate-brown transition-colors">{{ $pelanggan['nama'] }}</a>
+        <a href="{{ url('/kurator/pelanggan/' . $pelanggan['id']) }}" class="hover:text-crate-text transition-colors">{{ $pelanggan['nama'] }}</a>
         <span>/</span>
-        <a href="{{ url('/kurator/pilih-item?pelanggan=' . $pelanggan['id']) }}" class="hover:text-crate-brown transition-colors">Pilih Item</a>
+        <a href="{{ url('/kurator/pilih-item?pelanggan=' . $pelanggan['id']) }}" class="hover:text-crate-text transition-colors">Pilih Item</a>
         <span>/</span>
-        <span class="text-crate-brown font-medium">Susun Isi Box</span>
+        <span class="text-crate-text font-medium">Susun Isi Box</span>
     </div>
 
     {{-- HEADER --}}
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
             <p class="text-cur-teal font-script text-lg mb-0.5">Kurasi Box</p>
-            <h1 class="font-display text-3xl text-crate-brown font-bold">Susun Isi Box</h1>
-            <p class="text-crate-stone font-body mt-1 text-sm">
+            <h1 class="font-display text-3xl text-crate-text font-bold">Susun Isi Box</h1>
+            <p class="text-crate-text/50 font-body mt-1 text-sm">
                 Atur urutan, tambahkan catatan, lalu konfirmasi box untuk
-                <span class="font-semibold text-crate-brown">{{ $pelanggan['nama'] }}</span>
-                · <span class="font-semibold text-crate-brown">{{ $pelanggan['periode'] }}</span>
+                <span class="font-semibold text-crate-text">{{ $pelanggan['nama'] }}</span>
+                · <span class="font-semibold text-crate-text">{{ $pelanggan['periode'] }}</span>
             </p>
         </div>
         <a href="{{ url('/kurator/pilih-item?pelanggan=' . $pelanggan['id']) }}"
-            class="border border-crate-sand bg-white text-crate-brown font-body font-semibold
-                px-5 py-2.5 rounded-xl text-sm hover:bg-crate-sand transition-colors text-center shrink-0 flex items-center justify-center gap-2">
+            class="border border-crate-accent bg-white text-crate-text font-body font-semibold
+                px-5 py-2.5 rounded-xl text-sm hover:bg-crate-accent transition-colors text-center shrink-0 flex items-center justify-center gap-2">
             <i data-lucide="arrow-left" class="w-4 h-4"></i> Ubah Pilihan Item
         </a>
     </div>
@@ -118,17 +118,17 @@ default => 3,
 
             {{-- Info ringkas --}}
             <div class="flex items-center gap-3 flex-wrap">
-                <div class="flex items-center gap-2 bg-white border border-crate-sand rounded-xl px-4 py-2.5">
-                    <i data-lucide="package" class="w-4 h-4 text-crate-orange"></i>
-                    <span class="text-crate-brown font-semibold text-sm font-body">{{ $pelanggan['paket'] }}</span>
+                <div class="flex items-center gap-2 bg-white border border-crate-accent rounded-xl px-4 py-2.5">
+                    <i data-lucide="package" class="w-4 h-4 text-crate-primary"></i>
+                    <span class="text-crate-text font-semibold text-sm font-body">{{ $pelanggan['paket'] }}</span>
                 </div>
-                <div class="flex items-center gap-2 bg-white border border-crate-sand rounded-xl px-4 py-2.5">
-                    <i data-lucide="calendar" class="w-4 h-4 text-crate-orange"></i>
-                    <span class="text-crate-brown font-semibold text-sm font-body">{{ $pelanggan['periode'] }}</span>
+                <div class="flex items-center gap-2 bg-white border border-crate-accent rounded-xl px-4 py-2.5">
+                    <i data-lucide="calendar" class="w-4 h-4 text-crate-primary"></i>
+                    <span class="text-crate-text font-semibold text-sm font-body">{{ $pelanggan['periode'] }}</span>
                 </div>
-                <div class="flex items-center gap-2 bg-white border border-crate-sand rounded-xl px-4 py-2.5">
-                    <i data-lucide="shirt" class="w-4 h-4 text-crate-orange"></i>
-                    <span class="text-crate-brown font-semibold text-sm font-body">
+                <div class="flex items-center gap-2 bg-white border border-crate-accent rounded-xl px-4 py-2.5">
+                    <i data-lucide="shirt" class="w-4 h-4 text-crate-primary"></i>
+                    <span class="text-crate-text font-semibold text-sm font-body">
                         {{ count($itemDipilih) }} / {{ $maxItem }} item
                     </span>
                 </div>
@@ -137,24 +137,24 @@ default => 3,
             {{-- DRAG & DROP LIST --}}
             <div class="card-wood rounded-2xl overflow-hidden">
 
-                <div class="px-6 py-4 border-b border-crate-sand flex items-center justify-between">
-                    <h2 class="font-display text-base text-crate-brown font-bold flex items-center gap-2">
-                        <i data-lucide="clipboard-list" class="w-4 h-4 text-crate-orange"></i> Daftar Item dalam Box
+                <div class="px-6 py-4 border-b border-crate-accent flex items-center justify-between">
+                    <h2 class="font-display text-base text-crate-text font-bold flex items-center gap-2">
+                        <i data-lucide="clipboard-list" class="w-4 h-4 text-crate-primary"></i> Daftar Item dalam Box
                     </h2>
-                    <p class="text-crate-stone text-xs font-body hidden sm:block">
+                    <p class="text-crate-text/50 text-xs font-body hidden sm:block">
                         Seret untuk mengubah urutan
                     </p>
                 </div>
 
-                <ul id="sortable-list" class="divide-y divide-crate-sand/60">
+                <ul id="sortable-list" class="divide-y divide-crate-accent/60">
                     @foreach($itemDipilih as $i => $item)
-                    <li class="sortable-item flex items-center gap-4 px-5 py-4 hover:bg-crate-cream/40 transition-colors"
+                    <li class="sortable-item flex items-center gap-4 px-5 py-4 hover:bg-crate-accent/40 transition-colors"
                         data-id="{{ $item['id'] }}"
                         draggable="true">
 
                         {{-- Drag handle --}}
-                        <div class="drag-handle cursor-grab active:cursor-grabbing shrink-0 text-crate-stone/40
-                                    hover:text-crate-stone transition-colors select-none px-1">
+                        <div class="drag-handle cursor-grab active:cursor-grabbing shrink-0 text-crate-text/50/40
+                                    hover:text-crate-text/50 transition-colors select-none px-1">
                             <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor">
                                 <circle cx="5" cy="4" r="2" />
                                 <circle cx="11" cy="4" r="2" />
@@ -172,7 +172,7 @@ default => 3,
                         </div>
 
                         {{-- Foto / placeholder --}}
-                        <div class="w-14 h-14 rounded-xl bg-crate-sand flex items-center justify-center shrink-0 overflow-hidden border border-crate-sand">
+                        <div class="w-14 h-14 rounded-xl bg-crate-accent flex items-center justify-center shrink-0 overflow-hidden border border-crate-accent">
                             @if($item['foto'])
                             <img src="{{ asset($item['foto']) }}"
                                 alt="{{ $item['nama'] }}"
@@ -185,7 +185,7 @@ default => 3,
                         {{-- Detail --}}
                         <div class="flex-1 min-w-0">
                             <div class="flex items-center gap-2 flex-wrap mb-1">
-                                <p class="font-body font-semibold text-crate-brown text-sm">{{ $item['nama'] }}</p>
+                                <p class="font-body font-semibold text-crate-text text-sm">{{ $item['nama'] }}</p>
                                 @if($item['cocok'])
                                 <span class="bg-cur-teal-bg text-cur-teal text-xs font-body font-semibold
                                             px-2 py-0.5 rounded-full border border-cur-teal/25 inline-flex items-center gap-1">
@@ -194,17 +194,17 @@ default => 3,
                                 @endif
                             </div>
                             <div class="flex items-center gap-2 flex-wrap">
-                                <span class="bg-crate-sand text-crate-brown text-xs font-body px-2 py-0.5 rounded-full">
+                                <span class="bg-crate-accent text-crate-text text-xs font-body px-2 py-0.5 rounded-full">
                                     {{ $item['kategori'] }}
                                 </span>
-                                <span class="bg-crate-sand text-crate-brown text-xs font-body px-2 py-0.5 rounded-full">
+                                <span class="bg-crate-accent text-crate-text text-xs font-body px-2 py-0.5 rounded-full">
                                     Ukuran {{ $item['ukuran'] }}
                                 </span>
-                                <span class="bg-crate-sand text-crate-brown text-xs font-body px-2 py-0.5 rounded-full">
+                                <span class="bg-crate-accent text-crate-text text-xs font-body px-2 py-0.5 rounded-full">
                                     {{ $item['warna'] }}
                                 </span>
                                 <span class="text-xs font-body font-semibold px-2 py-0.5 rounded-full border
-                                             {{ $kondisiBadge[$item['kondisi']] ?? 'bg-crate-sand text-crate-stone border-crate-sand' }}">
+                                             {{ $kondisiBadge[$item['kondisi']] ?? 'bg-crate-accent text-crate-text/50 border-crate-accent' }}">
                                     {{ $item['kondisi'] }}
                                 </span>
                             </div>
@@ -212,7 +212,7 @@ default => 3,
 
                         {{-- Harga --}}
                         <div class="text-right shrink-0 hidden sm:block">
-                            <p class="text-crate-orange font-display font-bold text-sm">
+                            <p class="text-crate-primary font-display font-bold text-sm">
                                 Rp {{ number_format($item['harga'], 0, ',', '.') }}
                             </p>
                         </div>
@@ -234,9 +234,9 @@ default => 3,
                 </ul>
 
                 {{-- Tambah item lagi --}}
-                <div class="px-5 py-4 border-t border-crate-sand">
+                <div class="px-5 py-4 border-t border-crate-accent">
                     <a href="{{ url('/kurator/pilih-item?pelanggan=' . $pelanggan['id']) }}"
-                        class="flex items-center gap-2 text-sm font-body text-crate-stone hover:text-crate-brown transition-colors">
+                        class="flex items-center gap-2 text-sm font-body text-crate-text/50 hover:text-crate-text transition-colors">
                         <span class="w-7 h-7 rounded-full border-2 border-dashed border-crate-stone/40
                                      flex items-center justify-center text-base leading-none">+</span>
                         Tambah / ubah item
@@ -247,22 +247,22 @@ default => 3,
 
             {{-- CATATAN KURATOR --}}
             <div class="card-wood rounded-2xl p-6">
-                <h2 class="font-display text-base text-crate-brown font-bold mb-1 flex items-center gap-2">
-                    <i data-lucide="file-text" class="w-4 h-4 text-crate-orange"></i> Catatan Kurasi
+                <h2 class="font-display text-base text-crate-text font-bold mb-1 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-crate-primary"></i> Catatan Kurasi
                 </h2>
-                <p class="text-crate-stone text-xs font-body mb-4">
+                <p class="text-crate-text/50 text-xs font-body mb-4">
                     Catatan ini akan dilihat oleh pelanggan saat menerima box.
                 </p>
 
                 <textarea id="catatan-kurasi" name="catatan_kurasi" rows="4"
                     placeholder="Contoh: Hai Aulia! Kami pilihkan outfit casual-minimalis yang bisa kamu mix & match. Cardigan krem cocok dipadukan dengan kaos putih dan celana jeans biru. Semoga suka! 🎁"
-                    class="w-full border border-crate-sand rounded-xl px-4 py-3 text-sm font-body
-                                 text-crate-brown bg-crate-cream placeholder-crate-stone resize-none
+                    class="w-full border border-crate-accent rounded-xl px-4 py-3 text-sm font-body
+                                 text-crate-text bg-crate-accent placeholder-crate-stone resize-none
                                  transition-all leading-relaxed">{{ $catatanKurasi ?? '' }}</textarea>
 
                 <div class="flex items-center justify-between mt-2">
-                    <p class="text-crate-stone text-xs font-body">Tulis pesan personal untuk pelanggan.</p>
-                    <span id="char-count" class="text-crate-stone text-xs font-body">0 / 500</span>
+                    <p class="text-crate-text/50 text-xs font-body">Tulis pesan personal untuk pelanggan.</p>
+                    <span id="char-count" class="text-crate-text/50 text-xs font-body">0 / 500</span>
                 </div>
             </div>
 
@@ -279,8 +279,8 @@ default => 3,
                         {{ $pelanggan['avatar'] }}
                     </div>
                     <div class="min-w-0">
-                        <p class="font-body font-semibold text-crate-brown text-sm truncate">{{ $pelanggan['nama'] }}</p>
-                        <p class="text-crate-stone text-xs font-body">{{ $pelanggan['email'] }}</p>
+                        <p class="font-body font-semibold text-crate-text text-sm truncate">{{ $pelanggan['nama'] }}</p>
+                        <p class="text-crate-text/50 text-xs font-body">{{ $pelanggan['email'] }}</p>
                     </div>
                 </div>
 
@@ -290,7 +290,7 @@ default => 3,
                     <p class="text-xs font-body font-semibold text-amber-700 mb-1 flex items-center gap-1.5">
                         <i data-lucide="pin" class="w-3.5 h-3.5"></i> Catatan Pelanggan
                     </p>
-                    <p class="text-crate-brown text-xs font-body leading-relaxed line-clamp-4">
+                    <p class="text-crate-text text-xs font-body leading-relaxed line-clamp-4">
                         "{{ $pelanggan['catatan'] }}"
                     </p>
                 </div>
@@ -313,18 +313,18 @@ default => 3,
                 @endif
 
                 {{-- Alamat --}}
-                <div class="pt-4 border-t border-crate-sand">
-                    <p class="text-xs font-body font-semibold text-crate-brown/60 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <div class="pt-4 border-t border-crate-accent">
+                    <p class="text-xs font-body font-semibold text-crate-text/60 uppercase tracking-wider mb-2 flex items-center gap-1.5">
                         <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Alamat
                     </p>
-                    <p class="text-crate-brown text-xs font-body leading-relaxed">{{ $pelanggan['alamat'] }}</p>
+                    <p class="text-crate-text text-xs font-body leading-relaxed">{{ $pelanggan['alamat'] }}</p>
                 </div>
             </div>
 
             {{-- Ringkasan Box --}}
             <div class="card-wood rounded-2xl p-5">
-                <h3 class="font-display text-sm text-crate-brown font-bold mb-4 flex items-center gap-2">
-                    <i data-lucide="package" class="w-4 h-4 text-crate-orange"></i> Ringkasan Box
+                <h3 class="font-display text-sm text-crate-text font-bold mb-4 flex items-center gap-2">
+                    <i data-lucide="package" class="w-4 h-4 text-crate-primary"></i> Ringkasan Box
                 </h3>
 
                 <div class="space-y-2 mb-4">
@@ -334,24 +334,24 @@ default => 3,
                                      font-body font-bold flex items-center justify-center shrink-0">
                             {{ $i + 1 }}
                         </span>
-                        <p class="text-crate-brown text-xs font-body flex-1 truncate">{{ $item['nama'] }}</p>
-                        <p class="text-crate-orange text-xs font-body font-semibold shrink-0">
+                        <p class="text-crate-text text-xs font-body flex-1 truncate">{{ $item['nama'] }}</p>
+                        <p class="text-crate-primary text-xs font-body font-semibold shrink-0">
                             Rp {{ number_format($item['harga'], 0, ',', '.') }}
                         </p>
                     </div>
                     @endforeach
                 </div>
 
-                <div class="pt-3 border-t border-crate-sand space-y-1.5">
+                <div class="pt-3 border-t border-crate-accent space-y-1.5">
                     <div class="flex items-center justify-between text-xs font-body">
-                        <span class="text-crate-stone">Total item</span>
-                        <span id="summary-count" class="font-semibold text-crate-brown">
+                        <span class="text-crate-text/50">Total item</span>
+                        <span id="summary-count" class="font-semibold text-crate-text">
                             {{ count($itemDipilih) }} item
                         </span>
                     </div>
                     <div class="flex items-center justify-between text-xs font-body">
-                        <span class="text-crate-stone">Total nilai</span>
-                        <span id="summary-total" class="font-bold text-crate-orange text-sm">
+                        <span class="text-crate-text/50">Total nilai</span>
+                        <span id="summary-total" class="font-bold text-crate-primary text-sm">
                             Rp {{ number_format($totalHarga, 0, ',', '.') }}
                         </span>
                     </div>
@@ -369,17 +369,17 @@ default => 3,
                 <input type="hidden" name="urutan_item" id="hidden-urutan">
                 <input type="hidden" name="pelanggan_id" value="{{ $pelanggan['id'] }}">
 
-                <h3 class="font-display text-sm text-crate-brown font-bold mb-4 flex items-center gap-2">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-crate-orange"></i> Konfirmasi Box
+                <h3 class="font-display text-sm text-crate-text font-bold mb-4 flex items-center gap-2">
+                    <i data-lucide="check-circle" class="w-4 h-4 text-crate-primary"></i> Konfirmasi Box
                 </h3>
                 {{-- Status box --}}
                 <div class="mb-4">
-                    <label class="block text-xs font-body font-semibold text-crate-brown/70 uppercase tracking-wider mb-2">
+                    <label class="block text-xs font-body font-semibold text-crate-text/70 uppercase tracking-wider mb-2">
                         Ubah Status Box
                     </label>
                     <select name="status_box"
-                        class="w-full border border-crate-sand bg-white rounded-xl px-3 py-2.5
-                                   text-sm font-body text-crate-brown transition-all">
+                        class="w-full border border-crate-accent bg-white rounded-xl px-3 py-2.5
+                                   text-sm font-body text-crate-text transition-all">
                         <option value="sedang_dikurasi">🔄 Sedang Dikurasi</option>
                         <option value="siap_dikirim">📦 Siap Dikirim</option>
                         <option value="dalam_pengiriman">🚚 Dalam Pengiriman</option>
@@ -388,14 +388,14 @@ default => 3,
 
                 {{-- Nomor resi (opsional) --}}
                 <div class="mb-5">
-                    <label class="block text-xs font-body font-semibold text-crate-brown/70 uppercase tracking-wider mb-2">
-                        Nomor Resi <span class="normal-case font-normal text-crate-stone">(opsional)</span>
+                    <label class="block text-xs font-body font-semibold text-crate-text/70 uppercase tracking-wider mb-2">
+                        Nomor Resi <span class="normal-case font-normal text-crate-text/50">(opsional)</span>
                     </label>
                     <input type="text" name="nomor_resi"
                         placeholder="Misal: JNE123456789"
                         value="{{ $nomorResi ?? '' }}"
-                        class="w-full border border-crate-sand bg-white rounded-xl px-3 py-2.5
-                                  text-sm font-body text-crate-brown placeholder-crate-stone transition-all">
+                        class="w-full border border-crate-accent bg-white rounded-xl px-3 py-2.5
+                                  text-sm font-body text-crate-text placeholder-crate-stone transition-all">
                 </div>
 
                 {{-- Tombol simpan --}}
@@ -405,7 +405,7 @@ default => 3,
                     <i data-lucide="package" class="w-4 h-4"></i> Konfirmasi &amp; Simpan Box
                 </button>
 
-                <p class="text-center text-crate-stone text-xs font-body mt-3">
+                <p class="text-center text-crate-text/50 text-xs font-body mt-3">
                     Box akan tercatat dan status pelanggan diperbarui.
                 </p>
             </form>
@@ -416,30 +416,30 @@ default => 3,
 
     {{-- MOBILE: TOMBOL KONFIRMASI --}}
     <div class="lg:hidden card-wood rounded-2xl p-5">
-        <h3 class="font-display text-sm text-crate-brown font-bold mb-4 flex items-center gap-2">
-            <i data-lucide="check-circle" class="w-4 h-4 text-crate-orange"></i> Konfirmasi Box
+        <h3 class="font-display text-sm text-crate-text font-bold mb-4 flex items-center gap-2">
+            <i data-lucide="check-circle" class="w-4 h-4 text-crate-primary"></i> Konfirmasi Box
         </h3>
         <div class="grid grid-cols-2 gap-3 mb-4">
             <div>
-                <label class="block text-xs font-body font-semibold text-crate-brown/70 uppercase tracking-wider mb-2">
+                <label class="block text-xs font-body font-semibold text-crate-text/70 uppercase tracking-wider mb-2">
                     Status Box
                 </label>
                 <select name="status_box_mobile"
-                    class="w-full border border-crate-sand bg-white rounded-xl px-3 py-2.5
-                               text-sm font-body text-crate-brown transition-all">
+                    class="w-full border border-crate-accent bg-white rounded-xl px-3 py-2.5
+                               text-sm font-body text-crate-text transition-all">
                     <option value="sedang_dikurasi">🔄 Sedang Dikurasi</option>
                     <option value="siap_dikirim">📦 Siap Dikirim</option>
                     <option value="dalam_pengiriman">🚚 Dalam Pengiriman</option>
                 </select>
             </div>
             <div>
-                <label class="block text-xs font-body font-semibold text-crate-brown/70 uppercase tracking-wider mb-2">
+                <label class="block text-xs font-body font-semibold text-crate-text/70 uppercase tracking-wider mb-2">
                     Nomor Resi
                 </label>
                 <input type="text" name="nomor_resi_mobile"
                     placeholder="JNE123456789"
-                    class="w-full border border-crate-sand bg-white rounded-xl px-3 py-2.5
-                              text-sm font-body text-crate-brown placeholder-crate-stone transition-all">
+                    class="w-full border border-crate-accent bg-white rounded-xl px-3 py-2.5
+                              text-sm font-body text-crate-text placeholder-crate-stone transition-all">
             </div>
         </div>
         <button type="button"

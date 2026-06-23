@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReturController;
 use App\Http\Controllers\AdminReturController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\PenghasilanController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -88,6 +89,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/kurator/edit-susun-box/{boxId}',             [KuratorPelangganController::class, 'editSusunBox']);
         Route::post('/kurator/edit-susun-box/{boxId}/konfirmasi', [KuratorPelangganController::class, 'updateBox']);
 
+        Route::get('/kurator/penghasilan', [PenghasilanController::class, 'kurator'])->name('kurator.penghasilan');
+
         Route::post('/kurator/logout', [AuthController::class, 'logoutKurator'])->name('kurator.logout');
     });
     // end kurator
@@ -143,6 +146,10 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/admin/retur/{id}/tolak',        [AdminReturController::class, 'tolak']);
         Route::patch('/admin/retur/{id}/assign-kurir', [AdminReturController::class, 'assignKurir']);
 
+        // Penghasilan
+        Route::get('/admin/penghasilan',         [PenghasilanController::class, 'index']);
+        Route::post('/admin/penghasilan/tarif',  [PenghasilanController::class, 'updateTarif'])->name('admin.tarif.update');
+
         // end admin
     });
 
@@ -154,6 +161,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/kurir/box/{boxId}/ambil',                 [KurirDashboardController::class, 'ambilBox']);
         Route::post('/kurir/box/{boxId}/konfirmasi-tiba',       [KurirDashboardController::class, 'konfirmasiTiba']);
         Route::post('/kurir/retur/{id}/konfirmasi-jemput', [KurirDashboardController::class, 'konfirmasiJemputRetur']);
+        Route::get('/kurir/penghasilan', [PenghasilanController::class, 'kurir'])->name('kurir.penghasilan');
         Route::post('/kurir/logout', [AuthController::class, 'logoutKurir'])->name('kurir.logout');
 
         // end courier
