@@ -10,26 +10,40 @@ class KurirController extends Controller
 {
     public function index()
     {
-        $kurir = User::where('role', 'kurir')->latest()->get()
+        $kurirs = User::where('role', 'kurir')
+            ->withCount([
+                'boxPengiriman as total_antar'
+            ])
+            ->latest()
+            ->get()
             ->map(function ($user) {
                 return [
-                    'id'          => $user->id,
-                    'nama'        => $user->name,
-                    'email'       => $user->email,
-                    'no_hp'       => $user->no_hp ?? '-',
-                    'avatar'      => strtoupper(substr($user->name, 0, 1)),
-                    'status'      => $user->status ?? 'aktif',
-                    'bergabung'   => $user->created_at->translatedFormat('F Y'),
-                    'kendaraan'   => $user->kendaraan ?? '-',
-                    'plat'        => $user->plat ?? '-',
-                    'wilayah'     => $user->wilayah ?? '-',
-                    'total_antar' => 0,
-                    'bulan_ini'   => 0,
-                    'rating'      => 0,
-                ];
-            })->toArray();
+                    'id' => $user->id,
+                    'nama' => $user->name,
+                    'email' => $user->email,
+                    'no_hp' => $user->no_hp ?? '-',
+                    'avatar' => strtoupper(substr($user->name, 0, 1)),
+                    'status' => $user->status ?? 'aktif',
+                    'bergabung' => $user->created_at->translatedFormat('F Y'),
 
-        return view('admins.list-kurir', compact('kurir'));
+                    'kendaraan' => $user->kendaraan ?? '-',
+                    'plat' => $user->plat ?? '-',
+                    'wilayah' => $user->wilayah ?? '-',
+
+                    // Statistik
+                    'total_antar' => $user->total_antar,
+                    'bulan_ini' => $user->boxPengiriman()
+                        ->whereMonth('tanggal_dikirim', now()->month)
+                        ->whereYear('tanggal_dikirim', now()->year)
+                        ->count(),
+
+                    // Rating
+                    'rating' => round($user->rataRataRatingKurir(), 1),
+                    'total_rating' => $user->totalRatingKurir(),
+                ];
+            });
+
+        return view('admins.list-kurir', compact('kurirs'));
     }
 
     public function create()

@@ -10,22 +10,36 @@ class KuratorController extends Controller
 {
     public function index()
     {
-        $kurators = User::where('role', 'kurator')->latest()->get()
+        $kurators = User::where('role', 'kurator')
+            ->withCount([
+                'boxKurasi as total_kurasi'
+            ])
+            ->latest()
+            ->get()
             ->map(function ($user) {
                 return [
-                    'id'           => $user->id,
-                    'nama'         => $user->name,
-                    'email'        => $user->email,
-                    'no_hp'        => $user->no_hp ?? '-',
-                    'avatar'       => strtoupper(substr($user->name, 0, 1)),
-                    'status'       => $user->status ?? 'aktif',
-                    'bergabung'    => $user->created_at->translatedFormat('F Y'),
-                    'total_kurasi' => 0,
-                    'bulan_ini'    => 0,
-                    'rating'       => 0,
+                    'id' => $user->id,
+                    'nama' => $user->name,
+                    'email' => $user->email,
+                    'no_hp' => $user->no_hp ?? '-',
+                    'avatar' => strtoupper(substr($user->name, 0, 1)),
+                    'status' => $user->status ?? 'aktif',
+                    'bergabung' => $user->created_at->translatedFormat('F Y'),
+
+                    // Statistik
+                    'total_kurasi' => $user->total_kurasi,
+                    'bulan_ini' => $user->boxKurasi()
+                        ->whereMonth('tanggal_dikurasi', now()->month)
+                        ->whereYear('tanggal_dikurasi', now()->year)
+                        ->count(),
+
+                    // Rating
+                    'rating' => round($user->rataRataRatingKurator(), 1),
+                    'total_rating' => $user->totalRatingKurator(),
+
                     'spesialisasi' => json_decode($user->spesialisasi ?? '[]', true) ?? [],
                 ];
-            })->toArray();
+            });
 
         return view('admins.list-kurator', compact('kurators'));
     }

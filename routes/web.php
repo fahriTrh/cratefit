@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReturController;
 use App\Http\Controllers\AdminReturController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PenghasilanController;
 use App\Http\Controllers\RatingController;
 
@@ -112,13 +113,9 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/admin/kurator/{id}',         [KuratorController::class, 'update']);
         Route::delete('/admin/kurator/{id}', [KuratorController::class, 'destroy']);
 
-        Route::get('/admin/pelanggan', function () {
-            return view('admins.list-pelanggan');
-        });
-
-        Route::get('/admin/pelanggan/{id}', function () {
-            return view('admins.detail-pelanggan');
-        });
+        Route::get('/admin/pelanggan', [PelangganController::class, 'index']);
+        Route::get('/admin/pelanggan/{id}', [PelangganController::class, 'show']);
+        Route::delete('/admin/pelanggan/{id}', [PelangganController::class, 'destroy']);
 
         Route::get('/admin/kurir',                        [KurirController::class, 'index']);
         Route::get('/admin/kurir/tambah',                 [KurirController::class, 'create']);

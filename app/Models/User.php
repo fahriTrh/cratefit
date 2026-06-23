@@ -100,4 +100,14 @@ class User extends Authenticatable
             ->where('tipe', 'kurir')
             ->count();
     }
+
+    public function boxKurasi()
+    {
+        return $this->hasMany(Box::class, 'kurator_id');
+    }
+
+    public function boxPengiriman()
+    {
+        return $this->hasMany(Box::class, 'kurir_id');
+    }
 }

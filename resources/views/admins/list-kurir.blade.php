@@ -4,73 +4,12 @@
     @section('content')
 
     @php
-        $kurir = $kurir ?? [
-            [
-                'id'           => 1,
-                'nama'         => 'Budi Santoso',
-                'email'        => 'budi@cratefit.id',
-                'no_hp'        => '081234567890',
-                'avatar'       => 'B',
-                'status'       => 'aktif',
-                'bergabung'    => 'Januari 2025',
-                'kendaraan'    => 'Motor',
-                'plat'         => 'BK 1234 AB',
-                'wilayah'      => 'Medan Kota',
-                'total_antar'  => 62,
-                'bulan_ini'    => 11,
-                'rating'       => 4.8,
-            ],
-            [
-                'id'           => 2,
-                'nama'         => 'Eko Prasetyo',
-                'email'        => 'eko@cratefit.id',
-                'no_hp'        => '082345678901',
-                'avatar'       => 'E',
-                'status'       => 'aktif',
-                'bergabung'    => 'Februari 2025',
-                'kendaraan'    => 'Motor',
-                'plat'         => 'BK 5678 CD',
-                'wilayah'      => 'Medan Selatan',
-                'total_antar'  => 45,
-                'bulan_ini'    => 9,
-                'rating'       => 4.7,
-            ],
-            [
-                'id'           => 3,
-                'nama'         => 'Fajar Hidayat',
-                'email'        => 'fajar@cratefit.id',
-                'no_hp'        => '083456789012',
-                'avatar'       => 'F',
-                'status'       => 'nonaktif',
-                'bergabung'    => 'Maret 2025',
-                'kendaraan'    => 'Sepeda',
-                'plat'         => '-',
-                'wilayah'      => 'Medan Baru',
-                'total_antar'  => 18,
-                'bulan_ini'    => 0,
-                'rating'       => 4.5,
-            ],
-            [
-                'id'           => 4,
-                'nama'         => 'Gilang Ramadhan',
-                'email'        => 'gilang@cratefit.id',
-                'no_hp'        => '084567890123',
-                'avatar'       => 'G',
-                'status'       => 'aktif',
-                'bergabung'    => 'April 2025',
-                'kendaraan'    => 'Motor',
-                'plat'         => 'BK 9012 EF',
-                'wilayah'      => 'Medan Timur',
-                'total_antar'  => 27,
-                'bulan_ini'    => 7,
-                'rating'       => 4.9,
-            ],
-        ];
+        $kurirs = $kurirs ?? collect([]);
 
-        $totalAktif   = collect($kurir)->where('status', 'aktif')->count();
-        $totalNonaktif = collect($kurir)->where('status', 'nonaktif')->count();
-        $totalAntar   = collect($kurir)->sum('total_antar');
-        $rataRating   = collect($kurir)->avg('rating');
+        $totalAktif    = collect($kurirs ?? [])->where('status', 'aktif')->count();
+$totalNonaktif = collect($kurirs ?? [])->where('status', 'nonaktif')->count();
+$totalAntar    = collect($kurirs ?? [])->sum('total_antar');
+$rataRating    = collect($kurirs ?? [])->avg('rating');
     @endphp
 
     <div class="fade-in">
@@ -95,7 +34,7 @@
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
             @php
             $stats = [
-                ['label' => 'Total Kurir',      'value' => count($kurir),                 'icon' => 'truck',      'color' => 'text-crate-text'],
+                ['label' => 'Total Kurir',      'value' => count($kurirs),                 'icon' => 'truck',      'color' => 'text-crate-text'],
                 ['label' => 'Kurir Aktif',      'value' => $totalAktif,                   'icon' => 'badge-check','color' => 'text-emerald-600'],
                 ['label' => 'Total Pengiriman', 'value' => $totalAntar,                   'icon' => 'package',    'color' => 'text-crate-primary'],
                 ['label' => 'Rata-rata Rating', 'value' => number_format($rataRating, 1), 'icon' => 'star',       'color' => 'text-amber-500'],
@@ -148,12 +87,12 @@
             <div class="px-6 py-4 border-b border-crate-accent flex items-center justify-between">
                 <h2 class="font-display text-base font-bold text-crate-text">Daftar Kurir</h2>
                 <span class="text-crate-text/50 text-xs font-body">
-                    {{ count($kurir) }} kurir terdaftar
+                    {{ count($kurirs) }} kurir terdaftar
                 </span>
             </div>
 
             <div class="divide-y divide-crate-accent/60">
-                @forelse($kurir as $k)
+                @forelse($kurirs as $k)
                 <div class="flex items-center gap-4 px-6 py-4 hover:bg-crate-accent/50 transition-colors group">
 
                     {{-- Avatar --}}

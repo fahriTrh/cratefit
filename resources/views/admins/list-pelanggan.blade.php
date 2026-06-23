@@ -4,68 +4,7 @@
 @section('content')
 
 @php
-    $pelanggan = $pelanggan ?? [
-        [
-            'id'          => 1,
-            'nama'        => 'Aulia Ramadhani',
-            'email'       => 'aulia@gmail.com',
-            'no_hp'       => '081234567890',
-            'avatar'      => 'A',
-            'status'      => 'aktif',
-            'bergabung'   => 'Januari 2025',
-            'paket'       => 'Style Box',
-            'total_order' => 6,
-            'alamat'      => 'Medan, Sumatera Utara',
-        ],
-        [
-            'id'          => 2,
-            'nama'        => 'Bintang Pratama',
-            'email'       => 'bintang@gmail.com',
-            'no_hp'       => '082345678901',
-            'avatar'      => 'B',
-            'status'      => 'aktif',
-            'bergabung'   => 'Februari 2025',
-            'paket'       => 'Starter Box',
-            'total_order' => 4,
-            'alamat'      => 'Jakarta Selatan, DKI Jakarta',
-        ],
-        [
-            'id'          => 3,
-            'nama'        => 'Citra Dewi',
-            'email'       => 'citra@gmail.com',
-            'no_hp'       => '083456789012',
-            'avatar'      => 'C',
-            'status'      => 'nonaktif',
-            'bergabung'   => 'Maret 2025',
-            'paket'       => null,
-            'total_order' => 1,
-            'alamat'      => 'Bandung, Jawa Barat',
-        ],
-        [
-            'id'          => 4,
-            'nama'        => 'Dafi Maulana',
-            'email'       => 'dafi@gmail.com',
-            'no_hp'       => '084567890123',
-            'avatar'      => 'D',
-            'status'      => 'aktif',
-            'bergabung'   => 'April 2025',
-            'paket'       => 'Premium Box',
-            'total_order' => 3,
-            'alamat'      => 'Surabaya, Jawa Timur',
-        ],
-        [
-            'id'          => 5,
-            'nama'        => 'Elisa Nuraini',
-            'email'       => 'elisa@gmail.com',
-            'no_hp'       => '085678901234',
-            'avatar'      => 'E',
-            'status'      => 'aktif',
-            'bergabung'   => 'Mei 2025',
-            'paket'       => 'Starter Box',
-            'total_order' => 2,
-            'alamat'      => 'Yogyakarta, DIY',
-        ],
-    ];
+    $pelanggan = $pelanggan ?? collect([]);
 
     $totalAktif    = collect($pelanggan)->where('status', 'aktif')->count();
     $totalNonaktif = collect($pelanggan)->where('status', 'nonaktif')->count();
@@ -88,7 +27,7 @@
         @php
         // Ubah array $stats
         $stats = [
-            ['label' => 'Total Pelanggan', 'value' => count($pelanggan), 'icon' => 'users',      'color' => 'text-crate-text'],
+            ['label' => 'Total Pelanggan', 'value' => count($pelanggan ?? []), 'icon' => 'users',      'color' => 'text-crate-text'],
             ['label' => 'Pelanggan Aktif', 'value' => $totalAktif,       'icon' => 'badge-check', 'color' => 'text-emerald-600'],
             ['label' => 'Tidak Aktif',     'value' => $totalNonaktif,    'icon' => 'pause-circle','color' => 'text-crate-text/50'],
             ['label' => 'Total Langganan', 'value' => $totalOrder,       'icon' => 'package',     'color' => 'text-crate-primary'],
@@ -140,7 +79,7 @@
 
         <div class="px-6 py-4 border-b border-crate-accent flex items-center justify-between">
             <h2 class="font-display text-base font-bold text-crate-text">Daftar Pelanggan</h2>
-            <span class="text-crate-text/50 text-xs font-body">{{ count($pelanggan) }} pelanggan terdaftar</span>
+            <span class="text-crate-text/50 text-xs font-body">{{ count($pelanggan ?? []) }} pelanggan terdaftar</span>
         </div>
 
         <div class="divide-y divide-crate-sand/60">
