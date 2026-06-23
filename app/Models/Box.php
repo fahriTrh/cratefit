@@ -49,4 +49,20 @@ class Box extends Model
     {
         return $this->belongsTo(Langganan::class);
     }
+
+    // Tambahkan di dalam class Box
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function ratingKurator()
+    {
+        return $this->ratings()->where('tipe', 'kurator')->first();
+    }
+
+    public function ratingKurir()
+    {
+        return $this->ratings()->where('tipe', 'kurir')->first();
+    }
 }

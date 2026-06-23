@@ -233,5 +233,171 @@
     </form>
 </div>
 
+{{-- GANTI bagian Rating Section ini di resources/views/customers/status-box.blade.php --}}
+
+{{-- Rating Section --}}
+@if($box && $box->status === 'selesai')
+<div class="rounded-2xl p-6 mt-6" style="background-color: #fef5e7; border: 2px solid #f9e79f;">
+    <h3 class="font-display text-lg font-bold text-crate-text mb-4 flex items-center gap-2">
+        <i data-lucide="star" class="w-5 h-5 text-yellow-500"></i> Beri Rating
+    </h3>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {{-- Rating Kurator --}}
+        @if($box->kurator)
+        <div class="card-wood rounded-2xl p-6" style="background: white;">
+            <h4 class="font-display font-semibold mb-2 text-crate-text">Rating Kurator</h4>
+            <p class="text-sm text-gray-600 mb-4 font-body">{{ $box->kurator->name }}</p>
+            
+            @php
+                $ratingKurator = $box->ratingKurator();
+                $ratingValueKurator = $ratingKurator ? $ratingKurator->rating : 0;
+            @endphp
+
+            <form action="{{ route('rating.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="box_id" value="{{ $box->id }}">
+                <input type="hidden" name="rated_user_id" value="{{ $box->kurator->id }}">
+                <input type="hidden" name="tipe" value="kurator">
+                <input type="hidden" name="rating" id="ratingKuratorValue" value="{{ $ratingValueKurator }}">
+
+                {{-- Star Rating --}}
+                <div class="flex gap-1 mb-4" id="ratingKuratorStars">
+                    @for($i = 1; $i <= 5; $i++)
+                        <button type="button" 
+                                data-rating="{{ $i }}" 
+                                class="star-button focus:outline-none transition-transform hover:scale-110"
+                                onclick="setRating(this, 'ratingKuratorValue', 'ratingKuratorStars')">
+                            <svg class="w-9 h-9 transition-colors duration-200" 
+                                 viewBox="0 0 24 24" 
+                                 fill="{{ $i <= $ratingValueKurator ? '#fbbf24' : '#e5e7eb' }}"
+                                 stroke="currentColor" 
+                                 stroke-width="0">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                        </button>
+                    @endfor
+                </div>
+
+                {{-- Comment --}}
+                <textarea name="komentar" 
+                          placeholder="Komentar (opsional)" 
+                          class="w-full border-2 border-crate-accent rounded-lg px-3 py-2 text-sm mb-4 font-body focus:border-crate-primary focus:outline-none" 
+                          rows="2" 
+                          maxlength="500">{{ $ratingKurator->komentar ?? '' }}</textarea>
+
+                <button type="submit" 
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-body font-semibold py-2.5 rounded-lg transition-colors">
+                    {{ $ratingKurator ? 'Update Rating' : 'Kirim Rating' }}
+                </button>
+            </form>
+        </div>
+        @endif
+
+        {{-- Rating Kurir --}}
+        @if($box->kurir_id)
+        <div class="card-wood rounded-2xl p-6" style="background: white;">
+            <h4 class="font-display font-semibold mb-2 text-crate-text">Rating Kurir</h4>
+            <p class="text-sm text-gray-600 mb-4 font-body">{{ $box->kurir->name ?? 'Kurir' }}</p>
+            
+            @php
+                $ratingKurir = $box->ratings()->where('tipe', 'kurir')->first();
+                $ratingValueKurir = $ratingKurir ? $ratingKurir->rating : 0;
+            @endphp
+
+            <form action="{{ route('rating.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="box_id" value="{{ $box->id }}">
+                <input type="hidden" name="rated_user_id" value="{{ $box->kurir_id }}">
+                <input type="hidden" name="tipe" value="kurir">
+                <input type="hidden" name="rating" id="ratingKurirValue" value="{{ $ratingValueKurir }}">
+
+                {{-- Star Rating --}}
+                <div class="flex gap-1 mb-4" id="ratingKurirStars">
+                    @for($i = 1; $i <= 5; $i++)
+                        <button type="button" 
+                                data-rating="{{ $i }}" 
+                                class="star-button focus:outline-none transition-transform hover:scale-110"
+                                onclick="setRating(this, 'ratingKurirValue', 'ratingKurirStars')">
+                            <svg class="w-9 h-9 transition-colors duration-200" 
+                                 viewBox="0 0 24 24" 
+                                 fill="{{ $i <= $ratingValueKurir ? '#fbbf24' : '#e5e7eb' }}"
+                                 stroke="currentColor" 
+                                 stroke-width="0">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                        </button>
+                    @endfor
+                </div>
+
+                {{-- Comment --}}
+                <textarea name="komentar" 
+                          placeholder="Komentar (opsional)" 
+                          class="w-full border-2 border-crate-accent rounded-lg px-3 py-2 text-sm mb-4 font-body focus:border-crate-primary focus:outline-none" 
+                          rows="2" 
+                          maxlength="500">{{ $ratingKurir->komentar ?? '' }}</textarea>
+
+                <button type="submit" 
+                        class="w-full bg-green-600 hover:bg-green-700 text-white font-body font-semibold py-2.5 rounded-lg transition-colors">
+                    {{ $ratingKurir ? 'Update Rating' : 'Kirim Rating' }}
+                </button>
+            </form>
+        </div>
+        @endif
+    </div>
+</div>
+
+{{-- JavaScript untuk Star Rating --}}
+<script>
+function setRating(button, inputId, containerId) {
+    const rating = button.dataset.rating;
+    document.getElementById(inputId).value = rating;
+    
+    const container = document.getElementById(containerId);
+    const buttons = container.querySelectorAll('button');
+    
+    buttons.forEach((btn, index) => {
+        const svg = btn.querySelector('svg');
+        if (index < rating) {
+            svg.setAttribute('fill', '#fbbf24'); // Yellow
+        } else {
+            svg.setAttribute('fill', '#e5e7eb'); // Gray
+        }
+    });
+}
+
+// Hover effect untuk star rating
+document.querySelectorAll('[id$="Stars"]').forEach(container => {
+    const buttons = container.querySelectorAll('button');
+    
+    buttons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            const rating = this.dataset.rating;
+            buttons.forEach((btn, index) => {
+                const svg = btn.querySelector('svg');
+                if (index < rating) {
+                    svg.setAttribute('fill', '#fcd34d'); // Lighter yellow
+                } else {
+                    svg.setAttribute('fill', '#d1d5db'); // Lighter gray
+                }
+            });
+        });
+    });
+    
+    container.addEventListener('mouseleave', function() {
+        const inputId = container.id.replace('Stars', 'Value');
+        const currentRating = document.getElementById(inputId).value || 0;
+        buttons.forEach((btn, index) => {
+            const svg = btn.querySelector('svg');
+            if (index < currentRating) {
+                svg.setAttribute('fill', '#fbbf24');
+            } else {
+                svg.setAttribute('fill', '#e5e7eb');
+            }
+        });
+    });
+});
+</script>
+@endif
 </div>
 @endsection

@@ -16,6 +16,7 @@ use App\Http\Controllers\ReturController;
 use App\Http\Controllers\AdminReturController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\PenghasilanController;
+use App\Http\Controllers\RatingController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -166,4 +167,7 @@ Route::middleware(['auth'])->group(function () {
 
         // end courier
     });
+
+    // Ratings
+    Route::post('/rating', [RatingController::class, 'store'])->name('rating.store');
 });

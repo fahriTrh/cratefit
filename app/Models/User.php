@@ -66,4 +66,38 @@ class User extends Authenticatable
     {
         return $this->hasOne(Preferensi::class);
     }
+
+    // Tambahkan di dalam class User
+    public function ratingsYangDiterima()
+    {
+        return $this->hasMany(Rating::class, 'rated_user_id');
+    }
+
+    public function rataRataRatingKurator()
+    {
+        return $this->ratingsYangDiterima()
+            ->where('tipe', 'kurator')
+            ->avg('rating') ?? 0;
+    }
+
+    public function rataRataRatingKurir()
+    {
+        return $this->ratingsYangDiterima()
+            ->where('tipe', 'kurir')
+            ->avg('rating') ?? 0;
+    }
+
+    public function totalRatingKurator()
+    {
+        return $this->ratingsYangDiterima()
+            ->where('tipe', 'kurator')
+            ->count();
+    }
+
+    public function totalRatingKurir()
+    {
+        return $this->ratingsYangDiterima()
+            ->where('tipe', 'kurir')
+            ->count();
+    }
 }
